@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ZORG Build 0 shared documentary definitions",
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,31}(?![\\s\\S])",
+      "maxLength": 32
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}(?![\\s\\S])",
+      "minLength": 64,
+      "maxLength": 64
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\/$)[^\\u0000-\\u001f]+(?![\\s\\S])"
+    },
+    "fileReference": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\/$)[^\\u0000-\\u001f]+(?![\\s\\S])"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])",
+          "minLength": 64,
+          "maxLength": 64
+        }
+      },
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "creatorReview": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "const": "pending"
+        },
+        "source": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "vec2": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "occupancy": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "centroid": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 511
+              },
+              "minItems": 4,
+              "maxItems": 4
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "clipping": {
+          "type": "boolean"
+        },
+        "empty": {
+          "type": "boolean"
+        },
+        "iou": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "aligned_iou": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "centroid_distance": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "field_min": {
+          "type": "number"
+        },
+        "field_max": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "occupancy",
+        "centroid",
+        "bbox",
+        "clipping",
+        "empty",
+        "iou",
+        "aligned_iou",
+        "centroid_distance",
+        "field_min",
+        "field_max"
+      ],
+      "additionalProperties": false
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "python": {
+          "type": "string"
+        },
+        "implementation": {
+          "type": "string"
+        },
+        "numpy": {
+          "type": "string"
+        },
+        "pillow": {
+          "type": "string"
+        },
+        "zlib": {
+          "type": "string"
+        },
+        "zlib_runtime": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "release": {
+          "type": "string"
+        },
+        "machine": {
+          "type": "string"
+        },
+        "byteorder": {
+          "enum": [
+            "little",
+            "big"
+          ]
+        },
+        "numpy_build": {
+          "type": "string"
+        },
+        "pillow_zlib": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "python",
+        "implementation",
+        "numpy",
+        "pillow",
+        "zlib",
+        "zlib_runtime",
+        "system",
+        "release",
+        "machine",
+        "byteorder",
+        "numpy_build",
+        "pillow_zlib"
+      ],
+      "additionalProperties": false
+    },
+    "policies": {
+      "type": "object",
+      "properties": {
+        "numeric": {
+          "const": "semi-implicit-explicit-damping-v1"
+        },
+        "field": {
+          "const": "gaussian-separable-v1"
+        },
+        "cue": {
+          "const": "quartic-pulse-v1"
+        },
+        "raster": {
+          "const": "uniform-grid-gray8-v1"
+        },
+        "json": {
+          "const": "cz-json-python-v1"
+        }
+      },
+      "required": [
+        "numeric",
+        "field",
+        "cue",
+        "raster",
+        "json"
+      ],
+      "additionalProperties": false
+    },
+    "hashMap": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "^(?!/)(?!.*\\\\)(?!.*//)(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*\\/$)[^\\u0000-\\u001f]+(?![\\s\\S])"
+      },
+      "patternProperties": {
+        ".+": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}(?![\\s\\S])",
+          "minLength": 64,
+          "maxLength": 64
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-tests-0.3 executed test evidence",
+  "description": "Command arguments identify the executed pytest process. Hashed test-output.txt and junit.xml reside beside this report. Counts and family coverage are verified against the actual test artifacts; a passing flag alone does not establish execution.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-tests-0.3"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "exit_code": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "families": {
+      "type": "object",
+      "properties": {
+        "V01": {
+          "type": "boolean"
+        },
+        "V02": {
+          "type": "boolean"
+        },
+        "V03": {
+          "type": "boolean"
+        },
+        "V04": {
+          "type": "boolean"
+        },
+        "V05": {
+          "type": "boolean"
+        },
+        "V06": {
+          "type": "boolean"
+        },
+        "V07": {
+          "type": "boolean"
+        },
+        "V08": {
+          "type": "boolean"
+        },
+        "V09": {
+          "type": "boolean"
+        },
+        "V10": {
+          "type": "boolean"
+        },
+        "V11": {
+          "type": "boolean"
+        },
+        "V12": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "V01",
+        "V02",
+        "V03",
+        "V04",
+        "V05",
+        "V06",
+        "V07",
+        "V08",
+        "V09",
+        "V10",
+        "V11",
+        "V12"
+      ],
+      "additionalProperties": false
+    },
+    "source_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "command": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "summary": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "test-output.txt": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "junit.xml": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "test-output.txt",
+        "junit.xml"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "passed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "failed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "errors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skipped": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "passed",
+        "failed",
+        "errors",
+        "skipped"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "passed",
+    "exit_code",
+    "families",
+    "source_digest",
+    "command",
+    "summary",
+    "artifacts",
+    "counts"
+  ],
+  "additionalProperties": false
+}

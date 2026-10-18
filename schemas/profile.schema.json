@@ -1,0 +1,442 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-profile-0.3 verified experiment profile result",
+  "description": "Only the final check-profile result has this schema. Gates are recomputed from linked closed artifacts. The passed flag does not establish creator artistic approval.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-profile-0.3"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "gates": {
+      "type": "object",
+      "properties": {
+        "nominal_settings": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "state_schedule": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "frame_schedule": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "finite_states": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "state_bounds": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "excitation": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "numeric_recovery": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "position_max": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "speed_max": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "first_tick": {
+                      "const": 330
+                    },
+                    "last_tick": {
+                      "const": 360
+                    }
+                  },
+                  "required": [
+                    "position_max",
+                    "speed_max",
+                    "first_tick",
+                    "last_tick"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "visibility": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "finite_fields": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "morphology": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "temporal_variation": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 360
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "image_recovery": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "control_configuration": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "control_schedule": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "control_state_invariance": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "control_frame_invariance": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "provisional_baseline": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "e0": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "cadence": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "replay": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        },
+        "tests": {
+          "type": "object",
+          "properties": {
+            "passed": {
+              "type": "boolean"
+            },
+            "measured": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "passed",
+            "measured"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "nominal_settings",
+        "state_schedule",
+        "frame_schedule",
+        "finite_states",
+        "state_bounds",
+        "excitation",
+        "numeric_recovery",
+        "visibility",
+        "finite_fields",
+        "morphology",
+        "temporal_variation",
+        "image_recovery",
+        "control_configuration",
+        "control_schedule",
+        "control_state_invariance",
+        "control_frame_invariance",
+        "provisional_baseline",
+        "e0",
+        "cadence",
+        "replay",
+        "tests"
+      ],
+      "additionalProperties": false
+    },
+    "creator_review": {
+      "$ref": "common.schema.json#/$defs/creatorReview"
+    },
+    "experiment_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "passed",
+    "gates",
+    "creator_review",
+    "experiment_sha256"
+  ],
+  "additionalProperties": false
+}

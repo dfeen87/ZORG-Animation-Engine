@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools==82.0.1"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "commander-zorg"
+version = "0.1.0"
+description = "ZORG Build 0: deterministic mathematical silhouette animation"
+requires-python = ">=3.12,<3.13"
+license = "MIT"
+authors = [{name = "Don Michael Feeney Jr."}]
+dependencies = ["numpy==2.3.5", "Pillow==12.3.0"]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2"]
+
+[project.scripts]
+commander-zorg = "commander_zorg.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["commander_zorg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

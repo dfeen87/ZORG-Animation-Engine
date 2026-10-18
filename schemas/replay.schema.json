@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-replay-0.3 fresh-process comparison report",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-replay-0.3"
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "original_manifest_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "replayed_manifest_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "comparisons": {
+      "type": "object",
+      "properties": {
+        "states": {
+          "type": "boolean"
+        },
+        "decisions": {
+          "type": "boolean"
+        },
+        "pixels": {
+          "type": "boolean"
+        },
+        "png_files": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "states",
+        "decisions",
+        "pixels",
+        "png_files"
+      ],
+      "additionalProperties": false
+    },
+    "environment_match": {
+      "type": "boolean"
+    },
+    "source_match": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "passed",
+    "original_manifest_sha256",
+    "replayed_manifest_sha256",
+    "comparisons",
+    "environment_match",
+    "source_match"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-run-manifest-0.3 published final manifest",
+  "description": "This schema describes published final manifests. The in-memory prospective manifest intentionally lacks final wall/RSS timing and the complete-status hash. Integrity enforces the exact artifact set, canonical bytes, path containment, source index, schedule and all cross-file relationships; manifests do not hash themselves.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-run-manifest-0.3"
+    },
+    "engine_version": {
+      "const": "0.1.0"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "raw_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "resolved_sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "raw_sha256",
+        "resolved_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "element_order": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/identifier"
+      },
+      "minItems": 1,
+      "maxItems": 12,
+      "uniqueItems": true
+    },
+    "policies": {
+      "$ref": "common.schema.json#/$defs/policies"
+    },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "sim_hz": {
+          "type": "integer",
+          "enum": [
+            60,
+            120
+          ]
+        },
+        "fps_out": {
+          "const": 30
+        },
+        "frame_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "stride": {
+          "type": "integer",
+          "enum": [
+            2,
+            4
+          ]
+        },
+        "terminal_tick": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 1440
+        }
+      },
+      "required": [
+        "sim_hz",
+        "fps_out",
+        "frame_count",
+        "stride",
+        "terminal_tick"
+      ],
+      "additionalProperties": false
+    },
+    "expected": {
+      "type": "object",
+      "properties": {
+        "frames": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        },
+        "states": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 1441
+        },
+        "transitions": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 1440
+        }
+      },
+      "required": [
+        "frames",
+        "states",
+        "transitions"
+      ],
+      "additionalProperties": false
+    },
+    "counts": {
+      "type": "object",
+      "properties": {
+        "accepted": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 1440
+        },
+        "rejected": {
+          "const": 0
+        }
+      },
+      "required": [
+        "accepted",
+        "rejected"
+      ],
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "$ref": "common.schema.json#/$defs/hashMap"
+    },
+    "source": {
+      "type": "object",
+      "properties": {
+        "digest": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "index_path": {
+          "const": "source/index.json"
+        }
+      },
+      "required": [
+        "digest",
+        "index_path"
+      ],
+      "additionalProperties": false
+    },
+    "environment": {
+      "$ref": "common.schema.json#/$defs/environment"
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "closed_artifacts": {
+          "const": "passed"
+        }
+      },
+      "required": [
+        "closed_artifacts"
+      ],
+      "additionalProperties": false
+    },
+    "timings": {
+      "type": "object",
+      "properties": {
+        "field_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "raster_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "png_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "log_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "wall_s": {
+          "type": "number",
+          "minimum": 0
+        },
+        "peak_rss_kib": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "peak_rss_method": {
+          "const": "getrusage process lifetime high-water; Linux KiB, macOS bytes"
+        }
+      },
+      "required": [
+        "field_s",
+        "raster_s",
+        "png_s",
+        "log_s",
+        "wall_s",
+        "peak_rss_kib",
+        "peak_rss_method"
+      ],
+      "additionalProperties": false
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    },
+    "creator_review": {
+      "$ref": "common.schema.json#/$defs/creatorReview"
+    },
+    "contact_frames": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 359
+      },
+      "minItems": 1,
+      "maxItems": 11,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "schema_version",
+    "engine_version",
+    "scene_id",
+    "config",
+    "element_order",
+    "policies",
+    "timeline",
+    "expected",
+    "counts",
+    "artifacts",
+    "source",
+    "environment",
+    "verification",
+    "timings",
+    "warnings",
+    "creator_review",
+    "contact_frames"
+  ],
+  "additionalProperties": false
+}

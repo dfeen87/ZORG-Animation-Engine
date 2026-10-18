@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "frames.jsonl record",
+  "description": "Index, tick and path must match the scene schedule. Integrity checks decode PNG bytes and independently regenerate field, raster and metrics from the recorded state.",
+  "type": "object",
+  "properties": {
+    "index": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 359
+    },
+    "tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1436
+    },
+    "path": {
+      "type": "string",
+      "pattern": "^frames/frame_[0-9]{6}\\.png(?![\\s\\S])"
+    },
+    "mode": {
+      "const": "L"
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 512
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 64,
+      "maximum": 512
+    },
+    "file_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "pixel_sha256": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "metrics": {
+      "$ref": "common.schema.json#/$defs/metrics"
+    }
+  },
+  "required": [
+    "index",
+    "tick",
+    "path",
+    "mode",
+    "width",
+    "height",
+    "file_sha256",
+    "pixel_sha256",
+    "metrics"
+  ],
+  "additionalProperties": false
+}

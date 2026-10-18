@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-scene-0.3 raw and resolved scene",
+  "description": "The strict loader additionally rejects duplicate keys, floating numeric tokens in integer fields, duplicate IDs, unbound groups, invalid cue support, viewport-dependent homes, solver violations and conservative force sums. Resolved real values are float64-derived JSON floats and IDs are sorted.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-scene-0.3"
+    },
+    "scene_id": {
+      "$ref": "common.schema.json#/$defs/identifier"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 18446744073709551615
+    },
+    "raster": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 512
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 512
+        },
+        "samples_per_axis": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "invert": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "width",
+        "height",
+        "samples_per_axis",
+        "invert"
+      ],
+      "additionalProperties": false
+    },
+    "timeline": {
+      "type": "object",
+      "properties": {
+        "sim_hz": {
+          "type": "integer",
+          "enum": [
+            60,
+            120
+          ]
+        },
+        "fps_out": {
+          "type": "integer",
+          "const": 30
+        },
+        "frame_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 360
+        }
+      },
+      "required": [
+        "sim_hz",
+        "fps_out",
+        "frame_count"
+      ],
+      "additionalProperties": false
+    },
+    "field": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "gaussian-separable-v1"
+        },
+        "threshold": {
+          "type": "number",
+          "minimum": 0.05,
+          "maximum": 5
+        }
+      },
+      "required": [
+        "kind",
+        "threshold"
+      ],
+      "additionalProperties": false
+    },
+    "elements": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "group": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "home_xy": {
+            "$ref": "common.schema.json#/$defs/vec2"
+          },
+          "sigma": {
+            "type": "number",
+            "minimum": 0.03,
+            "maximum": 0.6
+          },
+          "weight": {
+            "type": "number",
+            "minimum": 0.05,
+            "maximum": 2
+          },
+          "mass": {
+            "type": "number",
+            "minimum": 0.5,
+            "maximum": 2
+          },
+          "spring_k": {
+            "type": "number",
+            "minimum": 5,
+            "maximum": 100
+          },
+          "damping_c": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 30
+          }
+        },
+        "required": [
+          "id",
+          "group",
+          "home_xy",
+          "sigma",
+          "weight",
+          "mass",
+          "spring_k",
+          "damping_c"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 12
+    },
+    "cues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "group": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "start_tick": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1439
+          },
+          "end_tick": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1440
+          },
+          "envelope": {
+            "const": "quartic-pulse-v1"
+          },
+          "force_xy": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "minimum": -6,
+              "maximum": 6
+            },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        },
+        "required": [
+          "id",
+          "group",
+          "start_tick",
+          "end_tick",
+          "envelope",
+          "force_xy"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "maxItems": 16
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "max_displacement": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 0.75
+        },
+        "max_speed": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 3
+        },
+        "max_total_force": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 6
+        }
+      },
+      "required": [
+        "max_displacement",
+        "max_speed",
+        "max_total_force"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "scene_id",
+    "seed",
+    "raster",
+    "timeline",
+    "field",
+    "elements",
+    "cues",
+    "limits"
+  ],
+  "additionalProperties": false
+}

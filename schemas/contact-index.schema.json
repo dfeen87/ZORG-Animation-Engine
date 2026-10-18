@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-contact-index-0.3",
+  "description": "Runtime checks regenerate exact selected indices, cell order, labels, thumbnail placement and contact-sheet PNG bytes.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-contact-index-0.3"
+    },
+    "columns": {
+      "const": 3
+    },
+    "cell_width": {
+      "const": 192
+    },
+    "cell_height": {
+      "const": 220
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 359
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^frames/frame_[0-9]{6}\\.png(?![\\s\\S])"
+          },
+          "cell": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "index",
+          "path",
+          "cell",
+          "label"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "maxItems": 11
+    }
+  },
+  "required": [
+    "schema_version",
+    "columns",
+    "cell_width",
+    "cell_height",
+    "entries"
+  ],
+  "additionalProperties": false
+}
