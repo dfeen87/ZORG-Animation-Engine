@@ -1,0 +1,140 @@
+{
+  "schema_version": "cz-live-config-0.1",
+  "seed": 172026,
+  "sim_hz": 60,
+  "fps_out": 30,
+  "max_ticks": 216000,
+  "wander": true,
+  "scene": {
+    "schema_version": "cz-scene-0.3",
+    "scene_id": "live_lab_geometry",
+    "seed": 172026,
+    "raster": {
+      "width": 384,
+      "height": 384,
+      "samples_per_axis": 2,
+      "invert": false
+    },
+    "timeline": {
+      "sim_hz": 60,
+      "fps_out": 30,
+      "frame_count": 1
+    },
+    "field": {
+      "kind": "gaussian-separable-v1",
+      "threshold": 0.85
+    },
+    "elements": [
+      {
+        "id": "core_00",
+        "group": "body",
+        "home_xy": [
+          0.0,
+          -0.1482
+        ],
+        "sigma": 0.2295,
+        "weight": 1.0,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "core_01",
+        "group": "body",
+        "home_xy": [
+          0.0,
+          0.0
+        ],
+        "sigma": 0.221,
+        "weight": 1.0,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "head_00",
+        "group": "head",
+        "home_xy": [
+          0.0,
+          0.1794
+        ],
+        "sigma": 0.187,
+        "weight": 1.0,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "head_01",
+        "group": "head",
+        "home_xy": [
+          0.0468,
+          0.2964
+        ],
+        "sigma": 0.0935,
+        "weight": 0.8,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "accent_left",
+        "group": "accent",
+        "home_xy": [
+          -0.1794,
+          0.23399999999999999
+        ],
+        "sigma": 0.0765,
+        "weight": 0.9,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "accent_right",
+        "group": "accent",
+        "home_xy": [
+          0.1794,
+          0.23399999999999999
+        ],
+        "sigma": 0.0765,
+        "weight": 0.9,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "base_left",
+        "group": "body",
+        "home_xy": [
+          -0.1014,
+          -0.2886
+        ],
+        "sigma": 0.0935,
+        "weight": 0.9,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      },
+      {
+        "id": "base_right",
+        "group": "body",
+        "home_xy": [
+          0.1014,
+          -0.2886
+        ],
+        "sigma": 0.0935,
+        "weight": 0.9,
+        "mass": 1.0,
+        "spring_k": 14.0,
+        "damping_c": 5.0
+      }
+    ],
+    "cues": [],
+    "limits": {
+      "max_displacement": 0.75,
+      "max_speed": 3.0,
+      "max_total_force": 6.0
+    }
+  }
+}
