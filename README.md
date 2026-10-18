@@ -1,342 +1,216 @@
-# ZORG
+<h1 align="center">ZORG</h1>
 
-ZORG is a small, local mathematical animation engine. Commander-ZORG is the
-original fictional production that motivates the technology. This repository
-began as **Commander-Zorg**; its existing history and MIT software license,
-including Don Michael Feeney Jr.'s attribution, are preserved.
+<p align="center">
+  <strong>MATHEMATICS WITH A CAST OF CHARACTERS.</strong><br>
+  <em>A deterministic animation laboratory, built for a story that hasn't reached the screen yet.</em>
+</p>
 
-Build 0 evaluates positive Gaussian influence fields, renders deterministic
-grayscale silhouettes, and animates independent damped springs with a prescribed
-quartic force pulse. It exports inspectable state, decision, frame, source and
-integrity evidence. It has no editor, network service, AI system, memory layer,
-GPU dependency or production character pipeline. Artistic approval is separate
-from numerical acceptance and remains pending unless the creator supplies it.
+<p align="center">
+  <a href="https://github.com/dfeen87/ZORG/actions/workflows/ci.yml"><img alt="ZORG CI" src="https://github.com/dfeen87/ZORG/actions/workflows/ci.yml/badge.svg?branch=main"></a>
+  <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&amp;logoColor=white">
+  <img alt="Creator Studio Build 0.3" src="https://img.shields.io/badge/Creator%20Studio-Build%200.3-7457C5">
+  <img alt="Local first" src="https://img.shields.io/badge/Local--first-no%20cloud%20required-0D9488">
+  <a href="LICENSE"><img alt="MIT licensed software" src="https://img.shields.io/badge/Code%20license-MIT-22A06B"></a>
+</p>
 
-The internal Python package remains `commander_zorg` and the scene schema remains
-`cz-scene-0.3`. The numerical authority is the verified v0.3 specification;
-[architecture decisions](docs/adr) and [scene decisions](docs/scene-decisions.md)
-record implementation choices. Implementation reports state which complete
-experiments and evidence gates actually passed.
+<p align="center">
+  <a href="#-launch-the-creator-studio">Launch the studio</a> ·
+  <a href="#-watch-the-math-change-shape">See the pixels</a> ·
+  <a href="#-why-zorg-exists">The story</a> ·
+  <a href="#-verified-engineering">Verification</a> ·
+  <a href="#-whats-next">What's next</a>
+</p>
 
-The verified take passed **456 tests**, all six E0 candidates, full E1 and
-cue-off sequences, numerical/image gates, integrity and fresh-process replay.
-See the [implementation report](docs/results/implementation-report.md),
-[numerical results](docs/results/numerical-verification.md),
-[E0 gallery](docs/results/e0-gallery.png) and
-[E1 contact sheet](docs/results/e1-contact-sheet.png).
-Creator review is pending. The implementation branch is pushed to
-`dfeen87/ZORG`; GitHub API networking still blocks metadata verification and
-automated PR creation. [Create the PR on GitHub](https://github.com/dfeen87/ZORG/pull/new/feature/build0-foundation).
+---
 
-## Install on a MacBook or Linux machine
+> **“COMMANDER!!! THE HUMAN GAVE US COLORS!!!”**
+>
+> **“That's very nice, Zorg. Please don't spill them on my newspaper.”**
 
-Python **3.12** is the supported baseline. The implementation environment is
-Linux on x86-64 with Python 3.12; exact interpreter, NumPy, Pillow, pytest and
-zlib versions are recorded in run manifests and `requirements.lock`. Native
-macOS acceptance has not been demonstrated. A MacBook should use the same
-Python minor release, install the locked dependencies, run the tests, and
-regenerate evidence locally. Exact PNG replay is demonstrated only within the
-recorded environment, not promised across operating systems or compiled builds.
+## 🎬 Why ZORG exists
 
-Clone the existing private repository using your existing GitHub access:
+**Commander–ZORG** is an original fictional project about two aliens in a spaceship. **ZORG** is the mathematical animation engine being developed to bring that world to life.
 
-```sh
+The premise is delightfully straightforward: **create the characters through mathematics, then give the artist the tools to direct their performances.**
+
+This is not a text-to-video service, a generative-AI model, or a finished movie studio. It is an evolving, **local Python research engine** with real, tested foundations for geometry, motion, live interaction, shape transformations, and procedural color.
+
+**The guiding idea:**
+
+> We are not creating a show to demonstrate an animation engine.  
+> We are creating an animation engine to bring our show to life.
+
+## 🌈 Watch the math change shape
+
+<p align="center">
+  <img src="docs/morph/studio-evidence/cloud-demo/contact_sheet.png" alt="Verified ZORG Build 0.3 contact sheet showing the oval-to-cloud chromatic animation" width="860">
+</p>
+
+| An oval | A changing form | A sky-blue cloud |
+| :---: | :---: | :---: |
+| <img src="docs/morph/studio-evidence/cloud-demo/starting_oval.png" alt="ZORG starting oval" width="235"> | <img src="docs/morph/studio-evidence/cloud-demo/transition_50.png" alt="ZORG halfway through its blue cloud transition" width="235"> | <img src="docs/morph/studio-evidence/cloud-demo/sky_blue_cloud.png" alt="ZORG procedural sky-blue cloud" width="235"> |
+
+These are **actual committed Build 0.3 demonstration frames**, not concept art. The source-backed demo recorded **841 simulation states, 420 RGB frames, and five captures**. Its exact replay and export checks passed in the recorded development environment. See the [demonstration and evidence](docs/morph/studio-demo.md).
+
+The shapes and their colors are mathematical. The clouds have *not* been approved as final character artwork; creator visual review is still part of the process.
+
+## 🚀 Launch the Creator Studio
+
+**Requirements:** Python **3.12**, a Mac or Linux terminal, and access to this private repository. FFmpeg is optional for local MP4 exports; PNG and HTML playback do not require it.
+
+```bash
 git clone https://github.com/dfeen87/ZORG.git
 cd ZORG
-git checkout feature/build0-foundation
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.lock
-python -m pip install --no-deps -e .
+python -m pip install --no-deps --no-build-isolation -e .
+
+# A fresh recording destination is required for every take.
+commander-zorg morph-lab --record outputs/first_zorg_take
 ```
 
-The engine uses Python, NumPy and Pillow; pytest is the test dependency. No
-FFmpeg, SciPy, browser framework or external development service is required.
-The commands below also work as `python -m commander_zorg.cli ...` after
-installation or from the checkout root.
-
-## Test and regenerate experiments
-
-Reproduce the complete experiment, including test reports, E0, full E1 and
-control, numerical cadence comparisons, integrity checks, fresh-process replay
-and the final linked profile report:
-
-```sh
-python scripts/run_build0.py --out outputs/build0_take_01
-```
-
-The runner preserves complete evidence in the new output directory and records
-all measured gates. It refuses an existing destination. To execute the same
-operations individually:
-
-```sh
-python -m pytest -q
-commander-zorg validate scenes/e1.json
-commander-zorg gallery scenes/e0 --out outputs/e0_take_01
-commander-zorg render scenes/e1.json --out outputs/e1_take_01
-commander-zorg render scenes/control.json --out outputs/control_take_01
-commander-zorg cadence scenes/e1.json --out outputs/cadence_take_01.json
-commander-zorg verify outputs/e1_take_01/manifest.json --integrity
-commander-zorg verify outputs/control_take_01/manifest.json --integrity
-commander-zorg verify outputs/e1_take_01/manifest.json --replay --out outputs/replay_take_01
-```
-
-Every destination must be new. Use a new take name for another run; existing
-takes are refused. Rendering success does not imply all Build 0 profile gates
-passed. The complete E1 and control each contain 180 PNG frames at ticks
-`0,2,...,358`, 361 state rows through terminal audit tick 360, and 360 accepted
-transition rows. Frame zero is rendered before stepping. Renderers stream one
-field at a time, and numerical rejection preserves the last committed state
-and terminates the run without clamping or repair.
-
-Each run contains:
+In the live terminal, enter these **one at a time**, pressing Return after each:
 
 ```text
-scene.input.json       scene.resolved.json
-frames/                contact_sheet.png
-states.jsonl           decisions.jsonl          frames.jsonl
-run_status.json        manifest.json            source/
-```
-
-The gallery contains six complete child static runs and its labeled contact
-sheet. State and decision traces use canonical JSON. The engine records raw
-input and resolved semantic hashes separately, exact executed source hashes,
-environment versions, decoded-pixel hashes and PNG file hashes. The final
-manifest is published atomically after checking all closed artifacts. Failed
-or interrupted runs are retained and cannot verify as complete.
-
-A release experiment manifest links the E0 gallery, E1, full cue-off control,
-cadence study, fresh-process replay report and executed test report using
-relative paths plus SHA-256 hashes. Its schema is `cz-experiment-0.3` (see
-[schemas](schemas)). Once this manifest and its linked evidence exist:
-
-```sh
-commander-zorg check-profile outputs/experiment_manifest.json --report outputs/profile_report.json
-```
-
-This command verifies linked integrity before checking numerical and image
-acceptance. It recomputes the cadence study with independent scalar and analytic
-references, verifies test-output and JUnit hashes, and checks actual JUnit
-testcase totals rather than trusting report pass flags. Tests and report values must come from actual executions. It checks
-all recovery states at ticks 330–360, every recovery output frame, excitation,
-centroid-aligned morphology, visibility, ten distinct decoded frames, control
-invariance, independent 60/120 Hz comparisons and exact replay. It never
-substitutes creator artistic judgment. Exit codes are 0 success, 2 configuration
-or usage failure, 3 numerical rejection, 4 integrity/export failure, 5 replay
-failure, and 6 experiment/profile failure.
-
-## View the outputs
-
-Open `player.html` from an exported run in your local browser for complete
-30-FPS sequence playback, or open `contact_sheet.png` in your image viewer. The E1 sheet includes frames
-0, 23, 38, 50, 60, 90, 120, 165 and 179, plus the minimum aligned-IoU frame
-when different. Review the complete frame sequence for flicker; sparse stills
-do not establish fluid motion. `frames/frame_000000.png` through
-`frame_000179.png` are ordered at exactly 30 FPS for six seconds.
-
-If FFmpeg is already installed locally, an optional viewing copy can be made:
-
-```sh
-ffmpeg -framerate 30 -i outputs/e1_take_01/frames/frame_%06d.png -c:v libx264 -pix_fmt yuv420p outputs/e1_preview.mp4
-```
-
-The PNG sequence and its recorded timestamps remain the required evidence.
-No optional encoder is needed to inspect each full-resolution output image.
-Ask during creator review whether the form feels fluid, an identifiable accent
-survives, the disturbance reads clearly, and recovery feels intentional.
-
-## Limits and next steps
-
-Build 0 is an experiment in mathematical geometry, motion and verification.
-It does not establish final character recognition, humor, mathematical novelty,
-physical realism or a real-time performance guarantee. The proposed thirty-second
-render target must be judged from measured runs. Generated outputs are ignored
-by Git; preserve complete evidence separately and regenerate it with the same
-scene and environment.
-
-The next engineering experiment should follow the measured failing gate, if
-any. A later creative tuning take must explicitly record scene changes and
-retain its predecessors. Temporal history, predictive motion, colors,
-cinematography, authoring tools and a community platform remain deferred.
-The software's MIT license does not automatically confer rights to original
-character artwork, scripts, fictional settings or third-party assets.
-
-## Live Morph Lab — Build 0.1
-
-The [Live Morph Lab guide](docs/live/README.md) documents the interactive ANSI
-terminal viewport, reproducible autonomous motion, directional and shape
-commands, tick-stamped recordings, offline replay, and PNG/HTML/optional MP4
-export. It includes a noninteractive 15-second demo and a native MacBook
-acceptance checklist. Build 0's finite experiments and numerical contracts
-remain separate.
-
-```sh
-commander-zorg live --scene scenes/live_lab.json --record outputs/live_take_01
-commander-zorg live-demo --out outputs/live_demo_01
-```
-
-The live viewport displays a Gaussian-field silhouette that wanders and changes
-shape continuously. Type commands and press Return while it animates. Physics
-runs at a fixed 60 Hz; the terminal preview targets 15 FPS. Accepted motion
-commands are recorded with their effective simulation ticks for exact replay
-with the same source and supported environment.
-
-### New capabilities — Build 0.2
-
-The Live Morph Lab now has a dedicated `morph-lab` mode for directing the
-mathematical form itself:
-
-- Smoothly morph between named `home`, `circle`, `oval`, `cloud`, and `hill`
-  targets with `morph NAME`, or choose a transition duration with
-  `morph NAME 2.0`.
-- Combine named shape changes with directional movement, autonomous wander,
-  and squash/stretch, within the existing numerical safety limits.
-- Redirect an ongoing morph toward another target, or return the shape to
-  `home`, while the animation continues.
-- Preserve the current mathematical state with `capture LABEL`, including
-  control positions, velocities, field parameters, motion targets, and the
-  simulation tick; generate its preview PNG during export.
-- Record and replay morph commands and captures, then export the animation
-  as full-resolution PNG frames, a standalone HTML player, and optional MP4.
-- Generate a complete 20-second morph demonstration with `morph-demo`.
-
-```sh
-commander-zorg morph-lab --record outputs/my_morph_take --mono
-```
-
-Inside this mode, try `morph circle`, `morph oval 2.0`, `up 0.05`,
-`capture My_shape`, and `save`. Shape names express artistic intent;
-creator approval remains pending. See the [Semantic Morph Lab guide](docs/morph/README.md)
-for the complete workflow.
-
-### Start an interactive take
-
-From the repository root, using the Python 3.12 environment installed above:
-
-```sh
-source .venv/bin/activate
-commander-zorg live --scene scenes/live_lab.json --seed 172026 --record outputs/my_live_take
-```
-
-Use a new recording directory for every take. The viewport needs an interactive
-ANSI-compatible terminal; `--mono` forces monochrome rendering. Native macOS
-terminal acceptance still needs the local checks in the guide.
-
-### Commands to type inside the viewport
-
-| Command | What it does |
-| --- | --- |
-| `left`, `right`, `up`, `down` | Smoothly move toward a directional offset from the home pose. |
-| `squash` | Compress the shape vertically and widen its control layout. |
-| `stretch` | Elongate the shape vertically and narrow its control layout. |
-| `reset` | Smoothly return toward home and turn wander off. |
-| `wander on`, `wander off` | Fade autonomous motion in or out. |
-| `help` | Show the available commands while animation continues. |
-| `save` | Finish the recording and export its animation. |
-| `quit` | Exit cleanly and keep the recording for later export. |
-
-Directional and shape commands accept **strength, then transition seconds**:
-
-```text
-right 0.3 2.0
-stretch 0.5 1.5
-left
-squash
-reset
+color on
+palette auto
+motion auto on
+motion gentle
+speed slow
+wander off
+morph oval .5
+morph cloud 2
+up
+capture SkyBlueCloud
 save
 ```
 
-Direction strength defaults to `0.3` world units and accepts `0.05`–`0.30`.
-Shape strength defaults to `0.5` and accepts `0.05`–`0.60`. Transition duration
-defaults to two seconds and accepts `0.5`–`10` seconds. Targets persist until
-replaced: directions share one translation channel, squash/stretch share one
-shape channel, and both can coexist with wander. Invalid commands are rejected
-without stopping the animation. Ctrl+C restores the terminal and retains the
-captured recording as interrupted.
+**What happens?** ZORG uses a named mathematical shape recipe, transitions toward its sky-blue cloud palette, attempts a conservatively safe directional move, and records the take. The terminal previews the animation while the simulation runs on its own fixed tick schedule.
 
-### Replay, export and watch
+If a requested movement exceeds a numerical limit, the engine can reduce a supported directional command or reject it honestly. **It never relaxes the physics guards to make an animation “look successful.”**
 
-Typing `save` exports into the recording's `export/` directory. Alternatively,
-verify and export a saved recording explicitly:
+On **Terminal.app**, an `xterm-256color` environment uses quantized ANSI color; terminals advertising truecolor use 24-bit color. Add `--mono` to the launch command for portable monochrome blocks. Actual creator visual acceptance on a physical MacBook remains a separate check.
 
-```sh
-commander-zorg verify-session outputs/my_live_take/session.json
-commander-zorg render-session outputs/my_live_take/session.json --out outputs/my_live_video
-commander-zorg verify-live-export outputs/my_live_video/manifest.json
+### 🎛️ The creative controls
+
+| What you want | What to type |
+| --- | --- |
+| Change mathematical shape | `morph circle`, `morph oval`, `morph cloud 2`, `morph hill`, `morph home` |
+| Choose movement intensity | `motion gentle`, `motion normal`, `motion bold` |
+| Choose transition pacing | `speed slow`, `speed normal`, `speed fast` |
+| Negotiate safe direction movement | `motion auto on` (or `motion auto off` for strict mode) |
+| Direct a movement target | `up`, `down`, `left`, `right` |
+| Change visual presentation | `color on`, `color off`, `palette auto`, `palette cloud` |
+| Control autonomous movement | `wander on`, `wander off` |
+| Save a mathematical snapshot | `capture MyShape` |
+| Get live command help | `help` |
+| End a take | `save` or `quit` |
+
+Named shape targets are **`home`, `circle`, `oval`, `cloud`, and `hill`**. Palette overrides also support `neutral`, `circle`, `oval`, `cloud`, and `hill`.
+
+**Important motion distinction:** `up` and the other directions currently request **absolute local deformation targets**, **not** endless world-space travel. Repeating a saturated target can correctly report `LIMIT REACHED`. Independent movement through a spaceship is planned research, not an existing command.
+
+Read the [motion semantics](docs/morph/studio-motion.md), [chromatic design](docs/morph/studio-color.md), and [native Mac acceptance guide](docs/morph/studio-mac-acceptance.md).
+
+## 🎞️ Replay it. Export it. Verify it.
+
+A recorded take contains tick-indexed instructions, state/capture evidence, configuration and integrity information. With the same recorded source and supported environment, it can be replayed and independently checked.
+
+```bash
+# After saving the take above:
+commander-zorg verify-morph-session outputs/first_zorg_take/session.json
+commander-zorg verify-morph-export outputs/first_zorg_take/export/manifest.json
+
+# Or generate a fresh, fully scripted color demonstration:
+python scripts/demo_chromatic_cloud.py --out outputs/chromatic_showcase_01
+commander-zorg verify-morph-session outputs/chromatic_showcase_01/record/session.json
+commander-zorg verify-morph-export outputs/chromatic_showcase_01/video/manifest.json
 ```
 
-The supplied scene exports a complete 384×384 PNG sequence at 30 FPS, a local
-HTML player, session/event records and a manifest with source and artifact
-hashes. When FFmpeg with H.264 support is available, it also creates
-`animation.mp4`; otherwise the HTML player remains available. On a MacBook:
+Open `outputs/first_zorg_take/export/player.html` locally to watch the animation, or inspect the PNG sequence frame by frame. FFmpeg with H.264/libx264 support also enables a convenient MP4.
 
-```sh
-open outputs/my_live_video/player.html
-# When MP4 encoding succeeded:
-open outputs/my_live_video/animation.mp4
+The **grayscale geometry remains the mathematical baseline**. Seeded, material-local texture and shape-aware palette transitions are applied *after* grayscale coverage is computed, without changing the physics. Exports have their own versioned manifests; historical session contracts retain their original meanings.
+
+**Integrity matters:** exact source/environment replay, numerical trajectories, decoded pixels and image artifacts have distinct verification responsibilities. Byte-identical PNG encoding is not promised across different platform/library builds.
+
+## ⚙️ What's inside the engine?
+
+| Layer | What it does |
+| --- | --- |
+| **Mathematical medium** | Evaluates superposed positive Gaussian influence fields and rasterizes antialiased silhouettes. |
+| **Motion & safety** | Uses bounded spring dynamics, fixed simulation ticks, explicit target blends and conservative force/displacement admission. |
+| **Creator controls** | Accepts named morphs, directional commands, motion/speed presets, wander, and state captures. |
+| **Chromatic presentation** | Adds seeded material-local RGB texture, named palettes, and continuous color transitions without altering numerical state. |
+| **Evidence & replay** | Records versioned events, captures, source/environment provenance, frame hashes, verification reports, and export manifests. |
+
+There is **no machine learning, online API, runtime cloud dependency, GPU requirement, or sprite-based character replacement** in this pipeline.
+
+<details>
+<summary><strong>🧪 Go deeper: the original Build 0 experiment</strong></summary>
+
+Build 0 established the field, numerical solver, grayscale renderer, integrity checks and the E0/E1 experiment system. The later studios extend that foundation rather than replacing it.
+
+```bash
+python scripts/run_build0.py --out outputs/build0_research_01
+commander-zorg validate scenes/e1.json
+commander-zorg render scenes/e1.json --out outputs/e1_research_01
+commander-zorg verify outputs/e1_research_01/manifest.json --integrity
 ```
 
-For a complete noninteractive demonstration using the same runtime:
+Destinations must not already exist. Rendering a valid scene does not, by itself, constitute passing every experiment/profile gate.
 
-```sh
-commander-zorg live-demo --seed 172026 --out outputs/my_live_demo
-open outputs/my_live_demo/video/player.html
-```
+Explore the [implementation report](docs/results/implementation-report.md), [numerical verification](docs/results/numerical-verification.md), [E0 gallery](docs/results/e0-gallery.png), [E1 frames](docs/results/e1-contact-sheet.png), [architecture decisions](docs/adr), and [schemas](schemas/README.md).
 
-The 15-second demo shows autonomous motion, rightward movement, stretch,
-leftward movement, squash and recovery. See the
-[saved demo video](docs/live/results/live-demo.mp4) and
-[execution evidence](docs/live/results/README.md): 642 tests passed, including
-all 456 unchanged Build 0 regressions, and the complete Build 0 experiment gates
-passed again. Exact replay across different operating systems or library builds
-is not claimed; record and verify a new take on the destination machine.
+</details>
 
-## Semantic Morph Lab — Build 0.2
+## ✅ Verified engineering
 
-The separately versioned [Semantic Morph Lab](docs/morph/README.md) adds explicit
-mathematical recipes for home, circle, oval, cloud and hill, bounded morphing,
-independent translation, creator-labeled state captures, and deterministic
-replay/export. Eight original Gaussian controls and field parameters are
-preserved. Artistic target approval remains pending; `head_base` is excluded
-as insufficiently distinct. See the [feasibility study](docs/morph/feasibility.md)
-and [implementation evidence](docs/morph/implementation-report.md).
+**Build 0.3 hardening:** the [PR #9 hosted CI run](https://github.com/dfeen87/ZORG/actions/runs/39161093651) recorded **934 passing tests on Ubuntu 24.04** and **934 passing tests on macOS 15**, using Python 3.12. Both strict test-inventory audits passed with no failed, skipped, or deselected tests. Two existing Pytest warnings remained on each platform.
 
-```sh
-commander-zorg morph-lab --record outputs/morph_take_01 --mono
-# Inside the terminal: morph circle; morph oval; up .05; capture My_shape; save
-commander-zorg morph-demo --out outputs/morph_demo_01
-python scripts/check_morph_demo.py outputs/morph_demo_01/video/manifest.json --report outputs/morph_demo_01/check_report.json
-```
+Those counts describe a **specific verified commit**, not a promise about future builds. The badge at the top reports the current `main` workflow status.
 
-Use a new take directory each time. Wide forms plus strong motion can exceed
-the unchanged force budget; rejected commands preserve the current state.
+- [Fast cross-platform CI](.github/workflows/ci.yml) — pytest, dependency/media checks, test inventory auditing and diagnostics.
+- [Manual deep validation](.github/workflows/deep-validation.yml) — broader Build 0, live, morph and chromatic evidence reproduction.
+- [CI guidance](docs/ci.md) — platform scope, artifacts and failure reporting.
+- [Creator Studio CI report](docs/morph/studio-ci.md) — development evidence and limitations.
 
-## Continuous integration
+**Platform CI passing ≠ finished artistic acceptance.** Terminal.app/iTerm2 color appearance, timing, texture and the final shapes still need creator review on the target hardware. The manual deep workflow is independent of the passing PR #9 fast-CI run.
 
-The [CI workflow](.github/workflows/ci.yml) runs the complete Python 3.12 test
-suite on Ubuntu 24.04 and macOS 15 for pull requests to `main` and pushes to
-`main`. The [manual deep-validation workflow](.github/workflows/deep-validation.yml)
-reproduces Build 0, semantic morphing, and live-demo evidence separately.
-See [CI instructions and failure diagnostics](docs/ci.md) for reports, status
-checks, and the distinction between configured workflows and verified runs.
+## 🗺️ From mathematical potato to movie
 
-### Creator studio (Build 0.3)
+| Milestone | Status | Focus |
+| --- | --- | --- |
+| **Build 0** | Implemented | Mathematical fields, springs, grayscale evidence and replay |
+| **Build 0.1** | Implemented | Live terminal interaction, recording and export |
+| **Build 0.2** | Implemented | Named mathematical morphs and persistent captures |
+| **Build 0.3** | Implemented; artistic review pending | Creator presets, corrected admission, deterministic RGB |
+| **Next research** | **Not implemented** | Object identity, local vs. world movement, multiple actors, scene/camera context |
+| **Longer horizon** | **Research concept** | Radial spatial strings, symbolic cinematic direction, Commander and Zorg performing in a spaceship |
 
-`commander-zorg morph-lab --record outputs/creator_01` now runs the versioned
-creator studio. Start with `motion auto on`, choose `motion gentle/normal/bold`
-and `speed slow/normal/fast`, then `color on` and `palette auto`. Try
-`morph oval .5`, allow it to settle, and `morph cloud 2`; direct the blue cloud
-with `up`. Directions are absolute local deformation targets. Repeating a
-saturated target reports the limit; rigid scene travel is a future pass.
-`motion auto off` restores strict direction admission. `--mono` forces portable
-blocks; advertised truecolor and 256-color terminals show color half-blocks.
-`save` exports recorded RGB when color was enabled, with PNG/HTML and optional
-H.264. `render-morph-session ... --grayscale` explicitly retains independent gray.
+The forthcoming **radial spatial-context / Letter-Depth Encoding** investigation is a *hypothesis to examine*, not an engine feature or proven translation from prose to cinema.
 
-See [motion diagnosis](docs/morph/studio-diagnosis.md),
-[presets and semantics](docs/morph/studio-motion.md),
-[color architecture](docs/morph/studio-color.md), and
-[Mac acceptance](docs/morph/studio-mac-acceptance.md).
-Reproduce the source-backed take with
-`python scripts/demo_chromatic_cloud.py --out outputs/chromatic_cloud_01`.
-Creator artistic review and native platform results are reported separately.
+## 📚 Explore the laboratory
+
+| Area | Start here |
+| --- | --- |
+| Creator motion & adaptive behavior | [Motion contract](docs/morph/studio-motion.md) · [Diagnosis](docs/morph/studio-diagnosis.md) |
+| Procedural color | [Chromatic architecture](docs/morph/studio-color.md) · [Demo walkthrough](docs/morph/studio-demo.md) |
+| Original live animation | [Live Lab guide](docs/live/README.md) · [Saved demo](docs/live/results/live-demo.mp4) |
+| Named semantic shapes | [Morph Lab guide](docs/morph/README.md) · [Morph demo](docs/morph/results/morph-demo.mp4) |
+| Mathematical foundations | [Build 0 results](docs/results/implementation-report.md) · [Architecture](docs/morph/architecture.md) |
+| Verification and contracts | [CI](docs/ci.md) · [JSON schemas](schemas/README.md) |
+
+## 📜 License & creative ownership
+
+Code in this repository is distributed under the [MIT License](LICENSE), with the original software attribution preserved. **The MIT software license does not automatically grant rights to the original Commander–ZORG characters, scripts, story bible, fictional setting, or third-party creative assets.**
+
+This is a personal, evolving research and creative project. The code is real; the finished film is still ahead of us.
+
+---
+
+<p align="center">
+  <strong>LET MATHEMATICS DISCOVER THE CHARACTERS.</strong><br>
+  <em>Let cinematic intention reveal their personalities.</em><br><br>
+  <strong>Design top-down. Verify bottom-up. Release with evidence.</strong>
+</p>
