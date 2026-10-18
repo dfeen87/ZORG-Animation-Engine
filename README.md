@@ -160,3 +160,17 @@ retain its predecessors. Temporal history, predictive motion, colors,
 cinematography, authoring tools and a community platform remain deferred.
 The software's MIT license does not automatically confer rights to original
 character artwork, scripts, fictional settings or third-party assets.
+
+## Live Morph Lab — Build 0.1
+
+The [Live Morph Lab guide](docs/live/README.md) documents the interactive ANSI
+terminal viewport, reproducible autonomous motion, directional and shape
+commands, tick-stamped recordings, offline replay, and PNG/HTML/optional MP4
+export. It includes a noninteractive 15-second demo and a native MacBook
+acceptance checklist. Build 0's finite experiments and numerical contracts
+remain separate.
+
+```sh
+commander-zorg live --scene scenes/live_lab.json --record outputs/live_take_01
+commander-zorg live-demo --out outputs/live_demo_01
+```

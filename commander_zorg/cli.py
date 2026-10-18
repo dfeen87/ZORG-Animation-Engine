@@ -1,4 +1,4 @@
-"""Local, noninteractive command line for the mathematical Build 0 engine."""
+"""Local Build 0 renderer and separately versioned Live Morph Lab commands."""
 from __future__ import annotations
 
 import argparse
@@ -10,7 +10,7 @@ from .config import load_scene
 
 
 def parser() -> argparse.ArgumentParser:
-    result = argparse.ArgumentParser(prog="commander-zorg", description="ZORG Build 0 mathematical renderer")
+    result = argparse.ArgumentParser(prog="commander-zorg", description="ZORG mathematical renderer and Live Morph Lab")
     commands = result.add_subparsers(dest="command", required=True)
     validate = commands.add_parser("validate", help="strictly validate a scene without creating outputs")
     validate.add_argument("scene", type=Path)
@@ -32,13 +32,60 @@ def parser() -> argparse.ArgumentParser:
     cadence = commands.add_parser("cadence", help="independent 60/120 Hz and analytic numerical study")
     cadence.add_argument("scene", type=Path)
     cadence.add_argument("--out", required=True, type=Path)
+    live = commands.add_parser("live", help="interactive terminal Live Morph Lab")
+    live.add_argument("--scene", type=Path, default=Path(__file__).resolve().parent.parent/"scenes/live_lab.json")
+    live.add_argument("--seed", type=int)
+    live.add_argument("--record", required=True, type=Path)
+    live.add_argument("--mono", action="store_true", help="force monochrome terminal rendering")
+    live.add_argument("--preview-fps", type=float, default=15.)
+    live.add_argument("--max-seconds", type=float, help="optional simulation duration limit")
+    live.add_argument("--no-mp4", action="store_true", help="use PNG/HTML export only on save")
+    demo = commands.add_parser("live-demo", help="record and export the 15-second command demonstration")
+    demo.add_argument("--scene", type=Path, default=Path(__file__).resolve().parent.parent/"scenes/live_lab.json")
+    demo.add_argument("--seed", type=int)
+    demo.add_argument("--out", required=True, type=Path)
+    demo.add_argument("--no-mp4", action="store_true")
+    session = commands.add_parser("render-session", help="replay a live session into full-resolution media")
+    session.add_argument("session", type=Path)
+    session.add_argument("--out", required=True, type=Path)
+    session.add_argument("--no-mp4", action="store_true")
+    replay = commands.add_parser("verify-session", help="check live recording integrity and exact numerical replay")
+    replay.add_argument("session", type=Path)
+    export = commands.add_parser("verify-live-export", help="check live export artifacts and timeline")
+    export.add_argument("manifest", type=Path)
     return result
 
 
 def main(argv: list[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     try:
-        if arguments.command == "validate":
+        if arguments.command in ("live", "live-demo"):
+            from .canonical import read_json
+            config = read_json(arguments.scene)
+            if arguments.seed is not None:
+                config['seed'] = arguments.seed
+            if arguments.command == 'live-demo':
+                from .live_demo import run_demo
+                report = run_demo(config,arguments.out,mp4=not arguments.no_mp4)
+            else:
+                from .live import run_live
+                report = run_live(config,arguments.record,mono=arguments.mono,
+                                  preview_fps=arguments.preview_fps,max_seconds=arguments.max_seconds)
+                if report['save_requested']:
+                    from .live_export import render_session
+                    export = render_session(Path(report['session']),arguments.record/'export',mp4=not arguments.no_mp4)
+                    report['export_manifest'] = str(arguments.record/'export/manifest.json')
+                    report['media'] = export['media']
+        elif arguments.command == 'render-session':
+            from .live_export import render_session
+            report = render_session(arguments.session,arguments.out,mp4=not arguments.no_mp4)
+        elif arguments.command == 'verify-session':
+            from .session import verify_session
+            report = verify_session(arguments.session)
+        elif arguments.command == 'verify-live-export':
+            from .live_export import verify_export
+            report = verify_export(arguments.manifest)
+        elif arguments.command == "validate":
             scene = load_scene(arguments.scene)
             report = {"valid": True, "scene_id": scene.scene_id, "elements": len(scene.elements),
                       "terminal_tick": scene.terminal_tick}
@@ -80,6 +127,9 @@ def main(argv: list[str] | None = None) -> int:
             return 0 if report["passed"] else 6
         print(json.dumps(report, allow_nan=False, sort_keys=True))
         return 0
+    except KeyboardInterrupt:
+        print(json.dumps({"error":"KeyboardInterrupt","message":"interrupted; partial evidence retained"}),file=sys.stderr)
+        return 130
     except (OSError, ValueError, RuntimeError) as error:
         code = getattr(error, "exit_code", 2)
         print(json.dumps({"error": type(error).__name__, "message": str(error)}, allow_nan=False), file=sys.stderr)

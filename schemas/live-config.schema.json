@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-live-config-0.1 initial live configuration",
+  "description": "Separate live horizon and runtime configuration. The strict loader additionally checks finite values, integer tokens and the unchanged scene numerical contract.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-live-config-0.1"
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "sim_hz": {
+      "type": "integer",
+      "const": 60
+    },
+    "fps_out": {
+      "type": "integer",
+      "const": 30
+    },
+    "max_ticks": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 216000
+    },
+    "wander": {
+      "type": "boolean"
+    },
+    "scene": {
+      "allOf": [
+        {
+          "$ref": "scene.schema.json"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "cues": {
+              "maxItems": 0
+            },
+            "timeline": {
+              "type": "object",
+              "properties": {
+                "sim_hz": {
+                  "const": 60
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "seed",
+    "sim_hz",
+    "fps_out",
+    "max_ticks",
+    "wander",
+    "scene"
+  ],
+  "additionalProperties": false
+}
