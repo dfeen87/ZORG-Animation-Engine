@@ -181,6 +181,34 @@ runs at a fixed 60 Hz; the terminal preview targets 15 FPS. Accepted motion
 commands are recorded with their effective simulation ticks for exact replay
 with the same source and supported environment.
 
+### New capabilities — Build 0.2
+
+The Live Morph Lab now has a dedicated `morph-lab` mode for directing the
+mathematical form itself:
+
+- Smoothly morph between named `home`, `circle`, `oval`, `cloud`, and `hill`
+  targets with `morph NAME`, or choose a transition duration with
+  `morph NAME 2.0`.
+- Combine named shape changes with directional movement, autonomous wander,
+  and squash/stretch, within the existing numerical safety limits.
+- Redirect an ongoing morph toward another target, or return the shape to
+  `home`, while the animation continues.
+- Preserve the current mathematical state with `capture LABEL`, including
+  control positions, velocities, field parameters, motion targets, and the
+  simulation tick; generate its preview PNG during export.
+- Record and replay morph commands and captures, then export the animation
+  as full-resolution PNG frames, a standalone HTML player, and optional MP4.
+- Generate a complete 20-second morph demonstration with `morph-demo`.
+
+```sh
+commander-zorg morph-lab --record outputs/my_morph_take --mono
+```
+
+Inside this mode, try `morph circle`, `morph oval 2.0`, `up 0.05`,
+`capture My_shape`, and `save`. Shape names express artistic intent;
+creator approval remains pending. See the [Semantic Morph Lab guide](docs/morph/README.md)
+for the complete workflow.
+
 ### Start an interactive take
 
 From the repository root, using the Python 3.12 environment installed above:
