@@ -5,7 +5,7 @@ from itertools import product
 import numpy as np
 
 from .canonical import canonical_bytes, strict_json
-from .morph_commands import parse_command
+from .studio_commands import parse_command, MOTION_PRESETS, SPEED_PRESETS
 from .morph_runtime import MorphRuntime
 
 
@@ -19,6 +19,9 @@ class StudioRuntime(MorphRuntime):
     def __init__(self, config, targets):
         super().__init__(config, targets)
         self._future_admission = False
+        # Match historical omitted numeric arguments until a creator changes it.
+        self.motion_preset = 'bold'
+        self.speed_preset = 'normal'
 
     def _admit(self, translation=None):
         if not self._future_admission:
@@ -40,16 +43,17 @@ class StudioRuntime(MorphRuntime):
                 raise ValueError('combined motion exceeds conservative force/displacement admission budget; reduce motion or turn wander off')
 
     def accept(self, text):
-        operation = parse_command(text)
+        operation = parse_command(text, self.motion_preset, self.speed_preset)
         self._future_admission = True
         try:
             if (operation['action'] == 'motion' and self.motion_auto
                     and operation['motion']['action'] in DIRECTIONS):
                 operation = self._adaptive_command(operation['motion'])
+            command = (operation if operation['action'] in ('motion_preset', 'speed_preset')
+                       else {**operation, 'admission': ADMISSION} if operation['action'] == 'adaptive_motion'
+                       else {'action': 'creator', 'operation': operation, 'admission': ADMISSION})
             event = {'schema_version': 'cz-morph-event-0.3', 'sequence': len(self.events),
-                     'effective_tick': self.state.tick,
-                     'command': {'action': 'creator', 'operation': operation,
-                                 'admission': ADMISSION}}
+                     'effective_tick': self.state.tick, 'command': command}
             self.apply_event(event)
             return deepcopy(event)
         except ValueError as error:
@@ -75,6 +79,22 @@ class StudioRuntime(MorphRuntime):
             finally:
                 self._future_admission = previous
         command = event.get('command')
+        if (set(event) != {'schema_version', 'sequence', 'effective_tick', 'command'}
+                or type(event['sequence']) is not int or event['sequence'] != len(self.events)
+                or type(event['effective_tick']) is not int or event['effective_tick'] != self.state.tick
+                or self.state.tick >= self.scene.terminal_tick or type(command) is not dict):
+            raise ValueError('invalid creator event envelope')
+        if command.get('action') in ('motion_preset', 'speed_preset'):
+            action = command['action']
+            text = ('motion' if action == 'motion_preset' else 'speed')+' '+str(command.get('name'))
+            if canonical_bytes(command) != canonical_bytes(parse_command(text)):
+                raise ValueError('invalid normalized creator preset')
+            setattr(self, 'motion_preset' if action == 'motion_preset' else 'speed_preset', command['name'])
+            self.events.append(event)
+            return
+        if command.get('action') == 'adaptive_motion':
+            command = {'action': 'creator', 'admission': command.get('admission'),
+                       'operation': {k: v for k, v in command.items() if k != 'admission'}}
         if (type(command) is not dict or set(command) != {'action', 'operation', 'admission'}
                 or command['action'] != 'creator' or command['admission'] != ADMISSION
                 or type(command['operation']) is not dict):
@@ -103,4 +123,14 @@ class StudioRuntime(MorphRuntime):
     def command_feedback(self, event):
         if event['schema_version'] != 'cz-morph-event-0.3':
             return super().command_feedback(event)
-        return super().command_feedback({'command': event['command']['operation']})
+        command = event['command']
+        if command['action'] == 'motion_preset':
+            return f"MOTION {command['name'].upper()}: requested intensity {command['strength']}; safety admission remains active"
+        if command['action'] == 'speed_preset':
+            return f"SPEED {command['name'].upper()}: transition {command['duration_ticks']/60:g} seconds"
+        if command['action'] == 'adaptive_motion':
+            return super().command_feedback({'command': command})
+        return super().command_feedback({'command': command['operation']})
+
+    def creator_status(self):
+        return f"AUTO {'ON' if self.motion_auto else 'OFF (STRICT)'} | MOTION {self.motion_preset.upper()} | SPEED {self.speed_preset.upper()}"
