@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "session": 1,
+  "events": 16,
+  "captures": 5,
+  "rgb_manifest": 1,
+  "validator": "jsonschema 4.26.0 development-only; locked runtime unchanged"
+}

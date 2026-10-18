@@ -1,0 +1,3945 @@
+{
+  "frames_read": 420,
+  "channel_units": "uint8 0-255; mean absolute change across RGB channels",
+  "foreground_filter": "minimum RGB channel > 64 in both adjacent frames; approximate interior, not authoritative mask",
+  "max_whole_frame_change": {
+    "from_frame": 8,
+    "to_frame": 9,
+    "to_tick": 18,
+    "whole_frame_mean_abs_channel_change": 0.6268536603009259,
+    "shared_bright_foreground_mean_abs_channel_change": 5.624568444674607,
+    "maximum_channel_change": 114,
+    "shared_bright_foreground_pixels": 15448
+  },
+  "max_shared_foreground_change": {
+    "from_frame": 7,
+    "to_frame": 8,
+    "to_tick": 16,
+    "whole_frame_mean_abs_channel_change": 0.6197848849826388,
+    "shared_bright_foreground_mean_abs_channel_change": 5.687138090625337,
+    "maximum_channel_change": 114,
+    "shared_bright_foreground_pixels": 15485
+  },
+  "morph_timeline_max_shared_foreground_change": {
+    "from_frame": 131,
+    "to_frame": 132,
+    "to_tick": 264,
+    "whole_frame_mean_abs_channel_change": 0.4944186740451389,
+    "shared_bright_foreground_mean_abs_channel_change": 1.6324344618918263,
+    "maximum_channel_change": 237,
+    "shared_bright_foreground_pixels": 15093
+  },
+  "samples": [
+    {
+      "name": "starting_oval",
+      "tick": 178,
+      "bright_foreground_pixels": 15120,
+      "mean_rgb": [
+        151.2616402116402,
+        185.18062169312168,
+        199.51732804232805
+      ],
+      "minimum_rgb": [
+        65,
+        85,
+        93
+      ],
+      "maximum_rgb": [
+        180,
+        206,
+        218
+      ],
+      "fraction_blue_exceeds_red_by_40": 0.9520502645502645,
+      "fraction_green_exceeds_red_by_20": 0.9888227513227513
+    },
+    {
+      "name": "transition_25",
+      "tick": 210,
+      "bright_foreground_pixels": 15100,
+      "mean_rgb": [
+        149.42602649006622,
+        186.62066225165563,
+        203.66384105960265
+      ],
+      "minimum_rgb": [
+        65,
+        86,
+        96
+      ],
+      "maximum_rgb": [
+        179,
+        207,
+        221
+      ],
+      "fraction_blue_exceeds_red_by_40": 0.9881456953642385,
+      "fraction_green_exceeds_red_by_20": 0.9929139072847682
+    },
+    {
+      "name": "transition_50",
+      "tick": 240,
+      "bright_foreground_pixels": 14983,
+      "mean_rgb": [
+        142.2514182740439,
+        192.04445037709405,
+        219.47220182873923
+      ],
+      "minimum_rgb": [
+        65,
+        92,
+        107
+      ],
+      "maximum_rgb": [
+        174,
+        212,
+        232
+      ],
+      "fraction_blue_exceeds_red_by_40": 0.9959954615230595,
+      "fraction_green_exceeds_red_by_20": 0.999666288460255
+    },
+    {
+      "name": "transition_75",
+      "tick": 270,
+      "bright_foreground_pixels": 15487,
+      "mean_rgb": [
+        135.7942790727707,
+        197.9682959901853,
+        235.631884806612
+      ],
+      "minimum_rgb": [
+        65,
+        98,
+        118
+      ],
+      "maximum_rgb": [
+        169,
+        216,
+        244
+      ],
+      "fraction_blue_exceeds_red_by_40": 0.9997417188609802,
+      "fraction_green_exceeds_red_by_20": 1.0
+    },
+    {
+      "name": "sky_blue_cloud",
+      "tick": 418,
+      "bright_foreground_pixels": 16693,
+      "mean_rgb": [
+        133.5386089977835,
+        199.3039597436051,
+        239.68831246630324
+      ],
+      "minimum_rgb": [
+        65,
+        100,
+        121
+      ],
+      "maximum_rgb": [
+        165,
+        216,
+        246
+      ],
+      "fraction_blue_exceeds_red_by_40": 1.0,
+      "fraction_green_exceeds_red_by_20": 1.0
+    },
+    {
+      "name": "final_cloud",
+      "tick": 838,
+      "bright_foreground_pixels": 16692,
+      "mean_rgb": [
+        133.5690750059909,
+        199.33866522885214,
+        239.72927150730888
+      ],
+      "minimum_rgb": [
+        65,
+        100,
+        121
+      ],
+      "maximum_rgb": [
+        165,
+        216,
+        246
+      ],
+      "fraction_blue_exceeds_red_by_40": 1.0,
+      "fraction_green_exceeds_red_by_20": 1.0
+    }
+  ],
+  "all_adjacent_frame_measurements": [
+    {
+      "from_frame": 0,
+      "to_frame": 1,
+      "to_tick": 2,
+      "whole_frame_mean_abs_channel_change": 0.012439869068287037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.11802335565859523,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 15528
+    },
+    {
+      "from_frame": 1,
+      "to_frame": 2,
+      "to_tick": 4,
+      "whole_frame_mean_abs_channel_change": 0.07645896629050926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7253992787223081,
+      "maximum_channel_change": 2,
+      "shared_bright_foreground_pixels": 15528
+    },
+    {
+      "from_frame": 2,
+      "to_frame": 3,
+      "to_tick": 6,
+      "whole_frame_mean_abs_channel_change": 0.18065049913194445,
+      "shared_bright_foreground_mean_abs_channel_change": 1.7101365275631117,
+      "maximum_channel_change": 58,
+      "shared_bright_foreground_pixels": 15528
+    },
+    {
+      "from_frame": 3,
+      "to_frame": 4,
+      "to_tick": 8,
+      "whole_frame_mean_abs_channel_change": 0.300048828125,
+      "shared_bright_foreground_mean_abs_channel_change": 2.819483810014601,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 15524
+    },
+    {
+      "from_frame": 4,
+      "to_frame": 5,
+      "to_tick": 10,
+      "whole_frame_mean_abs_channel_change": 0.41770652488425924,
+      "shared_bright_foreground_mean_abs_channel_change": 3.9157752287665937,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 15518
+    },
+    {
+      "from_frame": 5,
+      "to_frame": 6,
+      "to_tick": 12,
+      "whole_frame_mean_abs_channel_change": 0.5187355324074074,
+      "shared_bright_foreground_mean_abs_channel_change": 4.83924502343179,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 15506
+    },
+    {
+      "from_frame": 6,
+      "to_frame": 7,
+      "to_tick": 14,
+      "whole_frame_mean_abs_channel_change": 0.5943400065104166,
+      "shared_bright_foreground_mean_abs_channel_change": 5.425915165601395,
+      "maximum_channel_change": 113,
+      "shared_bright_foreground_pixels": 15489
+    },
+    {
+      "from_frame": 7,
+      "to_frame": 8,
+      "to_tick": 16,
+      "whole_frame_mean_abs_channel_change": 0.6197848849826388,
+      "shared_bright_foreground_mean_abs_channel_change": 5.687138090625337,
+      "maximum_channel_change": 114,
+      "shared_bright_foreground_pixels": 15485
+    },
+    {
+      "from_frame": 8,
+      "to_frame": 9,
+      "to_tick": 18,
+      "whole_frame_mean_abs_channel_change": 0.6268536603009259,
+      "shared_bright_foreground_mean_abs_channel_change": 5.624568444674607,
+      "maximum_channel_change": 114,
+      "shared_bright_foreground_pixels": 15448
+    },
+    {
+      "from_frame": 9,
+      "to_frame": 10,
+      "to_tick": 20,
+      "whole_frame_mean_abs_channel_change": 0.5794316044560185,
+      "shared_bright_foreground_mean_abs_channel_change": 5.1643113358399235,
+      "maximum_channel_change": 112,
+      "shared_bright_foreground_pixels": 15426
+    },
+    {
+      "from_frame": 10,
+      "to_frame": 11,
+      "to_tick": 22,
+      "whole_frame_mean_abs_channel_change": 0.5056107132523148,
+      "shared_bright_foreground_mean_abs_channel_change": 4.310149072629572,
+      "maximum_channel_change": 111,
+      "shared_bright_foreground_pixels": 15384
+    },
+    {
+      "from_frame": 11,
+      "to_frame": 12,
+      "to_tick": 24,
+      "whole_frame_mean_abs_channel_change": 0.41218623408564814,
+      "shared_bright_foreground_mean_abs_channel_change": 3.3454150369404605,
+      "maximum_channel_change": 162,
+      "shared_bright_foreground_pixels": 15340
+    },
+    {
+      "from_frame": 12,
+      "to_frame": 13,
+      "to_tick": 26,
+      "whole_frame_mean_abs_channel_change": 0.3213817455150463,
+      "shared_bright_foreground_mean_abs_channel_change": 2.2367421762472173,
+      "maximum_channel_change": 161,
+      "shared_bright_foreground_pixels": 15274
+    },
+    {
+      "from_frame": 13,
+      "to_frame": 14,
+      "to_tick": 28,
+      "whole_frame_mean_abs_channel_change": 0.23881700303819445,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3887465790914066,
+      "maximum_channel_change": 209,
+      "shared_bright_foreground_pixels": 15225
+    },
+    {
+      "from_frame": 14,
+      "to_frame": 15,
+      "to_tick": 30,
+      "whole_frame_mean_abs_channel_change": 0.1922675238715278,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9480676328502415,
+      "maximum_channel_change": 212,
+      "shared_bright_foreground_pixels": 15180
+    },
+    {
+      "from_frame": 15,
+      "to_frame": 16,
+      "to_tick": 32,
+      "whole_frame_mean_abs_channel_change": 0.20605920862268517,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0094640695499064,
+      "maximum_channel_change": 209,
+      "shared_bright_foreground_pixels": 15145
+    },
+    {
+      "from_frame": 16,
+      "to_frame": 17,
+      "to_tick": 34,
+      "whole_frame_mean_abs_channel_change": 0.21819616247106483,
+      "shared_bright_foreground_mean_abs_channel_change": 1.065991527667461,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 15108
+    },
+    {
+      "from_frame": 17,
+      "to_frame": 18,
+      "to_tick": 36,
+      "whole_frame_mean_abs_channel_change": 0.20827455873842593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8992191474771606,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 15069
+    },
+    {
+      "from_frame": 18,
+      "to_frame": 19,
+      "to_tick": 38,
+      "whole_frame_mean_abs_channel_change": 0.22620081018518517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9797475654932233,
+      "maximum_channel_change": 215,
+      "shared_bright_foreground_pixels": 15027
+    },
+    {
+      "from_frame": 19,
+      "to_frame": 20,
+      "to_tick": 40,
+      "whole_frame_mean_abs_channel_change": 0.21696189597800927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9986451670220327,
+      "maximum_channel_change": 214,
+      "shared_bright_foreground_pixels": 15008
+    },
+    {
+      "from_frame": 20,
+      "to_frame": 21,
+      "to_tick": 42,
+      "whole_frame_mean_abs_channel_change": 0.2174614800347222,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0452252372380382,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 14999
+    },
+    {
+      "from_frame": 21,
+      "to_frame": 22,
+      "to_tick": 44,
+      "whole_frame_mean_abs_channel_change": 0.21543375651041666,
+      "shared_bright_foreground_mean_abs_channel_change": 1.049318479976875,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 14991
+    },
+    {
+      "from_frame": 22,
+      "to_frame": 23,
+      "to_tick": 46,
+      "whole_frame_mean_abs_channel_change": 0.21127884476273148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9345885913956956,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 14977
+    },
+    {
+      "from_frame": 23,
+      "to_frame": 24,
+      "to_tick": 48,
+      "whole_frame_mean_abs_channel_change": 0.2065452293113426,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9760473709986198,
+      "maximum_channel_change": 213,
+      "shared_bright_foreground_pixels": 14974
+    },
+    {
+      "from_frame": 24,
+      "to_frame": 25,
+      "to_tick": 50,
+      "whole_frame_mean_abs_channel_change": 0.20194272641782407,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0217787862609005,
+      "maximum_channel_change": 212,
+      "shared_bright_foreground_pixels": 14984
+    },
+    {
+      "from_frame": 25,
+      "to_frame": 26,
+      "to_tick": 52,
+      "whole_frame_mean_abs_channel_change": 0.18923158998842593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9430172816440916,
+      "maximum_channel_change": 212,
+      "shared_bright_foreground_pixels": 14987
+    },
+    {
+      "from_frame": 26,
+      "to_frame": 27,
+      "to_tick": 54,
+      "whole_frame_mean_abs_channel_change": 0.1867381908275463,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8222444889779559,
+      "maximum_channel_change": 211,
+      "shared_bright_foreground_pixels": 14970
+    },
+    {
+      "from_frame": 27,
+      "to_frame": 28,
+      "to_tick": 56,
+      "whole_frame_mean_abs_channel_change": 0.17450403284143517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8759338313767343,
+      "maximum_channel_change": 210,
+      "shared_bright_foreground_pixels": 14992
+    },
+    {
+      "from_frame": 28,
+      "to_frame": 29,
+      "to_tick": 58,
+      "whole_frame_mean_abs_channel_change": 0.1665626808449074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9015555555555556,
+      "maximum_channel_change": 208,
+      "shared_bright_foreground_pixels": 15000
+    },
+    {
+      "from_frame": 29,
+      "to_frame": 30,
+      "to_tick": 60,
+      "whole_frame_mean_abs_channel_change": 0.16019467954282407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7924050632911392,
+      "maximum_channel_change": 163,
+      "shared_bright_foreground_pixels": 15010
+    },
+    {
+      "from_frame": 30,
+      "to_frame": 31,
+      "to_tick": 62,
+      "whole_frame_mean_abs_channel_change": 0.14564118561921297,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7261809625288581,
+      "maximum_channel_change": 162,
+      "shared_bright_foreground_pixels": 15016
+    },
+    {
+      "from_frame": 31,
+      "to_frame": 32,
+      "to_tick": 64,
+      "whole_frame_mean_abs_channel_change": 0.13151041666666666,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6785769734069688,
+      "maximum_channel_change": 160,
+      "shared_bright_foreground_pixels": 15029
+    },
+    {
+      "from_frame": 32,
+      "to_frame": 33,
+      "to_tick": 66,
+      "whole_frame_mean_abs_channel_change": 0.13085033275462962,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7086937236637836,
+      "maximum_channel_change": 109,
+      "shared_bright_foreground_pixels": 15030
+    },
+    {
+      "from_frame": 33,
+      "to_frame": 34,
+      "to_tick": 68,
+      "whole_frame_mean_abs_channel_change": 0.12055347583912036,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6773921907547755,
+      "maximum_channel_change": 109,
+      "shared_bright_foreground_pixels": 15042
+    },
+    {
+      "from_frame": 34,
+      "to_frame": 35,
+      "to_tick": 70,
+      "whole_frame_mean_abs_channel_change": 0.10681830512152778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5643410852713179,
+      "maximum_channel_change": 109,
+      "shared_bright_foreground_pixels": 15050
+    },
+    {
+      "from_frame": 35,
+      "to_frame": 36,
+      "to_tick": 72,
+      "whole_frame_mean_abs_channel_change": 0.10301151982060185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5632275483556853,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15062
+    },
+    {
+      "from_frame": 36,
+      "to_frame": 37,
+      "to_tick": 74,
+      "whole_frame_mean_abs_channel_change": 0.09389693648726852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4871777851532249,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15065
+    },
+    {
+      "from_frame": 37,
+      "to_frame": 38,
+      "to_tick": 76,
+      "whole_frame_mean_abs_channel_change": 0.08147741247106481,
+      "shared_bright_foreground_mean_abs_channel_change": 0.47453841901603094,
+      "maximum_channel_change": 109,
+      "shared_bright_foreground_pixels": 15075
+    },
+    {
+      "from_frame": 38,
+      "to_frame": 39,
+      "to_tick": 78,
+      "whole_frame_mean_abs_channel_change": 0.07246907552083333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.42904815576034827,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15083
+    },
+    {
+      "from_frame": 39,
+      "to_frame": 40,
+      "to_tick": 80,
+      "whole_frame_mean_abs_channel_change": 0.07426170066550926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4178266825754563,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15086
+    },
+    {
+      "from_frame": 40,
+      "to_frame": 41,
+      "to_tick": 82,
+      "whole_frame_mean_abs_channel_change": 0.05274793836805555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2740603330241597,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15094
+    },
+    {
+      "from_frame": 41,
+      "to_frame": 42,
+      "to_tick": 84,
+      "whole_frame_mean_abs_channel_change": 0.05568892867476852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2951970851275257,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15095
+    },
+    {
+      "from_frame": 42,
+      "to_frame": 43,
+      "to_tick": 86,
+      "whole_frame_mean_abs_channel_change": 0.047148527922453706,
+      "shared_bright_foreground_mean_abs_channel_change": 0.26219956300072833,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15103
+    },
+    {
+      "from_frame": 43,
+      "to_frame": 44,
+      "to_tick": 88,
+      "whole_frame_mean_abs_channel_change": 0.03828260633680555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2127673663995762,
+      "maximum_channel_change": 105,
+      "shared_bright_foreground_pixels": 15101
+    },
+    {
+      "from_frame": 44,
+      "to_frame": 45,
+      "to_tick": 90,
+      "whole_frame_mean_abs_channel_change": 0.036589445891203706,
+      "shared_bright_foreground_mean_abs_channel_change": 0.19515480764983878,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15094
+    },
+    {
+      "from_frame": 45,
+      "to_frame": 46,
+      "to_tick": 92,
+      "whole_frame_mean_abs_channel_change": 0.031279387297453706,
+      "shared_bright_foreground_mean_abs_channel_change": 0.15838632750397455,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15096
+    },
+    {
+      "from_frame": 46,
+      "to_frame": 47,
+      "to_tick": 94,
+      "whole_frame_mean_abs_channel_change": 0.02301251446759259,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12219132123780514,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15102
+    },
+    {
+      "from_frame": 47,
+      "to_frame": 48,
+      "to_tick": 96,
+      "whole_frame_mean_abs_channel_change": 0.014971697771990741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09876870117833973,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15106
+    },
+    {
+      "from_frame": 48,
+      "to_frame": 49,
+      "to_tick": 98,
+      "whole_frame_mean_abs_channel_change": 0.0142822265625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07198675496688742,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15100
+    },
+    {
+      "from_frame": 49,
+      "to_frame": 50,
+      "to_tick": 100,
+      "whole_frame_mean_abs_channel_change": 0.013163248697916666,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07742391136418814,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15103
+    },
+    {
+      "from_frame": 50,
+      "to_frame": 51,
+      "to_tick": 102,
+      "whole_frame_mean_abs_channel_change": 0.01224320023148148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.06982593156396849,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15109
+    },
+    {
+      "from_frame": 51,
+      "to_frame": 52,
+      "to_tick": 104,
+      "whole_frame_mean_abs_channel_change": 0.01153564453125,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07026943599241522,
+      "maximum_channel_change": 93,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 52,
+      "to_frame": 53,
+      "to_tick": 106,
+      "whole_frame_mean_abs_channel_change": 0.014707212094907407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09623652357960183,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 53,
+      "to_frame": 54,
+      "to_tick": 108,
+      "whole_frame_mean_abs_channel_change": 0.016465928819444444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09129792534779638,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 54,
+      "to_frame": 55,
+      "to_tick": 110,
+      "whole_frame_mean_abs_channel_change": 0.016513400607638888,
+      "shared_bright_foreground_mean_abs_channel_change": 0.08616660052035102,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 55,
+      "to_frame": 56,
+      "to_tick": 112,
+      "whole_frame_mean_abs_channel_change": 0.021796332465277776,
+      "shared_bright_foreground_mean_abs_channel_change": 0.13541459973102277,
+      "maximum_channel_change": 55,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 56,
+      "to_frame": 57,
+      "to_tick": 114,
+      "whole_frame_mean_abs_channel_change": 0.021870930989583332,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12188988883006882,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15112
+    },
+    {
+      "from_frame": 57,
+      "to_frame": 58,
+      "to_tick": 116,
+      "whole_frame_mean_abs_channel_change": 0.02185962818287037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12718688640324752,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15109
+    },
+    {
+      "from_frame": 58,
+      "to_frame": 59,
+      "to_tick": 118,
+      "whole_frame_mean_abs_channel_change": 0.024967900028935185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.15046219692457036,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15109
+    },
+    {
+      "from_frame": 59,
+      "to_frame": 60,
+      "to_tick": 120,
+      "whole_frame_mean_abs_channel_change": 0.026719835069444444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.15001434593568608,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15103
+    },
+    {
+      "from_frame": 60,
+      "to_frame": 61,
+      "to_tick": 122,
+      "whole_frame_mean_abs_channel_change": 0.025374801070601853,
+      "shared_bright_foreground_mean_abs_channel_change": 0.14523068776064077,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15107
+    },
+    {
+      "from_frame": 61,
+      "to_frame": 62,
+      "to_tick": 124,
+      "whole_frame_mean_abs_channel_change": 0.02189353660300926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1314802559011692,
+      "maximum_channel_change": 98,
+      "shared_bright_foreground_pixels": 15110
+    },
+    {
+      "from_frame": 62,
+      "to_frame": 63,
+      "to_tick": 126,
+      "whole_frame_mean_abs_channel_change": 0.027938277633101853,
+      "shared_bright_foreground_mean_abs_channel_change": 0.13611386957960941,
+      "maximum_channel_change": 105,
+      "shared_bright_foreground_pixels": 15105
+    },
+    {
+      "from_frame": 63,
+      "to_frame": 64,
+      "to_tick": 128,
+      "whole_frame_mean_abs_channel_change": 0.024793836805555556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.15002536447649925,
+      "maximum_channel_change": 103,
+      "shared_bright_foreground_pixels": 15113
+    },
+    {
+      "from_frame": 64,
+      "to_frame": 65,
+      "to_tick": 130,
+      "whole_frame_mean_abs_channel_change": 0.026496039496527776,
+      "shared_bright_foreground_mean_abs_channel_change": 0.17361386793701203,
+      "maximum_channel_change": 103,
+      "shared_bright_foreground_pixels": 15114
+    },
+    {
+      "from_frame": 65,
+      "to_frame": 66,
+      "to_tick": 132,
+      "whole_frame_mean_abs_channel_change": 0.021696867766203703,
+      "shared_bright_foreground_mean_abs_channel_change": 0.14624680250507188,
+      "maximum_channel_change": 105,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 66,
+      "to_frame": 67,
+      "to_tick": 134,
+      "whole_frame_mean_abs_channel_change": 0.02198395905671296,
+      "shared_bright_foreground_mean_abs_channel_change": 0.11780924651491088,
+      "maximum_channel_change": 102,
+      "shared_bright_foreground_pixels": 15112
+    },
+    {
+      "from_frame": 67,
+      "to_frame": 68,
+      "to_tick": 136,
+      "whole_frame_mean_abs_channel_change": 0.016807273582175927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1077886566110964,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 68,
+      "to_frame": 69,
+      "to_tick": 138,
+      "whole_frame_mean_abs_channel_change": 0.016413935908564815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.08360355590849933,
+      "maximum_channel_change": 55,
+      "shared_bright_foreground_pixels": 15111
+    },
+    {
+      "from_frame": 69,
+      "to_frame": 70,
+      "to_tick": 140,
+      "whole_frame_mean_abs_channel_change": 0.018037018952546297,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0846676370693838,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15114
+    },
+    {
+      "from_frame": 70,
+      "to_frame": 71,
+      "to_tick": 142,
+      "whole_frame_mean_abs_channel_change": 0.01921477141203704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.10414598089186028,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15107
+    },
+    {
+      "from_frame": 71,
+      "to_frame": 72,
+      "to_tick": 144,
+      "whole_frame_mean_abs_channel_change": 0.01341869212962963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07801089858141946,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15109
+    },
+    {
+      "from_frame": 72,
+      "to_frame": 73,
+      "to_tick": 146,
+      "whole_frame_mean_abs_channel_change": 0.015019169560185185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.059589207315727935,
+      "maximum_channel_change": 93,
+      "shared_bright_foreground_pixels": 15109
+    },
+    {
+      "from_frame": 73,
+      "to_frame": 74,
+      "to_tick": 148,
+      "whole_frame_mean_abs_channel_change": 0.014223451967592593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07538264743504919,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15114
+    },
+    {
+      "from_frame": 74,
+      "to_frame": 75,
+      "to_tick": 150,
+      "whole_frame_mean_abs_channel_change": 0.013258192274305556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07807470123914098,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 75,
+      "to_frame": 76,
+      "to_tick": 152,
+      "whole_frame_mean_abs_channel_change": 0.014356825086805556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07202558165178079,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15115
+    },
+    {
+      "from_frame": 76,
+      "to_frame": 77,
+      "to_tick": 154,
+      "whole_frame_mean_abs_channel_change": 0.007269965277777778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04679678024037932,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15115
+    },
+    {
+      "from_frame": 77,
+      "to_frame": 78,
+      "to_tick": 156,
+      "whole_frame_mean_abs_channel_change": 0.008954083478009259,
+      "shared_bright_foreground_mean_abs_channel_change": 0.05394556922941202,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15114
+    },
+    {
+      "from_frame": 78,
+      "to_frame": 79,
+      "to_tick": 158,
+      "whole_frame_mean_abs_channel_change": 0.009370026765046295,
+      "shared_bright_foreground_mean_abs_channel_change": 0.061325747552262506,
+      "maximum_channel_change": 55,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 79,
+      "to_frame": 80,
+      "to_tick": 160,
+      "whole_frame_mean_abs_channel_change": 0.006501374421296296,
+      "shared_bright_foreground_mean_abs_channel_change": 0.030142664990849156,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15117
+    },
+    {
+      "from_frame": 80,
+      "to_frame": 81,
+      "to_tick": 162,
+      "whole_frame_mean_abs_channel_change": 0.0084228515625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04646290905883391,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 81,
+      "to_frame": 82,
+      "to_tick": 164,
+      "whole_frame_mean_abs_channel_change": 0.005588107638888889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.030210814148363765,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 82,
+      "to_frame": 83,
+      "to_tick": 166,
+      "whole_frame_mean_abs_channel_change": 0.004715530960648148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01830169125267359,
+      "maximum_channel_change": 50,
+      "shared_bright_foreground_pixels": 15117
+    },
+    {
+      "from_frame": 83,
+      "to_frame": 84,
+      "to_tick": 168,
+      "whole_frame_mean_abs_channel_change": 0.0033591941550925927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.015631545296205657,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 84,
+      "to_frame": 85,
+      "to_tick": 170,
+      "whole_frame_mean_abs_channel_change": 0.004446524160879629,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022335405917890374,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 85,
+      "to_frame": 86,
+      "to_tick": 172,
+      "whole_frame_mean_abs_channel_change": 0.0019124348958333333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.009833101836541217,
+      "maximum_channel_change": 52,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 86,
+      "to_frame": 87,
+      "to_tick": 174,
+      "whole_frame_mean_abs_channel_change": 0.004263418692129629,
+      "shared_bright_foreground_mean_abs_channel_change": 0.030008378533315696,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 87,
+      "to_frame": 88,
+      "to_tick": 176,
+      "whole_frame_mean_abs_channel_change": 0.002940990306712963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.010715703135335361,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 88,
+      "to_frame": 89,
+      "to_tick": 178,
+      "whole_frame_mean_abs_channel_change": 0.0011121961805555555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.007561728395061728,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15120
+    },
+    {
+      "from_frame": 89,
+      "to_frame": 90,
+      "to_tick": 180,
+      "whole_frame_mean_abs_channel_change": 0.002007378472222222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.007474039288312719,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 90,
+      "to_frame": 91,
+      "to_tick": 182,
+      "whole_frame_mean_abs_channel_change": 0.001971209490740741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.012787441850210551,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 91,
+      "to_frame": 92,
+      "to_tick": 184,
+      "whole_frame_mean_abs_channel_change": 0.001148365162037037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01117798796216681,
+      "maximum_channel_change": 49,
+      "shared_bright_foreground_pixels": 15119
+    },
+    {
+      "from_frame": 92,
+      "to_frame": 93,
+      "to_tick": 186,
+      "whole_frame_mean_abs_channel_change": 0.002875434027777778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.024826917140715263,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 93,
+      "to_frame": 94,
+      "to_tick": 188,
+      "whole_frame_mean_abs_channel_change": 0.0036485460069444445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.035542620276050624,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 94,
+      "to_frame": 95,
+      "to_tick": 190,
+      "whole_frame_mean_abs_channel_change": 0.006743254484953704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.062398024430039244,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 95,
+      "to_frame": 96,
+      "to_tick": 192,
+      "whole_frame_mean_abs_channel_change": 0.008791323061342593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.08561538122326587,
+      "maximum_channel_change": 48,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 96,
+      "to_frame": 97,
+      "to_tick": 194,
+      "whole_frame_mean_abs_channel_change": 0.011488172743055556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.10911937205097676,
+      "maximum_channel_change": 49,
+      "shared_bright_foreground_pixels": 15118
+    },
+    {
+      "from_frame": 97,
+      "to_frame": 98,
+      "to_tick": 196,
+      "whole_frame_mean_abs_channel_change": 0.017951117621527776,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1517376731057599,
+      "maximum_channel_change": 53,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 98,
+      "to_frame": 99,
+      "to_tick": 198,
+      "whole_frame_mean_abs_channel_change": 0.02356183087384259,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1865352385992767,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15116
+    },
+    {
+      "from_frame": 99,
+      "to_frame": 100,
+      "to_tick": 200,
+      "whole_frame_mean_abs_channel_change": 0.02782298900462963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.23042490794028797,
+      "maximum_channel_change": 54,
+      "shared_bright_foreground_pixels": 15117
+    },
+    {
+      "from_frame": 100,
+      "to_frame": 101,
+      "to_tick": 202,
+      "whole_frame_mean_abs_channel_change": 0.035454644097222224,
+      "shared_bright_foreground_mean_abs_channel_change": 0.29625217832484063,
+      "maximum_channel_change": 94,
+      "shared_bright_foreground_pixels": 15111
+    },
+    {
+      "from_frame": 101,
+      "to_frame": 102,
+      "to_tick": 204,
+      "whole_frame_mean_abs_channel_change": 0.04782669632523148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3951271186440678,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15104
+    },
+    {
+      "from_frame": 102,
+      "to_frame": 103,
+      "to_tick": 206,
+      "whole_frame_mean_abs_channel_change": 0.05006239149305555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4000927213722763,
+      "maximum_channel_change": 103,
+      "shared_bright_foreground_pixels": 15099
+    },
+    {
+      "from_frame": 103,
+      "to_frame": 104,
+      "to_tick": 208,
+      "whole_frame_mean_abs_channel_change": 0.062255859375,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4918626476758308,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15095
+    },
+    {
+      "from_frame": 104,
+      "to_frame": 105,
+      "to_tick": 210,
+      "whole_frame_mean_abs_channel_change": 0.06389024522569445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5175025950219748,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15093
+    },
+    {
+      "from_frame": 105,
+      "to_frame": 106,
+      "to_tick": 212,
+      "whole_frame_mean_abs_channel_change": 0.0788302951388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5806358892721323,
+      "maximum_channel_change": 104,
+      "shared_bright_foreground_pixels": 15076
+    },
+    {
+      "from_frame": 106,
+      "to_frame": 107,
+      "to_tick": 214,
+      "whole_frame_mean_abs_channel_change": 0.09604899088541667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6783074403576329,
+      "maximum_channel_change": 110,
+      "shared_bright_foreground_pixels": 15062
+    },
+    {
+      "from_frame": 107,
+      "to_frame": 108,
+      "to_tick": 216,
+      "whole_frame_mean_abs_channel_change": 0.0993381076388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6862601842012044,
+      "maximum_channel_change": 106,
+      "shared_bright_foreground_pixels": 15056
+    },
+    {
+      "from_frame": 108,
+      "to_frame": 109,
+      "to_tick": 218,
+      "whole_frame_mean_abs_channel_change": 0.11723045066550926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8221528515763372,
+      "maximum_channel_change": 105,
+      "shared_bright_foreground_pixels": 15056
+    },
+    {
+      "from_frame": 109,
+      "to_frame": 110,
+      "to_tick": 220,
+      "whole_frame_mean_abs_channel_change": 0.1281421802662037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9095016611295681,
+      "maximum_channel_change": 107,
+      "shared_bright_foreground_pixels": 15050
+    },
+    {
+      "from_frame": 110,
+      "to_frame": 111,
+      "to_tick": 222,
+      "whole_frame_mean_abs_channel_change": 0.1380321361400463,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9437163196061473,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15031
+    },
+    {
+      "from_frame": 111,
+      "to_frame": 112,
+      "to_tick": 224,
+      "whole_frame_mean_abs_channel_change": 0.15481002242476852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9680763680763681,
+      "maximum_channel_change": 108,
+      "shared_bright_foreground_pixels": 15015
+    },
+    {
+      "from_frame": 112,
+      "to_frame": 113,
+      "to_tick": 226,
+      "whole_frame_mean_abs_channel_change": 0.16292317708333334,
+      "shared_bright_foreground_mean_abs_channel_change": 1.017646797350758,
+      "maximum_channel_change": 111,
+      "shared_bright_foreground_pixels": 14998
+    },
+    {
+      "from_frame": 113,
+      "to_frame": 114,
+      "to_tick": 228,
+      "whole_frame_mean_abs_channel_change": 0.18053068938078703,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1711946243018936,
+      "maximum_channel_change": 152,
+      "shared_bright_foreground_pixels": 14981
+    },
+    {
+      "from_frame": 114,
+      "to_frame": 115,
+      "to_tick": 230,
+      "whole_frame_mean_abs_channel_change": 0.20210548683449073,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1908293247817567,
+      "maximum_channel_change": 153,
+      "shared_bright_foreground_pixels": 14968
+    },
+    {
+      "from_frame": 115,
+      "to_frame": 116,
+      "to_tick": 232,
+      "whole_frame_mean_abs_channel_change": 0.20821578414351852,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2710142990779099,
+      "maximum_channel_change": 203,
+      "shared_bright_foreground_pixels": 14966
+    },
+    {
+      "from_frame": 116,
+      "to_frame": 117,
+      "to_tick": 234,
+      "whole_frame_mean_abs_channel_change": 0.23259367766203703,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3924270805458925,
+      "maximum_channel_change": 205,
+      "shared_bright_foreground_pixels": 14948
+    },
+    {
+      "from_frame": 117,
+      "to_frame": 118,
+      "to_tick": 236,
+      "whole_frame_mean_abs_channel_change": 0.23821569372106483,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3980222772829751,
+      "maximum_channel_change": 217,
+      "shared_bright_foreground_pixels": 14933
+    },
+    {
+      "from_frame": 118,
+      "to_frame": 119,
+      "to_tick": 238,
+      "whole_frame_mean_abs_channel_change": 0.2607964409722222,
+      "shared_bright_foreground_mean_abs_channel_change": 1.371167426477161,
+      "maximum_channel_change": 210,
+      "shared_bright_foreground_pixels": 14916
+    },
+    {
+      "from_frame": 119,
+      "to_frame": 120,
+      "to_tick": 240,
+      "whole_frame_mean_abs_channel_change": 0.2698319046585648,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5495441137034058,
+      "maximum_channel_change": 222,
+      "shared_bright_foreground_pixels": 14916
+    },
+    {
+      "from_frame": 120,
+      "to_frame": 121,
+      "to_tick": 242,
+      "whole_frame_mean_abs_channel_change": 0.29770462601273145,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5096551878454274,
+      "maximum_channel_change": 225,
+      "shared_bright_foreground_pixels": 14897
+    },
+    {
+      "from_frame": 121,
+      "to_frame": 122,
+      "to_tick": 244,
+      "whole_frame_mean_abs_channel_change": 0.3055103443287037,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5367447899178475,
+      "maximum_channel_change": 225,
+      "shared_bright_foreground_pixels": 14891
+    },
+    {
+      "from_frame": 122,
+      "to_frame": 123,
+      "to_tick": 246,
+      "whole_frame_mean_abs_channel_change": 0.32631655092592593,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5734945153346764,
+      "maximum_channel_change": 225,
+      "shared_bright_foreground_pixels": 14890
+    },
+    {
+      "from_frame": 123,
+      "to_frame": 124,
+      "to_tick": 248,
+      "whole_frame_mean_abs_channel_change": 0.34515380859375,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5817823467490872,
+      "maximum_channel_change": 228,
+      "shared_bright_foreground_pixels": 14883
+    },
+    {
+      "from_frame": 124,
+      "to_frame": 125,
+      "to_tick": 250,
+      "whole_frame_mean_abs_channel_change": 0.36509648075810186,
+      "shared_bright_foreground_mean_abs_channel_change": 1.573465869657689,
+      "maximum_channel_change": 229,
+      "shared_bright_foreground_pixels": 14889
+    },
+    {
+      "from_frame": 125,
+      "to_frame": 126,
+      "to_tick": 252,
+      "whole_frame_mean_abs_channel_change": 0.38737883391203703,
+      "shared_bright_foreground_mean_abs_channel_change": 1.553295744395221,
+      "maximum_channel_change": 230,
+      "shared_bright_foreground_pixels": 14898
+    },
+    {
+      "from_frame": 126,
+      "to_frame": 127,
+      "to_tick": 254,
+      "whole_frame_mean_abs_channel_change": 0.40928367332175924,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5918577110425884,
+      "maximum_channel_change": 231,
+      "shared_bright_foreground_pixels": 14918
+    },
+    {
+      "from_frame": 127,
+      "to_frame": 128,
+      "to_tick": 256,
+      "whole_frame_mean_abs_channel_change": 0.4183666087962963,
+      "shared_bright_foreground_mean_abs_channel_change": 1.6232465823688143,
+      "maximum_channel_change": 232,
+      "shared_bright_foreground_pixels": 14947
+    },
+    {
+      "from_frame": 128,
+      "to_frame": 129,
+      "to_tick": 258,
+      "whole_frame_mean_abs_channel_change": 0.4373847113715278,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5457380920554293,
+      "maximum_channel_change": 235,
+      "shared_bright_foreground_pixels": 14962
+    },
+    {
+      "from_frame": 129,
+      "to_frame": 130,
+      "to_tick": 260,
+      "whole_frame_mean_abs_channel_change": 0.46781864872685186,
+      "shared_bright_foreground_mean_abs_channel_change": 1.6110703730862388,
+      "maximum_channel_change": 235,
+      "shared_bright_foreground_pixels": 15001
+    },
+    {
+      "from_frame": 130,
+      "to_frame": 131,
+      "to_tick": 262,
+      "whole_frame_mean_abs_channel_change": 0.4777492947048611,
+      "shared_bright_foreground_mean_abs_channel_change": 1.523796856642504,
+      "maximum_channel_change": 236,
+      "shared_bright_foreground_pixels": 15037
+    },
+    {
+      "from_frame": 131,
+      "to_frame": 132,
+      "to_tick": 264,
+      "whole_frame_mean_abs_channel_change": 0.4944186740451389,
+      "shared_bright_foreground_mean_abs_channel_change": 1.6324344618918263,
+      "maximum_channel_change": 237,
+      "shared_bright_foreground_pixels": 15093
+    },
+    {
+      "from_frame": 132,
+      "to_frame": 133,
+      "to_tick": 266,
+      "whole_frame_mean_abs_channel_change": 0.5117639612268519,
+      "shared_bright_foreground_mean_abs_channel_change": 1.4978420751310169,
+      "maximum_channel_change": 238,
+      "shared_bright_foreground_pixels": 15138
+    },
+    {
+      "from_frame": 133,
+      "to_frame": 134,
+      "to_tick": 268,
+      "whole_frame_mean_abs_channel_change": 0.5319191261574074,
+      "shared_bright_foreground_mean_abs_channel_change": 1.53357897969031,
+      "maximum_channel_change": 238,
+      "shared_bright_foreground_pixels": 15198
+    },
+    {
+      "from_frame": 134,
+      "to_frame": 135,
+      "to_tick": 270,
+      "whole_frame_mean_abs_channel_change": 0.5381243670428241,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5188823401004148,
+      "maximum_channel_change": 239,
+      "shared_bright_foreground_pixels": 15270
+    },
+    {
+      "from_frame": 135,
+      "to_frame": 136,
+      "to_tick": 272,
+      "whole_frame_mean_abs_channel_change": 0.5468727394386574,
+      "shared_bright_foreground_mean_abs_channel_change": 1.5338677441779631,
+      "maximum_channel_change": 240,
+      "shared_bright_foreground_pixels": 15344
+    },
+    {
+      "from_frame": 136,
+      "to_frame": 137,
+      "to_tick": 274,
+      "whole_frame_mean_abs_channel_change": 0.5510841652199074,
+      "shared_bright_foreground_mean_abs_channel_change": 1.476428355174949,
+      "maximum_channel_change": 240,
+      "shared_bright_foreground_pixels": 15414
+    },
+    {
+      "from_frame": 137,
+      "to_frame": 138,
+      "to_tick": 276,
+      "whole_frame_mean_abs_channel_change": 0.5665102358217593,
+      "shared_bright_foreground_mean_abs_channel_change": 1.468741927150607,
+      "maximum_channel_change": 241,
+      "shared_bright_foreground_pixels": 15484
+    },
+    {
+      "from_frame": 138,
+      "to_frame": 139,
+      "to_tick": 278,
+      "whole_frame_mean_abs_channel_change": 0.5612815574363426,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3806312093182598,
+      "maximum_channel_change": 242,
+      "shared_bright_foreground_pixels": 15568
+    },
+    {
+      "from_frame": 139,
+      "to_frame": 140,
+      "to_tick": 280,
+      "whole_frame_mean_abs_channel_change": 0.5584422923900463,
+      "shared_bright_foreground_mean_abs_channel_change": 1.343749334355763,
+      "maximum_channel_change": 243,
+      "shared_bright_foreground_pixels": 15649
+    },
+    {
+      "from_frame": 140,
+      "to_frame": 141,
+      "to_tick": 282,
+      "whole_frame_mean_abs_channel_change": 0.5617562753182871,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3082453238325487,
+      "maximum_channel_change": 243,
+      "shared_bright_foreground_pixels": 15718
+    },
+    {
+      "from_frame": 141,
+      "to_frame": 142,
+      "to_tick": 284,
+      "whole_frame_mean_abs_channel_change": 0.5541517469618056,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2364127567065577,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 15793
+    },
+    {
+      "from_frame": 142,
+      "to_frame": 143,
+      "to_tick": 286,
+      "whole_frame_mean_abs_channel_change": 0.5402877242476852,
+      "shared_bright_foreground_mean_abs_channel_change": 1.270616879709506,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 15881
+    },
+    {
+      "from_frame": 143,
+      "to_frame": 144,
+      "to_tick": 288,
+      "whole_frame_mean_abs_channel_change": 0.5280264395254629,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1785303647956518,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 15945
+    },
+    {
+      "from_frame": 144,
+      "to_frame": 145,
+      "to_tick": 290,
+      "whole_frame_mean_abs_channel_change": 0.5205507631655093,
+      "shared_bright_foreground_mean_abs_channel_change": 1.200208073241781,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16020
+    },
+    {
+      "from_frame": 145,
+      "to_frame": 146,
+      "to_tick": 292,
+      "whole_frame_mean_abs_channel_change": 0.5085607458043981,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1641787950408427,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16078
+    },
+    {
+      "from_frame": 146,
+      "to_frame": 147,
+      "to_tick": 294,
+      "whole_frame_mean_abs_channel_change": 0.4833080150462963,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1156610085491265,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16142
+    },
+    {
+      "from_frame": 147,
+      "to_frame": 148,
+      "to_tick": 296,
+      "whole_frame_mean_abs_channel_change": 0.4698192455150463,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1524949607141388,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16206
+    },
+    {
+      "from_frame": 148,
+      "to_frame": 149,
+      "to_tick": 298,
+      "whole_frame_mean_abs_channel_change": 0.44132939091435186,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0075263524875928,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16254
+    },
+    {
+      "from_frame": 149,
+      "to_frame": 150,
+      "to_tick": 300,
+      "whole_frame_mean_abs_channel_change": 0.4235297309027778,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0176180840844524,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16309
+    },
+    {
+      "from_frame": 150,
+      "to_frame": 151,
+      "to_tick": 302,
+      "whole_frame_mean_abs_channel_change": 0.40324119285300924,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9666258919469929,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16350
+    },
+    {
+      "from_frame": 151,
+      "to_frame": 152,
+      "to_tick": 304,
+      "whole_frame_mean_abs_channel_change": 0.37618227358217593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8834990949213903,
+      "maximum_channel_change": 243,
+      "shared_bright_foreground_pixels": 16389
+    },
+    {
+      "from_frame": 152,
+      "to_frame": 153,
+      "to_tick": 306,
+      "whole_frame_mean_abs_channel_change": 0.3499168113425926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8381254061078622,
+      "maximum_channel_change": 242,
+      "shared_bright_foreground_pixels": 16416
+    },
+    {
+      "from_frame": 153,
+      "to_frame": 154,
+      "to_tick": 308,
+      "whole_frame_mean_abs_channel_change": 0.33391203703703703,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8514534589283905,
+      "maximum_channel_change": 243,
+      "shared_bright_foreground_pixels": 16455
+    },
+    {
+      "from_frame": 154,
+      "to_frame": 155,
+      "to_tick": 310,
+      "whole_frame_mean_abs_channel_change": 0.3010592990451389,
+      "shared_bright_foreground_mean_abs_channel_change": 0.859267341536845,
+      "maximum_channel_change": 242,
+      "shared_bright_foreground_pixels": 16497
+    },
+    {
+      "from_frame": 155,
+      "to_frame": 156,
+      "to_tick": 312,
+      "whole_frame_mean_abs_channel_change": 0.2866685655381944,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7091107341894839,
+      "maximum_channel_change": 242,
+      "shared_bright_foreground_pixels": 16508
+    },
+    {
+      "from_frame": 156,
+      "to_frame": 157,
+      "to_tick": 314,
+      "whole_frame_mean_abs_channel_change": 0.25801368995949076,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6630579412120479,
+      "maximum_channel_change": 241,
+      "shared_bright_foreground_pixels": 16534
+    },
+    {
+      "from_frame": 157,
+      "to_frame": 158,
+      "to_tick": 316,
+      "whole_frame_mean_abs_channel_change": 0.23743806061921297,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6830039684937854,
+      "maximum_channel_change": 239,
+      "shared_bright_foreground_pixels": 16547
+    },
+    {
+      "from_frame": 158,
+      "to_frame": 159,
+      "to_tick": 318,
+      "whole_frame_mean_abs_channel_change": 0.21620008680555555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6721753116204262,
+      "maximum_channel_change": 238,
+      "shared_bright_foreground_pixels": 16580
+    },
+    {
+      "from_frame": 159,
+      "to_frame": 160,
+      "to_tick": 320,
+      "whole_frame_mean_abs_channel_change": 0.20188395182291666,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6128928542721647,
+      "maximum_channel_change": 181,
+      "shared_bright_foreground_pixels": 16588
+    },
+    {
+      "from_frame": 160,
+      "to_frame": 161,
+      "to_tick": 322,
+      "whole_frame_mean_abs_channel_change": 0.17592818648726852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5098240115718419,
+      "maximum_channel_change": 181,
+      "shared_bright_foreground_pixels": 16592
+    },
+    {
+      "from_frame": 161,
+      "to_frame": 162,
+      "to_tick": 324,
+      "whole_frame_mean_abs_channel_change": 0.15565773292824073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5414810355207706,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16610
+    },
+    {
+      "from_frame": 162,
+      "to_frame": 163,
+      "to_tick": 326,
+      "whole_frame_mean_abs_channel_change": 0.14729365596064814,
+      "shared_bright_foreground_mean_abs_channel_change": 0.43538316368527774,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16603
+    },
+    {
+      "from_frame": 163,
+      "to_frame": 164,
+      "to_tick": 328,
+      "whole_frame_mean_abs_channel_change": 0.12495478877314815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3940415287390912,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16615
+    },
+    {
+      "from_frame": 164,
+      "to_frame": 165,
+      "to_tick": 330,
+      "whole_frame_mean_abs_channel_change": 0.11608660662615741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.39569181444745016,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16635
+    },
+    {
+      "from_frame": 165,
+      "to_frame": 166,
+      "to_tick": 332,
+      "whole_frame_mean_abs_channel_change": 0.09690122251157407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.33601698309701195,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16644
+    },
+    {
+      "from_frame": 166,
+      "to_frame": 167,
+      "to_tick": 334,
+      "whole_frame_mean_abs_channel_change": 0.08127396195023148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3018331732308678,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16656
+    },
+    {
+      "from_frame": 167,
+      "to_frame": 168,
+      "to_tick": 336,
+      "whole_frame_mean_abs_channel_change": 0.0797119140625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.24209494076208773,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16656
+    },
+    {
+      "from_frame": 168,
+      "to_frame": 169,
+      "to_tick": 338,
+      "whole_frame_mean_abs_channel_change": 0.06345621744791667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.22806280628062806,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16665
+    },
+    {
+      "from_frame": 169,
+      "to_frame": 170,
+      "to_tick": 340,
+      "whole_frame_mean_abs_channel_change": 0.0548095703125,
+      "shared_bright_foreground_mean_abs_channel_change": 0.16939628452016717,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16669
+    },
+    {
+      "from_frame": 170,
+      "to_frame": 171,
+      "to_tick": 342,
+      "whole_frame_mean_abs_channel_change": 0.045525444878472224,
+      "shared_bright_foreground_mean_abs_channel_change": 0.17602030619178957,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16678
+    },
+    {
+      "from_frame": 171,
+      "to_frame": 172,
+      "to_tick": 344,
+      "whole_frame_mean_abs_channel_change": 0.04248046875,
+      "shared_bright_foreground_mean_abs_channel_change": 0.17281285602926186,
+      "maximum_channel_change": 120,
+      "shared_bright_foreground_pixels": 16677
+    },
+    {
+      "from_frame": 172,
+      "to_frame": 173,
+      "to_tick": 346,
+      "whole_frame_mean_abs_channel_change": 0.034848813657407406,
+      "shared_bright_foreground_mean_abs_channel_change": 0.11171117111711171,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16665
+    },
+    {
+      "from_frame": 173,
+      "to_frame": 174,
+      "to_tick": 348,
+      "whole_frame_mean_abs_channel_change": 0.021918402777777776,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09356128774245151,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16670
+    },
+    {
+      "from_frame": 174,
+      "to_frame": 175,
+      "to_tick": 350,
+      "whole_frame_mean_abs_channel_change": 0.020227502893518517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0883117402431222,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16672
+    },
+    {
+      "from_frame": 175,
+      "to_frame": 176,
+      "to_tick": 352,
+      "whole_frame_mean_abs_channel_change": 0.012896502459490741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.047002139187108896,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16673
+    },
+    {
+      "from_frame": 176,
+      "to_frame": 177,
+      "to_tick": 354,
+      "whole_frame_mean_abs_channel_change": 0.010240342881944444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03237604172912045,
+      "maximum_channel_change": 120,
+      "shared_bright_foreground_pixels": 16679
+    },
+    {
+      "from_frame": 177,
+      "to_frame": 178,
+      "to_tick": 356,
+      "whole_frame_mean_abs_channel_change": 0.007493760850694444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.026916851507703374,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 178,
+      "to_frame": 179,
+      "to_tick": 358,
+      "whole_frame_mean_abs_channel_change": 0.0034157081886574073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.018823811522091,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 179,
+      "to_frame": 180,
+      "to_tick": 360,
+      "whole_frame_mean_abs_channel_change": 0.0010850694444444445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.006514788169464428,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 180,
+      "to_frame": 181,
+      "to_tick": 362,
+      "whole_frame_mean_abs_channel_change": 0.0007482458043981482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003537170263788969,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 181,
+      "to_frame": 182,
+      "to_tick": 364,
+      "whole_frame_mean_abs_channel_change": 0.0026290328414351853,
+      "shared_bright_foreground_mean_abs_channel_change": 0.014507523529764402,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 182,
+      "to_frame": 183,
+      "to_tick": 366,
+      "whole_frame_mean_abs_channel_change": 0.0034157081886574073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02201974183750949,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 183,
+      "to_frame": 184,
+      "to_tick": 368,
+      "whole_frame_mean_abs_channel_change": 0.007649739583333333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.017423969947648162,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 184,
+      "to_frame": 185,
+      "to_tick": 370,
+      "whole_frame_mean_abs_channel_change": 0.006937662760416667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.024860111910471622,
+      "maximum_channel_change": 120,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 185,
+      "to_frame": 186,
+      "to_tick": 372,
+      "whole_frame_mean_abs_channel_change": 0.004659016927083333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01922692569053044,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16678
+    },
+    {
+      "from_frame": 186,
+      "to_frame": 187,
+      "to_tick": 374,
+      "whole_frame_mean_abs_channel_change": 0.00794361255787037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022907171983689134,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16676
+    },
+    {
+      "from_frame": 187,
+      "to_frame": 188,
+      "to_tick": 376,
+      "whole_frame_mean_abs_channel_change": 0.009030942563657407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03942265403222582,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16674
+    },
+    {
+      "from_frame": 188,
+      "to_frame": 189,
+      "to_tick": 378,
+      "whole_frame_mean_abs_channel_change": 0.00867603443287037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03744352484906641,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16674
+    },
+    {
+      "from_frame": 189,
+      "to_frame": 190,
+      "to_tick": 380,
+      "whole_frame_mean_abs_channel_change": 0.008063422309027778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03816091954022988,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16675
+    },
+    {
+      "from_frame": 190,
+      "to_frame": 191,
+      "to_tick": 382,
+      "whole_frame_mean_abs_channel_change": 0.007844147858796295,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03300349825087456,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16675
+    },
+    {
+      "from_frame": 191,
+      "to_frame": 192,
+      "to_tick": 384,
+      "whole_frame_mean_abs_channel_change": 0.008029513888888888,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03774112943528236,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16675
+    },
+    {
+      "from_frame": 192,
+      "to_frame": 193,
+      "to_tick": 386,
+      "whole_frame_mean_abs_channel_change": 0.008138020833333334,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03249985009294237,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16677
+    },
+    {
+      "from_frame": 193,
+      "to_frame": 194,
+      "to_tick": 388,
+      "whole_frame_mean_abs_channel_change": 0.00905806929976852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.031918295559019864,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16678
+    },
+    {
+      "from_frame": 194,
+      "to_frame": 195,
+      "to_tick": 390,
+      "whole_frame_mean_abs_channel_change": 0.008949562355324073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03357314148681055,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 195,
+      "to_frame": 196,
+      "to_tick": 392,
+      "whole_frame_mean_abs_channel_change": 0.009175618489583334,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022740443218831806,
+      "maximum_channel_change": 115,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 196,
+      "to_frame": 197,
+      "to_tick": 394,
+      "whole_frame_mean_abs_channel_change": 0.00724509910300926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04151682250459522,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16684
+    },
+    {
+      "from_frame": 197,
+      "to_frame": 198,
+      "to_tick": 396,
+      "whole_frame_mean_abs_channel_change": 0.009874131944444444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.033569116412900134,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 198,
+      "to_frame": 199,
+      "to_tick": 398,
+      "whole_frame_mean_abs_channel_change": 0.005486382378472222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.023592632546246353,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16686
+    },
+    {
+      "from_frame": 199,
+      "to_frame": 200,
+      "to_tick": 400,
+      "whole_frame_mean_abs_channel_change": 0.005558720341435185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.029320710248267323,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 200,
+      "to_frame": 201,
+      "to_tick": 402,
+      "whole_frame_mean_abs_channel_change": 0.007360387731481482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0318991690635986,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 201,
+      "to_frame": 202,
+      "to_tick": 404,
+      "whole_frame_mean_abs_channel_change": 0.006607620804398148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022788096664669463,
+      "maximum_channel_change": 116,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 202,
+      "to_frame": 203,
+      "to_tick": 406,
+      "whole_frame_mean_abs_channel_change": 0.004763002748842593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02825874223633495,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 203,
+      "to_frame": 204,
+      "to_tick": 408,
+      "whole_frame_mean_abs_channel_change": 0.003467701099537037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022184947782503645,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16693
+    },
+    {
+      "from_frame": 204,
+      "to_frame": 205,
+      "to_tick": 410,
+      "whole_frame_mean_abs_channel_change": 0.004484953703703704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.022066458982346833,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 205,
+      "to_frame": 206,
+      "to_tick": 412,
+      "whole_frame_mean_abs_channel_change": 0.003883644386574074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.009785712859225531,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 206,
+      "to_frame": 207,
+      "to_tick": 414,
+      "whole_frame_mean_abs_channel_change": 0.004611545138888889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01837317516426018,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 207,
+      "to_frame": 208,
+      "to_tick": 416,
+      "whole_frame_mean_abs_channel_change": 0.0014128508391203704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.006550043933221504,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 208,
+      "to_frame": 209,
+      "to_tick": 418,
+      "whole_frame_mean_abs_channel_change": 0.002208568431712963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.011123092898793834,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 209,
+      "to_frame": 210,
+      "to_tick": 420,
+      "whole_frame_mean_abs_channel_change": 0.0023148148148148147,
+      "shared_bright_foreground_mean_abs_channel_change": 0.009504982128237385,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16693
+    },
+    {
+      "from_frame": 210,
+      "to_frame": 211,
+      "to_tick": 422,
+      "whole_frame_mean_abs_channel_change": 0.0028211805555555555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.005392127493858966,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 211,
+      "to_frame": 212,
+      "to_tick": 424,
+      "whole_frame_mean_abs_channel_change": 0.002495659722222222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.007609346914319952,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 212,
+      "to_frame": 213,
+      "to_tick": 426,
+      "whole_frame_mean_abs_channel_change": 0.0014512803819444445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0073097663271420015,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 213,
+      "to_frame": 214,
+      "to_tick": 428,
+      "whole_frame_mean_abs_channel_change": 0.0025047019675925927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004833233473137607,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 214,
+      "to_frame": 215,
+      "to_tick": 430,
+      "whole_frame_mean_abs_channel_change": 0.00237132884837963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.007209906131416017,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 215,
+      "to_frame": 216,
+      "to_tick": 432,
+      "whole_frame_mean_abs_channel_change": 0.002536349826388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.008508088675853804,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 216,
+      "to_frame": 217,
+      "to_tick": 434,
+      "whole_frame_mean_abs_channel_change": 0.003757052951388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.010326781719399169,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 217,
+      "to_frame": 218,
+      "to_tick": 436,
+      "whole_frame_mean_abs_channel_change": 0.006413212528935185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.025349074129561933,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16687
+    },
+    {
+      "from_frame": 218,
+      "to_frame": 219,
+      "to_tick": 438,
+      "whole_frame_mean_abs_channel_change": 0.007792154947916667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0315234328179312,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16686
+    },
+    {
+      "from_frame": 219,
+      "to_frame": 220,
+      "to_tick": 440,
+      "whole_frame_mean_abs_channel_change": 0.01987937644675926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07680933541142149,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 220,
+      "to_frame": 221,
+      "to_tick": 442,
+      "whole_frame_mean_abs_channel_change": 0.022542317708333332,
+      "shared_bright_foreground_mean_abs_channel_change": 0.11323544101488363,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16685
+    },
+    {
+      "from_frame": 221,
+      "to_frame": 222,
+      "to_tick": 444,
+      "whole_frame_mean_abs_channel_change": 0.033173737702546294,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12557200807305718,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 222,
+      "to_frame": 223,
+      "to_tick": 446,
+      "whole_frame_mean_abs_channel_change": 0.038074634693287035,
+      "shared_bright_foreground_mean_abs_channel_change": 0.14042348989262793,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16671
+    },
+    {
+      "from_frame": 223,
+      "to_frame": 224,
+      "to_tick": 448,
+      "whole_frame_mean_abs_channel_change": 0.04582836009837963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.19568434525237982,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 224,
+      "to_frame": 225,
+      "to_tick": 450,
+      "whole_frame_mean_abs_channel_change": 0.059380425347222224,
+      "shared_bright_foreground_mean_abs_channel_change": 0.240174323297749,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16674
+    },
+    {
+      "from_frame": 225,
+      "to_frame": 226,
+      "to_tick": 452,
+      "whole_frame_mean_abs_channel_change": 0.06716353804976852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2839424673428154,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16663
+    },
+    {
+      "from_frame": 226,
+      "to_frame": 227,
+      "to_tick": 454,
+      "whole_frame_mean_abs_channel_change": 0.0984836154513889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.36133797742012974,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16652
+    },
+    {
+      "from_frame": 227,
+      "to_frame": 228,
+      "to_tick": 456,
+      "whole_frame_mean_abs_channel_change": 0.10309516059027778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3960459438908232,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16658
+    },
+    {
+      "from_frame": 228,
+      "to_frame": 229,
+      "to_tick": 458,
+      "whole_frame_mean_abs_channel_change": 0.11796739366319445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4171672272945699,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16648
+    },
+    {
+      "from_frame": 229,
+      "to_frame": 230,
+      "to_tick": 460,
+      "whole_frame_mean_abs_channel_change": 0.15253137659143517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.562163028881807,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16631
+    },
+    {
+      "from_frame": 230,
+      "to_frame": 231,
+      "to_tick": 462,
+      "whole_frame_mean_abs_channel_change": 0.1567450629340278,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6442080378250591,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16638
+    },
+    {
+      "from_frame": 231,
+      "to_frame": 232,
+      "to_tick": 464,
+      "whole_frame_mean_abs_channel_change": 0.19556794343171297,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6645605167087897,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16618
+    },
+    {
+      "from_frame": 232,
+      "to_frame": 233,
+      "to_tick": 466,
+      "whole_frame_mean_abs_channel_change": 0.21378580729166666,
+      "shared_bright_foreground_mean_abs_channel_change": 0.751951518070355,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16611
+    },
+    {
+      "from_frame": 233,
+      "to_frame": 234,
+      "to_tick": 468,
+      "whole_frame_mean_abs_channel_change": 0.23066993995949073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8434866361666266,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16612
+    },
+    {
+      "from_frame": 234,
+      "to_frame": 235,
+      "to_tick": 470,
+      "whole_frame_mean_abs_channel_change": 0.2543289749710648,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8191474409172138,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16601
+    },
+    {
+      "from_frame": 235,
+      "to_frame": 236,
+      "to_tick": 472,
+      "whole_frame_mean_abs_channel_change": 0.2870551215277778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9846694796061884,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16590
+    },
+    {
+      "from_frame": 236,
+      "to_frame": 237,
+      "to_tick": 474,
+      "whole_frame_mean_abs_channel_change": 0.3097330729166667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9658444404237783,
+      "maximum_channel_change": 184,
+      "shared_bright_foreground_pixels": 16581
+    },
+    {
+      "from_frame": 237,
+      "to_frame": 238,
+      "to_tick": 476,
+      "whole_frame_mean_abs_channel_change": 0.33580638744212965,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0886877828054298,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16575
+    },
+    {
+      "from_frame": 238,
+      "to_frame": 239,
+      "to_tick": 478,
+      "whole_frame_mean_abs_channel_change": 0.3713311089409722,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0113956672304099,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16556
+    },
+    {
+      "from_frame": 239,
+      "to_frame": 240,
+      "to_tick": 480,
+      "whole_frame_mean_abs_channel_change": 0.38743308738425924,
+      "shared_bright_foreground_mean_abs_channel_change": 1.108239745602383,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16562
+    },
+    {
+      "from_frame": 240,
+      "to_frame": 241,
+      "to_tick": 482,
+      "whole_frame_mean_abs_channel_change": 0.4077781394675926,
+      "shared_bright_foreground_mean_abs_channel_change": 1.137836585906189,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16551
+    },
+    {
+      "from_frame": 241,
+      "to_frame": 242,
+      "to_tick": 484,
+      "whole_frame_mean_abs_channel_change": 0.4452311197916667,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1192780802581166,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16530
+    },
+    {
+      "from_frame": 242,
+      "to_frame": 243,
+      "to_tick": 486,
+      "whole_frame_mean_abs_channel_change": 0.4522365993923611,
+      "shared_bright_foreground_mean_abs_channel_change": 1.209827276941371,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16539
+    },
+    {
+      "from_frame": 243,
+      "to_frame": 244,
+      "to_tick": 488,
+      "whole_frame_mean_abs_channel_change": 0.4898659035011574,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2748573387373219,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16531
+    },
+    {
+      "from_frame": 244,
+      "to_frame": 245,
+      "to_tick": 490,
+      "whole_frame_mean_abs_channel_change": 0.4959513346354167,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2725016645481508,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16521
+    },
+    {
+      "from_frame": 245,
+      "to_frame": 246,
+      "to_tick": 492,
+      "whole_frame_mean_abs_channel_change": 0.5293059172453703,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2016241439912732,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16501
+    },
+    {
+      "from_frame": 246,
+      "to_frame": 247,
+      "to_tick": 494,
+      "whole_frame_mean_abs_channel_change": 0.5467280635127315,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2610417424334264,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16498
+    },
+    {
+      "from_frame": 247,
+      "to_frame": 248,
+      "to_tick": 496,
+      "whole_frame_mean_abs_channel_change": 0.5580964265046297,
+      "shared_bright_foreground_mean_abs_channel_change": 1.334181869608259,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16499
+    },
+    {
+      "from_frame": 248,
+      "to_frame": 249,
+      "to_tick": 498,
+      "whole_frame_mean_abs_channel_change": 0.5765674732349537,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3528983749696823,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16492
+    },
+    {
+      "from_frame": 249,
+      "to_frame": 250,
+      "to_tick": 500,
+      "whole_frame_mean_abs_channel_change": 0.5863285771122685,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3618302714282826,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16493
+    },
+    {
+      "from_frame": 250,
+      "to_frame": 251,
+      "to_tick": 502,
+      "whole_frame_mean_abs_channel_change": 0.5967814127604166,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3872551991754078,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16493
+    },
+    {
+      "from_frame": 251,
+      "to_frame": 252,
+      "to_tick": 504,
+      "whole_frame_mean_abs_channel_change": 0.6072749385127315,
+      "shared_bright_foreground_mean_abs_channel_change": 1.4104010025062657,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16492
+    },
+    {
+      "from_frame": 252,
+      "to_frame": 253,
+      "to_tick": 506,
+      "whole_frame_mean_abs_channel_change": 0.6154694733796297,
+      "shared_bright_foreground_mean_abs_channel_change": 1.421114345786835,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16488
+    },
+    {
+      "from_frame": 253,
+      "to_frame": 254,
+      "to_tick": 508,
+      "whole_frame_mean_abs_channel_change": 0.6175469292534722,
+      "shared_bright_foreground_mean_abs_channel_change": 1.416216762713578,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16485
+    },
+    {
+      "from_frame": 254,
+      "to_frame": 255,
+      "to_tick": 510,
+      "whole_frame_mean_abs_channel_change": 0.6201194480613426,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3972164906744347,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16478
+    },
+    {
+      "from_frame": 255,
+      "to_frame": 256,
+      "to_tick": 512,
+      "whole_frame_mean_abs_channel_change": 0.61834716796875,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3789580171977744,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16475
+    },
+    {
+      "from_frame": 256,
+      "to_frame": 257,
+      "to_tick": 514,
+      "whole_frame_mean_abs_channel_change": 0.6177594220196759,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3609171675470018,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16471
+    },
+    {
+      "from_frame": 257,
+      "to_frame": 258,
+      "to_tick": 516,
+      "whole_frame_mean_abs_channel_change": 0.6112738715277778,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3707840161861407,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16475
+    },
+    {
+      "from_frame": 258,
+      "to_frame": 259,
+      "to_tick": 518,
+      "whole_frame_mean_abs_channel_change": 0.6032127097800926,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3676193943807269,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16479
+    },
+    {
+      "from_frame": 259,
+      "to_frame": 260,
+      "to_tick": 520,
+      "whole_frame_mean_abs_channel_change": 0.5949232313368056,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3664947932463856,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16485
+    },
+    {
+      "from_frame": 260,
+      "to_frame": 261,
+      "to_tick": 522,
+      "whole_frame_mean_abs_channel_change": 0.5823725947627315,
+      "shared_bright_foreground_mean_abs_channel_change": 1.346855040827876,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16492
+    },
+    {
+      "from_frame": 261,
+      "to_frame": 262,
+      "to_tick": 524,
+      "whole_frame_mean_abs_channel_change": 0.56536865234375,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3416151577586555,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16502
+    },
+    {
+      "from_frame": 262,
+      "to_frame": 263,
+      "to_tick": 526,
+      "whole_frame_mean_abs_channel_change": 0.5446551287615741,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3363416111447608,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16510
+    },
+    {
+      "from_frame": 263,
+      "to_frame": 264,
+      "to_tick": 528,
+      "whole_frame_mean_abs_channel_change": 0.5443296079282407,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3667191473900933,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16514
+    },
+    {
+      "from_frame": 264,
+      "to_frame": 265,
+      "to_tick": 530,
+      "whole_frame_mean_abs_channel_change": 0.5169429072627315,
+      "shared_bright_foreground_mean_abs_channel_change": 1.3019427464746112,
+      "maximum_channel_change": 246,
+      "shared_bright_foreground_pixels": 16523
+    },
+    {
+      "from_frame": 265,
+      "to_frame": 266,
+      "to_tick": 532,
+      "whole_frame_mean_abs_channel_change": 0.48637107566550924,
+      "shared_bright_foreground_mean_abs_channel_change": 1.2489811564378808,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16522
+    },
+    {
+      "from_frame": 266,
+      "to_frame": 267,
+      "to_tick": 534,
+      "whole_frame_mean_abs_channel_change": 0.4824535228587963,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1423554344535272,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16515
+    },
+    {
+      "from_frame": 267,
+      "to_frame": 268,
+      "to_tick": 536,
+      "whole_frame_mean_abs_channel_change": 0.44003861038773145,
+      "shared_bright_foreground_mean_abs_channel_change": 1.22314881959552,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16548
+    },
+    {
+      "from_frame": 268,
+      "to_frame": 269,
+      "to_tick": 538,
+      "whole_frame_mean_abs_channel_change": 0.43437138310185186,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1992304748091296,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16547
+    },
+    {
+      "from_frame": 269,
+      "to_frame": 270,
+      "to_tick": 540,
+      "whole_frame_mean_abs_channel_change": 0.3953653971354167,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1136615322661834,
+      "maximum_channel_change": 245,
+      "shared_bright_foreground_pixels": 16555
+    },
+    {
+      "from_frame": 270,
+      "to_frame": 271,
+      "to_tick": 542,
+      "whole_frame_mean_abs_channel_change": 0.37030029296875,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0614331723027375,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16560
+    },
+    {
+      "from_frame": 271,
+      "to_frame": 272,
+      "to_tick": 544,
+      "whole_frame_mean_abs_channel_change": 0.356201171875,
+      "shared_bright_foreground_mean_abs_channel_change": 1.1245248868778281,
+      "maximum_channel_change": 244,
+      "shared_bright_foreground_pixels": 16575
+    },
+    {
+      "from_frame": 272,
+      "to_frame": 273,
+      "to_tick": 546,
+      "whole_frame_mean_abs_channel_change": 0.32891845703125,
+      "shared_bright_foreground_mean_abs_channel_change": 0.9964209595045643,
+      "maximum_channel_change": 243,
+      "shared_bright_foreground_pixels": 16578
+    },
+    {
+      "from_frame": 273,
+      "to_frame": 274,
+      "to_tick": 548,
+      "whole_frame_mean_abs_channel_change": 0.3006591796875,
+      "shared_bright_foreground_mean_abs_channel_change": 1.0260705390857234,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16596
+    },
+    {
+      "from_frame": 274,
+      "to_frame": 275,
+      "to_tick": 550,
+      "whole_frame_mean_abs_channel_change": 0.27489330150462965,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8884068450228971,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16596
+    },
+    {
+      "from_frame": 275,
+      "to_frame": 276,
+      "to_tick": 552,
+      "whole_frame_mean_abs_channel_change": 0.24878381799768517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.869429053240183,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16604
+    },
+    {
+      "from_frame": 276,
+      "to_frame": 277,
+      "to_tick": 554,
+      "whole_frame_mean_abs_channel_change": 0.23939344618055555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.8107196627521831,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16605
+    },
+    {
+      "from_frame": 277,
+      "to_frame": 278,
+      "to_tick": 556,
+      "whole_frame_mean_abs_channel_change": 0.21285219545717593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7442009792118147,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16612
+    },
+    {
+      "from_frame": 278,
+      "to_frame": 279,
+      "to_tick": 558,
+      "whole_frame_mean_abs_channel_change": 0.18391701027199073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.7231811711874261,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16627
+    },
+    {
+      "from_frame": 279,
+      "to_frame": 280,
+      "to_tick": 560,
+      "whole_frame_mean_abs_channel_change": 0.1803611472800926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.6116625558964487,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16623
+    },
+    {
+      "from_frame": 280,
+      "to_frame": 281,
+      "to_tick": 562,
+      "whole_frame_mean_abs_channel_change": 0.15499086733217593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.559896615976438,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16637
+    },
+    {
+      "from_frame": 281,
+      "to_frame": 282,
+      "to_tick": 564,
+      "whole_frame_mean_abs_channel_change": 0.1442577220775463,
+      "shared_bright_foreground_mean_abs_channel_change": 0.5339342948717949,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16640
+    },
+    {
+      "from_frame": 282,
+      "to_frame": 283,
+      "to_tick": 566,
+      "whole_frame_mean_abs_channel_change": 0.11580629701967593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.474097205540876,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16652
+    },
+    {
+      "from_frame": 283,
+      "to_frame": 284,
+      "to_tick": 568,
+      "whole_frame_mean_abs_channel_change": 0.1194164134837963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.42480676038287474,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16646
+    },
+    {
+      "from_frame": 284,
+      "to_frame": 285,
+      "to_tick": 570,
+      "whole_frame_mean_abs_channel_change": 0.0950000904224537,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3685653122061501,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16661
+    },
+    {
+      "from_frame": 285,
+      "to_frame": 286,
+      "to_tick": 572,
+      "whole_frame_mean_abs_channel_change": 0.07707609953703703,
+      "shared_bright_foreground_mean_abs_channel_change": 0.29263170526821075,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16666
+    },
+    {
+      "from_frame": 286,
+      "to_frame": 287,
+      "to_tick": 574,
+      "whole_frame_mean_abs_channel_change": 0.0824856228298611,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3393928485721142,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 287,
+      "to_frame": 288,
+      "to_tick": 576,
+      "whole_frame_mean_abs_channel_change": 0.0645435474537037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.23119699151864298,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16664
+    },
+    {
+      "from_frame": 288,
+      "to_frame": 289,
+      "to_tick": 578,
+      "whole_frame_mean_abs_channel_change": 0.05631736472800926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.23437312537492502,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16670
+    },
+    {
+      "from_frame": 289,
+      "to_frame": 290,
+      "to_tick": 580,
+      "whole_frame_mean_abs_channel_change": 0.04442907262731482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1796870315966185,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16679
+    },
+    {
+      "from_frame": 290,
+      "to_frame": 291,
+      "to_tick": 582,
+      "whole_frame_mean_abs_channel_change": 0.03406213831018518,
+      "shared_bright_foreground_mean_abs_channel_change": 0.17154393539617813,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16676
+    },
+    {
+      "from_frame": 291,
+      "to_frame": 292,
+      "to_tick": 584,
+      "whole_frame_mean_abs_channel_change": 0.03145797164351852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12570240166376706,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16669
+    },
+    {
+      "from_frame": 292,
+      "to_frame": 293,
+      "to_tick": 586,
+      "whole_frame_mean_abs_channel_change": 0.028417516637731483,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1377172456550869,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16667
+    },
+    {
+      "from_frame": 293,
+      "to_frame": 294,
+      "to_tick": 588,
+      "whole_frame_mean_abs_channel_change": 0.024262604890046297,
+      "shared_bright_foreground_mean_abs_channel_change": 0.08413288558407292,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16676
+    },
+    {
+      "from_frame": 294,
+      "to_frame": 295,
+      "to_tick": 590,
+      "whole_frame_mean_abs_channel_change": 0.019486038773148147,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07178104085505943,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16685
+    },
+    {
+      "from_frame": 295,
+      "to_frame": 296,
+      "to_tick": 592,
+      "whole_frame_mean_abs_channel_change": 0.014026783130787037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04453368496763366,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16684
+    },
+    {
+      "from_frame": 296,
+      "to_frame": 297,
+      "to_tick": 594,
+      "whole_frame_mean_abs_channel_change": 0.011565031828703705,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03129993608181528,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 297,
+      "to_frame": 298,
+      "to_tick": 596,
+      "whole_frame_mean_abs_channel_change": 0.005954318576388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.018652766960238053,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 298,
+      "to_frame": 299,
+      "to_tick": 598,
+      "whole_frame_mean_abs_channel_change": 0.0020616319444444445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.00684958862528956,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 299,
+      "to_frame": 300,
+      "to_tick": 600,
+      "whole_frame_mean_abs_channel_change": 0.001697681568287037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.00966472972703129,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16693
+    },
+    {
+      "from_frame": 300,
+      "to_frame": 301,
+      "to_tick": 602,
+      "whole_frame_mean_abs_channel_change": 0.0016841182002314814,
+      "shared_bright_foreground_mean_abs_channel_change": 0.009544919027935861,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16693
+    },
+    {
+      "from_frame": 301,
+      "to_frame": 302,
+      "to_tick": 604,
+      "whole_frame_mean_abs_channel_change": 0.0006487811053240741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0027957504593018614,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 302,
+      "to_frame": 303,
+      "to_tick": 606,
+      "whole_frame_mean_abs_channel_change": 0.004365143952546296,
+      "shared_bright_foreground_mean_abs_channel_change": 0.016235322310088666,
+      "maximum_channel_change": 117,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 303,
+      "to_frame": 304,
+      "to_tick": 608,
+      "whole_frame_mean_abs_channel_change": 0.005183467158564815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.011443292792522916,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 304,
+      "to_frame": 305,
+      "to_tick": 610,
+      "whole_frame_mean_abs_channel_change": 0.007222493489583333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.015380313199105145,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 305,
+      "to_frame": 306,
+      "to_tick": 612,
+      "whole_frame_mean_abs_channel_change": 0.005285192418981482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.024705412422608347,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 306,
+      "to_frame": 307,
+      "to_tick": 614,
+      "whole_frame_mean_abs_channel_change": 0.00853587962962963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.024607026584376936,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 307,
+      "to_frame": 308,
+      "to_tick": 616,
+      "whole_frame_mean_abs_channel_change": 0.006702564380787037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02750314578464857,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 308,
+      "to_frame": 309,
+      "to_tick": 618,
+      "whole_frame_mean_abs_channel_change": 0.005282931857638889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.013044086214817922,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16687
+    },
+    {
+      "from_frame": 309,
+      "to_frame": 310,
+      "to_tick": 620,
+      "whole_frame_mean_abs_channel_change": 0.006673177083333333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.020053128807398086,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 310,
+      "to_frame": 311,
+      "to_tick": 622,
+      "whole_frame_mean_abs_channel_change": 0.005364312065972222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02238731452079963,
+      "maximum_channel_change": 116,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 311,
+      "to_frame": 312,
+      "to_tick": 624,
+      "whole_frame_mean_abs_channel_change": 0.0010398582175925927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0032154983023766725,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 312,
+      "to_frame": 313,
+      "to_tick": 626,
+      "whole_frame_mean_abs_channel_change": 0.0004634150752314815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.001457958857599361,
+      "maximum_channel_change": 58,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 313,
+      "to_frame": 314,
+      "to_tick": 628,
+      "whole_frame_mean_abs_channel_change": 0.00047245732060185184,
+      "shared_bright_foreground_mean_abs_channel_change": 0.001537847014180148,
+      "maximum_channel_change": 58,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 314,
+      "to_frame": 315,
+      "to_tick": 630,
+      "whole_frame_mean_abs_channel_change": 0.0014784071180555555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004074295985620132,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 315,
+      "to_frame": 316,
+      "to_tick": 632,
+      "whole_frame_mean_abs_channel_change": 0.007823802806712963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.03317355702017176,
+      "maximum_channel_change": 116,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 316,
+      "to_frame": 317,
+      "to_tick": 634,
+      "whole_frame_mean_abs_channel_change": 0.00946949146412037,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02508939094304948,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16687
+    },
+    {
+      "from_frame": 317,
+      "to_frame": 318,
+      "to_tick": 636,
+      "whole_frame_mean_abs_channel_change": 0.014847366898148149,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04866355028167326,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16686
+    },
+    {
+      "from_frame": 318,
+      "to_frame": 319,
+      "to_tick": 638,
+      "whole_frame_mean_abs_channel_change": 0.015882703993055556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.047345079707539255,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16686
+    },
+    {
+      "from_frame": 319,
+      "to_frame": 320,
+      "to_tick": 640,
+      "whole_frame_mean_abs_channel_change": 0.018303765190972224,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07152132654080512,
+      "maximum_channel_change": 117,
+      "shared_bright_foreground_pixels": 16685
+    },
+    {
+      "from_frame": 320,
+      "to_frame": 321,
+      "to_tick": 642,
+      "whole_frame_mean_abs_channel_change": 0.02159514250578704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09481863215084692,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 321,
+      "to_frame": 322,
+      "to_tick": 644,
+      "whole_frame_mean_abs_channel_change": 0.027689615885416668,
+      "shared_bright_foreground_mean_abs_channel_change": 0.09934052757793765,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 322,
+      "to_frame": 323,
+      "to_tick": 646,
+      "whole_frame_mean_abs_channel_change": 0.03014006438078704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.13527554649722257,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 323,
+      "to_frame": 324,
+      "to_tick": 648,
+      "whole_frame_mean_abs_channel_change": 0.03519920066550926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.14179507164698124,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16679
+    },
+    {
+      "from_frame": 324,
+      "to_frame": 325,
+      "to_tick": 650,
+      "whole_frame_mean_abs_channel_change": 0.034304018373842594,
+      "shared_bright_foreground_mean_abs_channel_change": 0.12517235177747138,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16681
+    },
+    {
+      "from_frame": 325,
+      "to_frame": 326,
+      "to_tick": 652,
+      "whole_frame_mean_abs_channel_change": 0.04243299696180555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.16399800099950024,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16675
+    },
+    {
+      "from_frame": 326,
+      "to_frame": 327,
+      "to_tick": 654,
+      "whole_frame_mean_abs_channel_change": 0.05529333043981482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2383694196205442,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16673
+    },
+    {
+      "from_frame": 327,
+      "to_frame": 328,
+      "to_tick": 656,
+      "whole_frame_mean_abs_channel_change": 0.05769178602430555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.21962925190473334,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16669
+    },
+    {
+      "from_frame": 328,
+      "to_frame": 329,
+      "to_tick": 658,
+      "whole_frame_mean_abs_channel_change": 0.05784550419560185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2287440483335334,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16662
+    },
+    {
+      "from_frame": 329,
+      "to_frame": 330,
+      "to_tick": 660,
+      "whole_frame_mean_abs_channel_change": 0.06108262803819445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2497900923593619,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16674
+    },
+    {
+      "from_frame": 330,
+      "to_frame": 331,
+      "to_tick": 662,
+      "whole_frame_mean_abs_channel_change": 0.06005859375,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2553855385538554,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16665
+    },
+    {
+      "from_frame": 331,
+      "to_frame": 332,
+      "to_tick": 664,
+      "whole_frame_mean_abs_channel_change": 0.07915355541087964,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3221081697580887,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16659
+    },
+    {
+      "from_frame": 332,
+      "to_frame": 333,
+      "to_tick": 666,
+      "whole_frame_mean_abs_channel_change": 0.07862232349537036,
+      "shared_bright_foreground_mean_abs_channel_change": 0.26630260841734676,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16664
+    },
+    {
+      "from_frame": 333,
+      "to_frame": 334,
+      "to_tick": 668,
+      "whole_frame_mean_abs_channel_change": 0.07673927589699074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.31063514918806495,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 334,
+      "to_frame": 335,
+      "to_tick": 670,
+      "whole_frame_mean_abs_channel_change": 0.07686812789351852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.28492849284928495,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16665
+    },
+    {
+      "from_frame": 335,
+      "to_frame": 336,
+      "to_tick": 672,
+      "whole_frame_mean_abs_channel_change": 0.09743697554976852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3854804498339136,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16658
+    },
+    {
+      "from_frame": 336,
+      "to_frame": 337,
+      "to_tick": 674,
+      "whole_frame_mean_abs_channel_change": 0.08827718098958333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.35184295833833595,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16658
+    },
+    {
+      "from_frame": 337,
+      "to_frame": 338,
+      "to_tick": 676,
+      "whole_frame_mean_abs_channel_change": 0.08852358217592593,
+      "shared_bright_foreground_mean_abs_channel_change": 0.366976697669767,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16665
+    },
+    {
+      "from_frame": 338,
+      "to_frame": 339,
+      "to_tick": 678,
+      "whole_frame_mean_abs_channel_change": 0.10084816261574074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.39586836416046123,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16652
+    },
+    {
+      "from_frame": 339,
+      "to_frame": 340,
+      "to_tick": 680,
+      "whole_frame_mean_abs_channel_change": 0.09957320601851852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3430819120826327,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16652
+    },
+    {
+      "from_frame": 340,
+      "to_frame": 341,
+      "to_tick": 682,
+      "whole_frame_mean_abs_channel_change": 0.09285481770833333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.35462440469043904,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16658
+    },
+    {
+      "from_frame": 341,
+      "to_frame": 342,
+      "to_tick": 684,
+      "whole_frame_mean_abs_channel_change": 0.10615822120949074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4242860859298393,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16657
+    },
+    {
+      "from_frame": 342,
+      "to_frame": 343,
+      "to_tick": 686,
+      "whole_frame_mean_abs_channel_change": 0.10590051721643519,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3890323743167758,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16649
+    },
+    {
+      "from_frame": 343,
+      "to_frame": 344,
+      "to_tick": 688,
+      "whole_frame_mean_abs_channel_change": 0.09656665943287036,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4096484382816095,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16659
+    },
+    {
+      "from_frame": 344,
+      "to_frame": 345,
+      "to_tick": 690,
+      "whole_frame_mean_abs_channel_change": 0.10938856336805555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.4263030375843495,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16647
+    },
+    {
+      "from_frame": 345,
+      "to_frame": 346,
+      "to_tick": 692,
+      "whole_frame_mean_abs_channel_change": 0.10625542534722222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.37058835305186877,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16651
+    },
+    {
+      "from_frame": 346,
+      "to_frame": 347,
+      "to_tick": 694,
+      "whole_frame_mean_abs_channel_change": 0.09757260923032407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.36587220587941005,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16657
+    },
+    {
+      "from_frame": 347,
+      "to_frame": 348,
+      "to_tick": 696,
+      "whole_frame_mean_abs_channel_change": 0.10788755063657407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.44228999079521353,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16658
+    },
+    {
+      "from_frame": 348,
+      "to_frame": 349,
+      "to_tick": 698,
+      "whole_frame_mean_abs_channel_change": 0.10149242259837964,
+      "shared_bright_foreground_mean_abs_channel_change": 0.38609343100756577,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16654
+    },
+    {
+      "from_frame": 349,
+      "to_frame": 350,
+      "to_tick": 700,
+      "whole_frame_mean_abs_channel_change": 0.09539794921875,
+      "shared_bright_foreground_mean_abs_channel_change": 0.39607089985195854,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16662
+    },
+    {
+      "from_frame": 350,
+      "to_frame": 351,
+      "to_tick": 702,
+      "whole_frame_mean_abs_channel_change": 0.10176368995949074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.39831051325166145,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16652
+    },
+    {
+      "from_frame": 351,
+      "to_frame": 352,
+      "to_tick": 704,
+      "whole_frame_mean_abs_channel_change": 0.09763816550925926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3345743509677936,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16653
+    },
+    {
+      "from_frame": 352,
+      "to_frame": 353,
+      "to_tick": 706,
+      "whole_frame_mean_abs_channel_change": 0.08666766131365741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.33425370148059225,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16660
+    },
+    {
+      "from_frame": 353,
+      "to_frame": 354,
+      "to_tick": 708,
+      "whole_frame_mean_abs_channel_change": 0.09163185402199074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3572443323929007,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16659
+    },
+    {
+      "from_frame": 354,
+      "to_frame": 355,
+      "to_tick": 710,
+      "whole_frame_mean_abs_channel_change": 0.09364827473958333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3437631373491082,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16651
+    },
+    {
+      "from_frame": 355,
+      "to_frame": 356,
+      "to_tick": 712,
+      "whole_frame_mean_abs_channel_change": 0.08056640625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.3220301684471652,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16662
+    },
+    {
+      "from_frame": 356,
+      "to_frame": 357,
+      "to_tick": 714,
+      "whole_frame_mean_abs_channel_change": 0.07292796947337964,
+      "shared_bright_foreground_mean_abs_channel_change": 0.32837194414436044,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16662
+    },
+    {
+      "from_frame": 357,
+      "to_frame": 358,
+      "to_tick": 716,
+      "whole_frame_mean_abs_channel_change": 0.08197021484375,
+      "shared_bright_foreground_mean_abs_channel_change": 0.32645016707685537,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16659
+    },
+    {
+      "from_frame": 358,
+      "to_frame": 359,
+      "to_tick": 718,
+      "whole_frame_mean_abs_channel_change": 0.07249394169560185,
+      "shared_bright_foreground_mean_abs_channel_change": 0.25703028121124843,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16666
+    },
+    {
+      "from_frame": 359,
+      "to_frame": 360,
+      "to_tick": 720,
+      "whole_frame_mean_abs_channel_change": 0.06493914568865741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2579774472168906,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16672
+    },
+    {
+      "from_frame": 360,
+      "to_frame": 361,
+      "to_tick": 722,
+      "whole_frame_mean_abs_channel_change": 0.059041341145833336,
+      "shared_bright_foreground_mean_abs_channel_change": 0.22044913712080308,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16669
+    },
+    {
+      "from_frame": 361,
+      "to_frame": 362,
+      "to_tick": 724,
+      "whole_frame_mean_abs_channel_change": 0.05713342737268518,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2167836362545738,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16671
+    },
+    {
+      "from_frame": 362,
+      "to_frame": 363,
+      "to_tick": 726,
+      "whole_frame_mean_abs_channel_change": 0.06271927445023148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.2748285445784096,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16671
+    },
+    {
+      "from_frame": 363,
+      "to_frame": 364,
+      "to_tick": 728,
+      "whole_frame_mean_abs_channel_change": 0.05340124059606482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.19224462043036558,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 364,
+      "to_frame": 365,
+      "to_tick": 730,
+      "whole_frame_mean_abs_channel_change": 0.04563621238425926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.19074474042076633,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 365,
+      "to_frame": 366,
+      "to_tick": 732,
+      "whole_frame_mean_abs_channel_change": 0.041239420572916664,
+      "shared_bright_foreground_mean_abs_channel_change": 0.16115107913669063,
+      "maximum_channel_change": 123,
+      "shared_bright_foreground_pixels": 16680
+    },
+    {
+      "from_frame": 366,
+      "to_frame": 367,
+      "to_tick": 734,
+      "whole_frame_mean_abs_channel_change": 0.035185637297453706,
+      "shared_bright_foreground_mean_abs_channel_change": 0.16074105162179986,
+      "maximum_channel_change": 117,
+      "shared_bright_foreground_pixels": 16679
+    },
+    {
+      "from_frame": 367,
+      "to_frame": 368,
+      "to_tick": 736,
+      "whole_frame_mean_abs_channel_change": 0.03416160300925926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1500079993600512,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16668
+    },
+    {
+      "from_frame": 368,
+      "to_frame": 369,
+      "to_tick": 738,
+      "whole_frame_mean_abs_channel_change": 0.03056731047453704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.13372534901396055,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16666
+    },
+    {
+      "from_frame": 369,
+      "to_frame": 370,
+      "to_tick": 740,
+      "whole_frame_mean_abs_channel_change": 0.03216100622106482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.1350129974005199,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16670
+    },
+    {
+      "from_frame": 370,
+      "to_frame": 371,
+      "to_tick": 742,
+      "whole_frame_mean_abs_channel_change": 0.030617042824074073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.11551372737081884,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16682
+    },
+    {
+      "from_frame": 371,
+      "to_frame": 372,
+      "to_tick": 744,
+      "whole_frame_mean_abs_channel_change": 0.026389793113425927,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07764254451705738,
+      "maximum_channel_change": 121,
+      "shared_bright_foreground_pixels": 16679
+    },
+    {
+      "from_frame": 372,
+      "to_frame": 373,
+      "to_tick": 746,
+      "whole_frame_mean_abs_channel_change": 0.020105432581018517,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07633603036659674,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16685
+    },
+    {
+      "from_frame": 373,
+      "to_frame": 374,
+      "to_tick": 748,
+      "whole_frame_mean_abs_channel_change": 0.016832139756944444,
+      "shared_bright_foreground_mean_abs_channel_change": 0.07514381591562799,
+      "maximum_channel_change": 122,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 374,
+      "to_frame": 375,
+      "to_tick": 750,
+      "whole_frame_mean_abs_channel_change": 0.01806640625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0674058535610828,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16685
+    },
+    {
+      "from_frame": 375,
+      "to_frame": 376,
+      "to_tick": 752,
+      "whole_frame_mean_abs_channel_change": 0.01375777633101852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.05406377367537761,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16684
+    },
+    {
+      "from_frame": 376,
+      "to_frame": 377,
+      "to_tick": 754,
+      "whole_frame_mean_abs_channel_change": 0.010721842447916666,
+      "shared_bright_foreground_mean_abs_channel_change": 0.04594670182588198,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16686
+    },
+    {
+      "from_frame": 377,
+      "to_frame": 378,
+      "to_tick": 756,
+      "whole_frame_mean_abs_channel_change": 0.012632016782407407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.06864801166436975,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 378,
+      "to_frame": 379,
+      "to_tick": 758,
+      "whole_frame_mean_abs_channel_change": 0.007355866608796296,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02774116237267825,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16690
+    },
+    {
+      "from_frame": 379,
+      "to_frame": 380,
+      "to_tick": 760,
+      "whole_frame_mean_abs_channel_change": 0.007075557002314815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.029162671780121444,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16688
+    },
+    {
+      "from_frame": 380,
+      "to_frame": 381,
+      "to_tick": 762,
+      "whole_frame_mean_abs_channel_change": 0.007444028501157407,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0343140192142529,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 381,
+      "to_frame": 382,
+      "to_tick": 764,
+      "whole_frame_mean_abs_channel_change": 0.006698043258101852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.025006491301655782,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16689
+    },
+    {
+      "from_frame": 382,
+      "to_frame": 383,
+      "to_tick": 766,
+      "whole_frame_mean_abs_channel_change": 0.0029003002025462963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.013537798011261532,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 383,
+      "to_frame": 384,
+      "to_tick": 768,
+      "whole_frame_mean_abs_channel_change": 0.003017849392361111,
+      "shared_bright_foreground_mean_abs_channel_change": 0.018547356652291964,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 384,
+      "to_frame": 385,
+      "to_tick": 770,
+      "whole_frame_mean_abs_channel_change": 0.005201551649305556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.02028672976318837,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 385,
+      "to_frame": 386,
+      "to_tick": 772,
+      "whole_frame_mean_abs_channel_change": 0.00152587890625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.005590161316083693,
+      "maximum_channel_change": 114,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 386,
+      "to_frame": 387,
+      "to_tick": 774,
+      "whole_frame_mean_abs_channel_change": 0.0005357530381944445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.001697013256668264,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 387,
+      "to_frame": 388,
+      "to_tick": 776,
+      "whole_frame_mean_abs_channel_change": 0.00012885199652777778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0011379971250598945,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 388,
+      "to_frame": 389,
+      "to_tick": 778,
+      "whole_frame_mean_abs_channel_change": 0.00042724609375,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0009782782303146462,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 389,
+      "to_frame": 390,
+      "to_tick": 780,
+      "whole_frame_mean_abs_channel_change": 0.00034812644675925923,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003074588723846031,
+      "maximum_channel_change": 59,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 390,
+      "to_frame": 391,
+      "to_tick": 782,
+      "whole_frame_mean_abs_channel_change": 0.0003458658854166667,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003054623862002875,
+      "maximum_channel_change": 59,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 391,
+      "to_frame": 392,
+      "to_tick": 784,
+      "whole_frame_mean_abs_channel_change": 0.00037977430555555556,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0005590161316083692,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 392,
+      "to_frame": 393,
+      "to_tick": 786,
+      "whole_frame_mean_abs_channel_change": 0.00011076750578703704,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0009782782303146462,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 393,
+      "to_frame": 394,
+      "to_tick": 788,
+      "whole_frame_mean_abs_channel_change": 0.00010398582175925926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0009183836447851781,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 394,
+      "to_frame": 395,
+      "to_tick": 790,
+      "whole_frame_mean_abs_channel_change": 0.0004588939525462963,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0010182079540009582,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 395,
+      "to_frame": 396,
+      "to_tick": 792,
+      "whole_frame_mean_abs_channel_change": 0.0004928023726851852,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004332375019964862,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 396,
+      "to_frame": 397,
+      "to_tick": 794,
+      "whole_frame_mean_abs_channel_change": 0.00103759765625,
+      "shared_bright_foreground_mean_abs_channel_change": 0.001297716019805143,
+      "maximum_channel_change": 114,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 397,
+      "to_frame": 398,
+      "to_tick": 796,
+      "whole_frame_mean_abs_channel_change": 0.0014625831886574073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004232804232804233,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16695
+    },
+    {
+      "from_frame": 398,
+      "to_frame": 399,
+      "to_tick": 798,
+      "whole_frame_mean_abs_channel_change": 0.002396195023148148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01022262154337626,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16695
+    },
+    {
+      "from_frame": 399,
+      "to_frame": 400,
+      "to_tick": 800,
+      "whole_frame_mean_abs_channel_change": 0.0014716254340277778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.006927807059575148,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 400,
+      "to_frame": 401,
+      "to_tick": 802,
+      "whole_frame_mean_abs_channel_change": 0.0014784071180555555,
+      "shared_bright_foreground_mean_abs_channel_change": 0.01024197412553905,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 401,
+      "to_frame": 402,
+      "to_tick": 804,
+      "whole_frame_mean_abs_channel_change": 0.0013902452256944445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.006987701645104616,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16696
+    },
+    {
+      "from_frame": 402,
+      "to_frame": 403,
+      "to_tick": 806,
+      "whole_frame_mean_abs_channel_change": 0.0011800130208333333,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004332634521313767,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16695
+    },
+    {
+      "from_frame": 403,
+      "to_frame": 404,
+      "to_tick": 808,
+      "whole_frame_mean_abs_channel_change": 0.0007798936631944445,
+      "shared_bright_foreground_mean_abs_channel_change": 0.00391358172596941,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 404,
+      "to_frame": 405,
+      "to_tick": 810,
+      "whole_frame_mean_abs_channel_change": 0.00047019675925925923,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0041531887704165165,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 405,
+      "to_frame": 406,
+      "to_tick": 812,
+      "whole_frame_mean_abs_channel_change": 0.0004860206886574074,
+      "shared_bright_foreground_mean_abs_channel_change": 0.001277904237051236,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 406,
+      "to_frame": 407,
+      "to_tick": 814,
+      "whole_frame_mean_abs_channel_change": 0.0004634150752314815,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0013577732518669382,
+      "maximum_channel_change": 59,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 407,
+      "to_frame": 408,
+      "to_tick": 816,
+      "whole_frame_mean_abs_channel_change": 0.0011574074074074073,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004472664829679326,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16694
+    },
+    {
+      "from_frame": 408,
+      "to_frame": 409,
+      "to_tick": 818,
+      "whole_frame_mean_abs_channel_change": 0.0017632378472222222,
+      "shared_bright_foreground_mean_abs_channel_change": 0.006968988997384133,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16693
+    },
+    {
+      "from_frame": 409,
+      "to_frame": 410,
+      "to_tick": 820,
+      "whole_frame_mean_abs_channel_change": 0.001121238425925926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003834172058471124,
+      "maximum_channel_change": 62,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 410,
+      "to_frame": 411,
+      "to_tick": 822,
+      "whole_frame_mean_abs_channel_change": 0.0007392035590277778,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003973959581436217,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 411,
+      "to_frame": 412,
+      "to_tick": 824,
+      "whole_frame_mean_abs_channel_change": 0.001125759548611111,
+      "shared_bright_foreground_mean_abs_channel_change": 0.004193625688952792,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 412,
+      "to_frame": 413,
+      "to_tick": 826,
+      "whole_frame_mean_abs_channel_change": 0.001365379050925926,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0008188045453637689,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16691
+    },
+    {
+      "from_frame": 413,
+      "to_frame": 414,
+      "to_tick": 828,
+      "whole_frame_mean_abs_channel_change": 0.0008092809606481482,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0040338685198498285,
+      "maximum_channel_change": 61,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 414,
+      "to_frame": 415,
+      "to_tick": 830,
+      "whole_frame_mean_abs_channel_change": 0.0004001193576388889,
+      "shared_bright_foreground_mean_abs_channel_change": 0.0035346273664030674,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 415,
+      "to_frame": 416,
+      "to_tick": 832,
+      "whole_frame_mean_abs_channel_change": 0.0004046404803240741,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003574566658678808,
+      "maximum_channel_change": 60,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 416,
+      "to_frame": 417,
+      "to_tick": 834,
+      "whole_frame_mean_abs_channel_change": 7.233796296296296e-05,
+      "shared_bright_foreground_mean_abs_channel_change": 0.000639028676411854,
+      "maximum_channel_change": 1,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 417,
+      "to_frame": 418,
+      "to_tick": 836,
+      "whole_frame_mean_abs_channel_change": 0.00038429542824074077,
+      "shared_bright_foreground_mean_abs_channel_change": 0.003394839843437974,
+      "maximum_channel_change": 58,
+      "shared_bright_foreground_pixels": 16692
+    },
+    {
+      "from_frame": 418,
+      "to_frame": 419,
+      "to_tick": 838,
+      "whole_frame_mean_abs_channel_change": 0.0003616898148148148,
+      "shared_bright_foreground_mean_abs_channel_change": 0.00045930186117102003,
+      "maximum_channel_change": 59,
+      "shared_bright_foreground_pixels": 16692
+    }
+  ],
+  "limitations": [
+    "Frame differences include geometry movement and deformation; high maximum individual pixel differences at silhouette crossings do not prove color flashes.",
+    "The bright foreground filter is a measurement heuristic; unchanged coverage raster remains the authoritative geometry.",
+    "Material coordinates use a smooth Gaussian-weighted inverse-displacement approximation during deformation, not a globally invertible UV map.",
+    "This is an independent technical/artistic observation; creator artistic acceptance remains pending."
+  ]
+}

@@ -1,0 +1,16 @@
+{"command":{"action":"color","enabled":true},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":0}
+{"command":{"action":"palette","duration_ticks":120,"name":"auto"},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":1}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"motion","motion":{"action":"wander_off","duration_ticks":120,"envelope":"quintic-target-v1","scope":"all","strength":0.0}}},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":2}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"morph","duration_ticks":30,"target":"oval"}},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":3}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"motion_auto","enabled":true}},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":4}
+{"command":{"action":"motion_preset","name":"normal","strength":0.2},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":5}
+{"command":{"action":"speed_preset","duration_ticks":120,"name":"normal"},"effective_tick":0,"schema_version":"cz-morph-event-0.3","sequence":6}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"capture","label":"starting_oval"}},"effective_tick":178,"schema_version":"cz-morph-event-0.3","sequence":7}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"morph","duration_ticks":120,"target":"cloud"}},"effective_tick":180,"schema_version":"cz-morph-event-0.3","sequence":8}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"capture","label":"chromatic_midpoint"}},"effective_tick":240,"schema_version":"cz-morph-event-0.3","sequence":9}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"capture","label":"palette_endpoint"}},"effective_tick":300,"schema_version":"cz-morph-event-0.3","sequence":10}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"capture","label":"sky_blue_cloud"}},"effective_tick":418,"schema_version":"cz-morph-event-0.3","sequence":11}
+{"command":{"action":"adaptive_motion","admission":"future-corners-v1","algorithm":"translation-bisection-v1","effective_translation":[0.0,0.2],"fraction":1.0,"requested":{"action":"up","duration_ticks":120,"envelope":"quintic-target-v1","scope":"all","strength":0.2}},"effective_tick":420,"schema_version":"cz-morph-event-0.3","sequence":12}
+{"command":{"action":"motion_preset","name":"bold","strength":0.3},"effective_tick":600,"schema_version":"cz-morph-event-0.3","sequence":13}
+{"command":{"action":"adaptive_motion","admission":"future-corners-v1","algorithm":"translation-bisection-v1","effective_translation":[0.0,0.23353747064975572],"fraction":0.3353747064975572,"requested":{"action":"up","duration_ticks":120,"envelope":"quintic-target-v1","scope":"all","strength":0.3}},"effective_tick":600,"schema_version":"cz-morph-event-0.3","sequence":14}
+{"command":{"action":"creator","admission":"future-corners-v1","operation":{"action":"capture","label":"final_cloud"}},"effective_tick":838,"schema_version":"cz-morph-event-0.3","sequence":15}
