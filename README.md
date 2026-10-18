@@ -310,3 +310,12 @@ python scripts/check_morph_demo.py outputs/morph_demo_01/video/manifest.json --r
 
 Use a new take directory each time. Wide forms plus strong motion can exceed
 the unchanged force budget; rejected commands preserve the current state.
+
+## Continuous integration
+
+The [CI workflow](.github/workflows/ci.yml) runs the complete Python 3.12 test
+suite on Ubuntu 24.04 and macOS 15 for pull requests to `main` and pushes to
+`main`. The [manual deep-validation workflow](.github/workflows/deep-validation.yml)
+reproduces Build 0, semantic morphing, and live-demo evidence separately.
+See [CI instructions and failure diagnostics](docs/ci.md) for reports, status
+checks, and the distinction between configured workflows and verified runs.
