@@ -1,0 +1,18 @@
+{
+  "termios_restored": true,
+  "cursor_restored": true,
+  "fixed_rows_no_scrolling": true,
+  "session_replay": {
+    "passed": true,
+    "states": 421,
+    "final_tick": 420,
+    "trajectory_sha256": "64650e4088be6486d058f52b1da58acf33d78ed85fce91c131acdc1fa1bd9824"
+  },
+  "metrics": {
+    "achieved_preview_fps": 14.837816996885756,
+    "elapsed_seconds": 7.009117313000161,
+    "final_tick": 420,
+    "preview_frames": 104,
+    "render_seconds": 0.10342039999954977
+  }
+}
