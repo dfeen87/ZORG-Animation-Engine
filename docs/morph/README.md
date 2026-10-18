@@ -71,3 +71,10 @@ In Terminal.app and/or iTerm2:
 6. Verify and export the saved and interrupted takes. Confirm 384×384 PNGs and 30 FPS timestamps, player scrubbing and optional MP4. Check measured preview FPS rather than assuming a guaranteed rate.
 
 Creator checklist: Are circle and oval visibly distinct? Does cloud read as a cloud rather than a decorative blob? Is hill useful despite its lower notch? Are transitions fluid in the complete film? Does home feel restored? Which captures deserve intentional future promotion? Record approval/rejection separately from automated geometry gates.
+
+## Optional adaptive directional motion
+
+Use `motion auto on` to select the strongest feasible translation along the
+bounded segment toward a requested direction; `motion auto off` restores strict
+admission. Strict mode remains the default. See [adaptive motion](adaptive-motion.md)
+for the algorithm, versioned recording contract, measured demo and MacBook checks.

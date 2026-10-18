@@ -36,7 +36,9 @@ class MorphRecorder:
             and self.source==engine_sources() and self.environment==environment_info())
         if not matching and status!='failed':
             raise ValueError('recording journal/config/source/environment mismatch')
-        doc={'schema_version':'cz-morph-session-0.1','status':status,'reason':reason,
+        version = ('cz-morph-session-0.2' if any(e['schema_version']=='cz-morph-event-0.2' for e in runtime.events)
+                   else 'cz-morph-session-0.1')
+        doc={'schema_version':version,'status':status,'reason':reason,
             'config':self.config,'targets':self.targets,'events':runtime.events,'captures':runtime.captures,
             'final_tick':runtime.state.tick,'trajectory_sha256':runtime.trajectory_sha256,
             'final_state_sha256':sha256(canonical_bytes(state_mapping(runtime.state))),
@@ -51,7 +53,7 @@ def load_session(path):
     if path.is_symlink():
         raise ValueError('symlink session refused')
     doc=read_json(path)
-    if (type(doc) is not dict or set(doc)!=SESSION_KEYS or doc['schema_version']!='cz-morph-session-0.1'
+    if (type(doc) is not dict or set(doc)!=SESSION_KEYS or doc['schema_version'] not in ('cz-morph-session-0.1','cz-morph-session-0.2')
         or doc['status'] not in ('complete','interrupted')):
         raise ValueError('unsupported, failed or incomplete morph session')
     if sha256(canonical_bytes({k:v for k,v in doc.items() if k!='session_sha256'}))!=doc['session_sha256']:
@@ -67,6 +69,8 @@ def load_session(path):
     for sequence,event in enumerate(doc['events']):
         if type(event) is not dict or type(event.get('effective_tick')) is not int:
             raise ValueError('invalid event')
+        if doc['schema_version']=='cz-morph-session-0.1' and event.get('schema_version')!='cz-morph-event-0.1':
+            raise ValueError('extended event in historical morph session')
         tick=event['effective_tick']
         if not previous<=tick<=doc['final_tick'] or event.get('sequence')!=sequence:
             raise ValueError('event chronology mismatch')
