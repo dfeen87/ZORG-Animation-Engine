@@ -1,0 +1,71 @@
+name: ZORG CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests (${{ matrix.os }}, Python 3.12)
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, macos-15]
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONUNBUFFERED: '1'
+      PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+    steps:
+      - name: Checkout tested commit
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Set up Python 3.12
+        id: python
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: '3.12'
+      - name: Install locked environment
+        id: install
+        run: |
+          python scripts/ci.py run locked-dependencies -- python -m pip install --disable-pip-version-check -r requirements.lock
+          python scripts/ci.py run editable-install -- python -m pip install --disable-pip-version-check --no-deps --no-build-isolation -e .
+          python scripts/ci.py run dependency-check -- python -m pip check
+      - name: Record environment and versions
+        if: ${{ !cancelled() && steps.python.outcome == 'success' }}
+        run: python scripts/ci.py run diagnostics -- python scripts/ci.py diagnostics
+      - name: Run complete pytest suite
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python scripts/ci.py run --pytest-report pytest-outcomes.json pytest -- python -m pytest -q --junitxml=ci-results/pytest.xml
+      - name: Audit test inventory and outcomes
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python scripts/ci.py run test-audit -- python scripts/ci.py audit-tests --junit ci-results/pytest.xml
+      - name: Check CLI registration and scene validation
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python scripts/ci.py smoke
+      - name: Summarize every required stage
+        if: ${{ always() }}
+        run: python scripts/ci.py summary fast
+      - name: Upload private CI diagnostics
+        if: ${{ always() }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: ci-${{ matrix.os }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ci-results/
+          if-no-files-found: error
+          retention-days: 7
