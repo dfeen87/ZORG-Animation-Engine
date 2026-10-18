@@ -44,7 +44,9 @@ def terminal_session(input_stream: Any, output_stream: Any):
 
 def run_live(config: dict, record: Path, *, mono: bool = False,
              preview_fps: float = 15.0, max_seconds: float | None = None,
-             input_stream: Any = None, output_stream: Any = None) -> dict:
+             input_stream: Any = None, output_stream: Any = None,
+             runtime_factory=LiveRuntime, recorder_factory=None,
+             command_parser=parse_command, help_text=HELP, viewport=frame_lines) -> dict:
     """Run a live take; display frames may be dropped, simulation ticks never are.
 
     ``save`` returns ``save_requested=True`` for the CLI's offline exporter.
@@ -60,8 +62,9 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
     if max_seconds is not None and (not math.isfinite(max_seconds) or max_seconds <= 0):
         raise ValueError("max_seconds must be finite and positive")
 
-    runtime = LiveRuntime(config)
-    recorder = Recorder(Path(record), runtime.config)
+    runtime = runtime_factory(config)
+    recorder = (Recorder(Path(record), runtime.config) if recorder_factory is None
+                else recorder_factory(Path(record), runtime))
     editor = CommandInput()
     monochrome = use_monochrome(mono)
     sim_hz = runtime.scene.sim_hz
@@ -99,10 +102,10 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
                             status_text = event.text
                             continue
                         try:
-                            command = parse_command(event.text)
+                            command = command_parser(event.text)
                             action = command["action"]
                             if action == "help":
-                                status_text = HELP
+                                status_text = help_text
                             elif action in ("save", "quit"):
                                 reason, running = action, False
                                 save_requested = action == "save"
@@ -141,7 +144,7 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
                     render_started = time.monotonic()
                     elapsed = max(now - started, 1e-9)
                     size = terminal_size(output_stream)
-                    lines = frame_lines(runtime, size, command=editor.text,
+                    lines = viewport(runtime, size, command=editor.text,
                                         status=status_text, fps=frame_count / elapsed,
                                         mono=monochrome)
                     draw_frame(output_stream, lines, size)

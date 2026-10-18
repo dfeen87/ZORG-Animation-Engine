@@ -262,3 +262,23 @@ leftward movement, squash and recovery. See the
 all 456 unchanged Build 0 regressions, and the complete Build 0 experiment gates
 passed again. Exact replay across different operating systems or library builds
 is not claimed; record and verify a new take on the destination machine.
+
+## Semantic Morph Lab — Build 0.2
+
+The separately versioned [Semantic Morph Lab](docs/morph/README.md) adds explicit
+mathematical recipes for home, circle, oval, cloud and hill, bounded morphing,
+independent translation, creator-labeled state captures, and deterministic
+replay/export. Eight original Gaussian controls and field parameters are
+preserved. Artistic target approval remains pending; `head_base` is excluded
+as insufficiently distinct. See the [feasibility study](docs/morph/feasibility.md)
+and [implementation evidence](docs/morph/implementation-report.md).
+
+```sh
+commander-zorg morph-lab --record outputs/morph_take_01 --mono
+# Inside the terminal: morph circle; morph oval; up .05; capture My_shape; save
+commander-zorg morph-demo --out outputs/morph_demo_01
+python scripts/check_morph_demo.py outputs/morph_demo_01/video/manifest.json --report outputs/morph_demo_01/check_report.json
+```
+
+Use a new take directory each time. Wide forms plus strong motion can exceed
+the unchanged force budget; rejected commands preserve the current state.
