@@ -1,0 +1,21 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+........................................................................ [ 40%]
+........................................................................ [ 50%]
+........................................................................ [ 60%]
+........................................................................ [ 70%]
+........................................................................ [ 80%]
+........................................................................ [ 90%]
+....................................................................     [100%]
+=============================== warnings summary ===============================
+tests/test_motion.py::test_v05_analytic_default_spring_60_and_120_hz
+  tests/test_motion.py:81: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    def test_v05_analytic_default_spring_60_and_120_hz(record_property):
+
+tests/test_motion.py::test_v05_forced_common_time_cadence_gate
+  tests/test_motion.py:109: PytestWarning: record_property is incompatible with junit_family 'xunit2' (use 'legacy' or 'xunit1')
+    def test_v05_forced_common_time_cadence_gate(record_property):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+716 passed, 2 warnings in 29.94s

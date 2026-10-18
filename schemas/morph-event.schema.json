@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-morph-event-0.1"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "effective_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 215999
+    },
+    "command": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "morph"
+            },
+            "target": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+            },
+            "duration_ticks": {
+              "type": "integer",
+              "minimum": 30,
+              "maximum": 600
+            }
+          },
+          "required": [
+            "action",
+            "target",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "capture"
+            },
+            "label": {
+              "type": "string",
+              "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+            }
+          },
+          "required": [
+            "action",
+            "label"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "motion"
+            },
+            "motion": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": [
+                    "left",
+                    "right",
+                    "up",
+                    "down",
+                    "squash",
+                    "stretch",
+                    "reset",
+                    "wander_on",
+                    "wander_off"
+                  ]
+                },
+                "strength": {
+                  "type": "number"
+                },
+                "duration_ticks": {
+                  "type": "integer",
+                  "minimum": 30,
+                  "maximum": 600
+                },
+                "scope": {
+                  "const": "all"
+                },
+                "envelope": {
+                  "const": "quintic-target-v1"
+                }
+              },
+              "required": [
+                "action",
+                "strength",
+                "duration_ticks",
+                "scope",
+                "envelope"
+              ],
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "action": {
+                        "enum": [
+                          "left",
+                          "right",
+                          "up",
+                          "down"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "strength": {
+                        "minimum": 0.05,
+                        "maximum": 0.3
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "action": {
+                        "enum": [
+                          "squash",
+                          "stretch"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "strength": {
+                        "minimum": 0.05,
+                        "maximum": 0.6
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "action": {
+                        "enum": [
+                          "reset",
+                          "wander_on",
+                          "wander_off"
+                        ]
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "strength": {
+                        "const": 0.0
+                      },
+                      "duration_ticks": {
+                        "const": 120
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "motion"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "sequence",
+    "effective_tick",
+    "command"
+  ],
+  "additionalProperties": false
+}

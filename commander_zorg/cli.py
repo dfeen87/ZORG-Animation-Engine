@@ -53,13 +53,58 @@ def parser() -> argparse.ArgumentParser:
     replay.add_argument("session", type=Path)
     export = commands.add_parser("verify-live-export", help="check live export artifacts and timeline")
     export.add_argument("manifest", type=Path)
+    for name in ('morph-lab','morph-demo'):
+        morph = commands.add_parser(name, help='versioned position-only semantic morph extension')
+        morph.add_argument('--scene', type=Path, default=Path(__file__).resolve().parent.parent/'scenes/live_lab.json')
+        morph.add_argument('--targets', type=Path, default=Path(__file__).resolve().parent.parent/'morph_targets')
+        morph.add_argument('--seed', type=int)
+        morph.add_argument('--no-mp4', action='store_true')
+        if name == 'morph-lab':
+            morph.add_argument('--record', required=True, type=Path)
+            morph.add_argument('--mono', action='store_true')
+            morph.add_argument('--preview-fps', type=float, default=15.)
+            morph.add_argument('--max-seconds', type=float)
+        else:
+            morph.add_argument('--out', required=True, type=Path)
+    for name in ('verify-morph-session','render-morph-session','verify-morph-export'):
+        morph = commands.add_parser(name, help='verify or export versioned morph evidence')
+        morph.add_argument('path', type=Path)
+        if name == 'render-morph-session':
+            morph.add_argument('--out', required=True, type=Path)
+            morph.add_argument('--no-mp4', action='store_true')
     return result
 
 
 def main(argv: list[str] | None = None) -> int:
     arguments = parser().parse_args(argv)
     try:
-        if arguments.command in ("live", "live-demo"):
+        if arguments.command in ('morph-lab','morph-demo'):
+            from .canonical import read_json
+            from .live_motion import LiveRuntime
+            from .morph_targets import load_targets
+            from .morph_lab import run_lab, run_demo
+            config = read_json(arguments.scene)
+            if arguments.seed is not None:
+                config['seed'] = arguments.seed
+            targets = load_targets(arguments.targets, LiveRuntime(config).scene)
+            if arguments.command == 'morph-demo':
+                report = run_demo(config, targets, arguments.out, mp4=not arguments.no_mp4)
+            else:
+                report = run_lab(config, targets, arguments.record, mono=arguments.mono,
+                    preview_fps=arguments.preview_fps, max_seconds=arguments.max_seconds)
+                if report['save_requested']:
+                    from .morph_export import render_session
+                    report['export'] = render_session(report['session'], arguments.record/'export', mp4=not arguments.no_mp4)
+        elif arguments.command == 'verify-morph-session':
+            from .morph_session import verify_session
+            report = verify_session(arguments.path)
+        elif arguments.command == 'render-morph-session':
+            from .morph_export import render_session
+            report = render_session(arguments.path, arguments.out, mp4=not arguments.no_mp4)
+        elif arguments.command == 'verify-morph-export':
+            from .morph_export import verify_export
+            report = verify_export(arguments.path)
+        elif arguments.command in ("live", "live-demo"):
             from .canonical import read_json
             config = read_json(arguments.scene)
             if arguments.seed is not None:
