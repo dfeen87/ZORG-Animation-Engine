@@ -1,0 +1,17 @@
+{
+  "tests/test_live_terminal.py": {
+    "baseline_assertions": 54,
+    "current_assertions": 54,
+    "assertion_expressions_identical": true
+  },
+  "tests/test_morph.py": {
+    "baseline_assertions": 52,
+    "current_assertions": 52,
+    "assertion_expressions_identical": true
+  },
+  "tests/test_adaptive_motion.py": {
+    "baseline_assertions": 50,
+    "current_assertions": 50,
+    "assertion_expressions_identical": true
+  }
+}

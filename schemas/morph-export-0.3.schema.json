@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-morph-export-0.3 RGB presentation manifest",
+  "description": "Opt-in RGB PNG/HTML/optional H.264 export of a source-bound studio session. The verifier regenerates every RGB PNG and chromatic snapshot from tick events, independently checks unchanged grayscale coverage and silhouette measurements, and rejects unsupported algorithm metadata. Legacy grayscale output retains cz-morph-export-0.1. Source/environment equality, replay arithmetic, event timing and file bytes require executable verification.",
+  "type": "object",
+  "properties": {
+    "schema_version": {"const": "cz-morph-export-0.3"},
+    "status": {"const": "complete"},
+    "session_sha256": {"$ref": "#/$defs/digest"},
+    "trajectory_sha256": {"$ref": "#/$defs/digest"},
+    "frames": {"type": "integer", "minimum": 0, "maximum": 108000},
+    "states": {"type": "integer", "minimum": 1, "maximum": 216001},
+    "final_tick": {"type": "integer", "minimum": 0, "maximum": 216000},
+    "creator_review": {"const": "pending"},
+    "elapsed_seconds": {"type": "number", "minimum": 0},
+    "presentation": {
+      "type": "object",
+      "properties": {
+        "mode": {"const": "rgb"},
+        "algorithm": {"const": "material-gaussian-palette-v1"},
+        "seed": {"type": "integer", "minimum": 0, "maximum": 4294967295}
+      },
+      "required": ["mode", "algorithm", "seed"],
+      "additionalProperties": false
+    },
+    "media": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "status": {"const": "complete"},
+            "path": {"const": "animation.mp4"},
+            "codec": {"const": "h264"},
+            "pixel_format": {"const": "yuv420p"},
+            "fps": {"const": 30},
+            "frames": {"type": "integer", "minimum": 1, "maximum": 108000},
+            "log": {"const": "encoder.log"}
+          },
+          "required": ["status", "path", "codec", "pixel_format", "fps", "frames", "log"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {"enum": ["disabled", "unavailable", "no_frames", "failed"]},
+            "reason": {"type": "string", "minLength": 1}
+          },
+          "required": ["status", "reason"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "status": {"const": "failed"},
+            "reason": {"type": "string", "minLength": 1},
+            "log": {"const": "encoder.log"},
+            "exit_code": {"type": "integer"}
+          },
+          "required": ["status", "reason", "log", "exit_code"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "artifacts": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:session\\.json|status\\.json|states\\.jsonl|frames\\.jsonl|measurements\\.json|contact_sheet\\.png|player\\.html|animation\\.mp4|encoder\\.log|frames/frame_[0-9]{6}\\.png|captures/[A-Za-z][A-Za-z0-9_]{0,63}\\.(?:png|json))$"
+      },
+      "additionalProperties": {"$ref": "#/$defs/digest"}
+    }
+  },
+  "required": ["schema_version", "status", "session_sha256", "frames", "states", "final_tick", "trajectory_sha256", "media", "creator_review", "elapsed_seconds", "artifacts", "presentation"],
+  "additionalProperties": false,
+  "$defs": {
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

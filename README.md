@@ -319,3 +319,24 @@ suite on Ubuntu 24.04 and macOS 15 for pull requests to `main` and pushes to
 reproduces Build 0, semantic morphing, and live-demo evidence separately.
 See [CI instructions and failure diagnostics](docs/ci.md) for reports, status
 checks, and the distinction between configured workflows and verified runs.
+
+### Creator studio (Build 0.3)
+
+`commander-zorg morph-lab --record outputs/creator_01` now runs the versioned
+creator studio. Start with `motion auto on`, choose `motion gentle/normal/bold`
+and `speed slow/normal/fast`, then `color on` and `palette auto`. Try
+`morph oval .5`, allow it to settle, and `morph cloud 2`; direct the blue cloud
+with `up`. Directions are absolute local deformation targets. Repeating a
+saturated target reports the limit; rigid scene travel is a future pass.
+`motion auto off` restores strict direction admission. `--mono` forces portable
+blocks; advertised truecolor and 256-color terminals show color half-blocks.
+`save` exports recorded RGB when color was enabled, with PNG/HTML and optional
+H.264. `render-morph-session ... --grayscale` explicitly retains independent gray.
+
+See [motion diagnosis](docs/morph/studio-diagnosis.md),
+[presets and semantics](docs/morph/studio-motion.md),
+[color architecture](docs/morph/studio-color.md), and
+[Mac acceptance](docs/morph/studio-mac-acceptance.md).
+Reproduce the source-backed take with
+`python scripts/demo_chromatic_cloud.py --out outputs/chromatic_cloud_01`.
+Creator artistic review and native platform results are reported separately.

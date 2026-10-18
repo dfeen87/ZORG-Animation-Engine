@@ -21,6 +21,9 @@ jobs:
     env:
       PYTHONUNBUFFERED: '1'
       PYTEST_DISABLE_PLUGIN_AUTOLOAD: '1'
+      PYTEST_ADDOPTS: '--tb=short -o faulthandler_timeout=30'
+      HOMEBREW_NO_AUTO_UPDATE: '1'
+      HOMEBREW_NO_INSTALL_CLEANUP: '1'
       ZORG_CI_TAKE: outputs/ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
       - name: Checkout tested commit
@@ -39,6 +42,18 @@ jobs:
           python scripts/ci.py run locked-dependencies -- python -m pip install --disable-pip-version-check -r requirements.lock
           python scripts/ci.py run editable-install -- python -m pip install --disable-pip-version-check --no-deps --no-build-isolation -e .
           python scripts/ci.py run dependency-check -- python -m pip check
+      - name: Provision and verify FFmpeg, ffprobe and libx264
+        if: ${{ !cancelled() && steps.python.outcome == 'success' }}
+        run: |
+          if [[ "$RUNNER_OS" == "Linux" ]]; then
+            sudo apt-get update
+            python scripts/ci.py run media-install -- sudo apt-get install --no-install-recommends -y ffmpeg
+          elif [[ "$RUNNER_OS" == "macOS" ]]; then
+            python scripts/ci.py run media-install -- brew install ffmpeg
+          else
+            exit 1
+          fi
+          python scripts/ci.py run media-readiness -- python scripts/ci.py check-media
       - name: Record environment and versions
         if: ${{ !cancelled() && steps.python.outcome == 'success' }}
         run: python scripts/ci.py run diagnostics -- python scripts/ci.py diagnostics
@@ -60,6 +75,9 @@ jobs:
       - name: Verify original live evidence
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: python scripts/ci.py run live-check -- python scripts/check_live_demo.py "$ZORG_CI_TAKE/live/video/manifest.json" --report "$ZORG_CI_TAKE/live/check_report.json"
+      - name: Reproduce and verify chromatic motion demonstration
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: python scripts/ci.py run chromatic-demo -- python scripts/demo_chromatic_cloud.py --out "$ZORG_CI_TAKE/chromatic" --no-mp4
       - name: Collect compact mathematical reports
         if: ${{ always() }}
         run: python scripts/ci.py run compact-reports -- python scripts/ci.py compact "$ZORG_CI_TAKE"

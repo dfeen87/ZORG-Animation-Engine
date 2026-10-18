@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "algorithm": {
+      "const": "material-gaussian-palette-v1"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "mode": {
+      "enum": [
+        "auto",
+        "override"
+      ]
+    },
+    "override": {
+      "enum": [
+        null,
+        "neutral",
+        "circle",
+        "oval",
+        "cloud",
+        "hill"
+      ]
+    },
+    "palette": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "enum": [
+            "neutral",
+            "circle",
+            "oval",
+            "cloud",
+            "hill"
+          ]
+        },
+        "start": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 255
+            }
+          }
+        },
+        "end": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 255
+            }
+          }
+        },
+        "tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 216000
+        },
+        "duration_ticks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 600
+        }
+      },
+      "required": [
+        "name",
+        "start",
+        "end",
+        "tick",
+        "duration_ticks"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "algorithm",
+    "enabled",
+    "mode",
+    "override",
+    "palette"
+  ],
+  "additionalProperties": false,
+  "description": "Runtime additionally verifies mode/override agreement and exact fixed named palette endpoint; replay authenticates interrupted blend starts."
+}

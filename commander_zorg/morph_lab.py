@@ -3,8 +3,9 @@ from pathlib import Path
 import time
 from .live import run_live
 from .terminal_view import frame_lines
-from .morph_commands import HELP,parse_command
+from .studio_commands import HELP,parse_command
 from .morph_runtime import MorphRuntime
+from .studio_runtime import StudioRuntime
 from .morph_session import MorphRecorder,verify_session
 from .morph_export import render_session
 from .morph_targets import load_targets
@@ -17,13 +18,21 @@ def _ui_command(text):
 
 
 def _viewport(runtime,size,**kwargs):
+    if hasattr(runtime, 'terminal_color_mode'):
+        kwargs['mono'] = runtime.terminal_color_mode == 'mono'
     lines=frame_lines(runtime,size,**kwargs)
-    lines[0]=f'ZORG MORPH LAB — TARGET: {runtime.active_target.upper()}'[:size.columns]
+    settings = ' | '+runtime.creator_status() if hasattr(runtime, 'creator_status') else ''
+    lines[0]=f'ZORG MORPH LAB — TARGET: {runtime.active_target.upper()}{settings}'[:size.columns]
     return lines
 
 
 def run_lab(config,targets,record,**kwargs):
-    return run_live(config,record,runtime_factory=lambda c:MorphRuntime(c,targets),
+    def factory(config):
+        from .terminal_view import detect_color_mode
+        runtime = StudioRuntime(config, targets)
+        runtime.terminal_color_mode = detect_color_mode(kwargs.get('mono', False))
+        return runtime
+    return run_live(config,record,runtime_factory=factory,
         recorder_factory=MorphRecorder,command_parser=_ui_command,help_text=HELP,viewport=_viewport,**kwargs)
 
 

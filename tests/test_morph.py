@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import numpy as np
 import pytest
+from scripts.pty_support import PtyProcess
 from commander_zorg.canonical import read_json,atomic_json,canonical_bytes,sha256
 from commander_zorg.live_motion import LiveRuntime,LiveNumericalError
 from commander_zorg.morph_targets import load_targets,validate_target
@@ -269,8 +270,6 @@ def test_motion_payload_cannot_override_event(runtime):
 @pytest.mark.parametrize('ending,expected',[(b'quit\r','complete'),(b'\x03','interrupted'),(b'save\r','complete')])
 def test_real_morph_pty(tmp_path,ending,expected):
     import os,sys,select,subprocess,termios,time,fcntl,struct
-    master,slave=os.openpty(); previous=termios.tcgetattr(slave)
-    fcntl.ioctl(slave,termios.TIOCSWINSZ,struct.pack('HHHH',24,100,0,0))
     code="""from pathlib import Path
 from commander_zorg.canonical import read_json,atomic_json
 from commander_zorg.live_motion import LiveRuntime
@@ -282,18 +281,15 @@ t=load_targets('morph_targets',LiveRuntime(c).scene)
 result=run_lab(c,t,Path(sys.argv[1])/'take',mono=True,max_seconds=5)
 atomic_json(Path(sys.argv[1])/'result.json',result)
 """
-    def controlling_terminal():
-        os.setsid(); fcntl.ioctl(0,termios.TIOCSCTTY,0)
-    process=subprocess.Popen([sys.executable,'-c',code,str(tmp_path)],cwd=ROOT,stdin=slave,stdout=slave,stderr=subprocess.PIPE,preexec_fn=controlling_terminal)
+    take=PtyProcess(code,(tmp_path,),cwd=ROOT,size=(100,24))
+    master,slave=take.master,take.slave
+    previous=take.previous
+    process=take.process
     output=b''
     def until(text):
         nonlocal output
-        deadline=time.monotonic()+6
-        while time.monotonic()<deadline:
-            if select.select([master],[],[],.05)[0]: output+=os.read(master,65536)
-            if text in output: return
-            if process.poll() is not None: break
-        raise AssertionError(f'missing {text!r}: {output[-500:]!r}')
+        take.wait_for(lambda data:text in data,timeout=6)
+        output=take.output
     try:
         until(b'COMMAND:')
         os.write(master,b'morph circle .5\r')
@@ -302,9 +298,9 @@ atomic_json(Path(sys.argv[1])/'result.json',result)
         until(b'CAPTURE accepted at tick')
         os.write(master,ending)
         until(b'\x1b[?25h\x1b[?1049l')
-        process.wait(timeout=6)
-        while select.select([master],[],[],0)[0]: output+=os.read(master,65536)
-        assert process.returncode==0,process.stderr.read().decode()
+        take.wait(timeout=6)
+        output=take.output
+        assert process.returncode==0,take.stderr.decode()
         assert termios.tcgetattr(slave)==previous
         assert b'\x1b[?25h\x1b[?1049l' in output
         doc=load_session(tmp_path/'take/session.json')
@@ -314,8 +310,7 @@ atomic_json(Path(sys.argv[1])/'result.json',result)
         result=read_json(tmp_path/'result.json')
         assert result['save_requested']==(ending==b'save\r')
     finally:
-        if process.poll() is None: process.kill();process.wait()
-        process.stderr.close();os.close(master);os.close(slave)
+        take.close()
 
 
 def test_reindexed_false_continuity_rejected(tmp_path,config,targets):

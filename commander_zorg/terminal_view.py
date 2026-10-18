@@ -34,6 +34,18 @@ def use_monochrome(force: bool = False, environment: Any = None) -> bool:
     return force or term in ("dumb", "unknown") or not advertised
 
 
+def detect_color_mode(force: bool = False, environment: Any = None) -> str:
+    """Detect creator-preview color while retaining conservative legacy defaults."""
+    environment = os.environ if environment is None else environment
+    term = environment.get("TERM", "").lower()
+    color = environment.get("COLORTERM", "").lower()
+    if force or term in ("dumb", "unknown"):
+        return "mono"
+    if color in ("truecolor", "24bit") or "direct" in term:
+        return "truecolor"
+    return "256" if "256color" in term else "mono"
+
+
 @dataclass(frozen=True)
 class InputEvent:
     kind: str
@@ -94,10 +106,34 @@ def terminal_size(stream: Any) -> os.terminal_size:
         return shutil.get_terminal_size((80, 24))
 
 
-def half_blocks(pixels: np.ndarray, *, mono: bool = False) -> list[str]:
-    """Encode pairs of genuine raster rows as terminal cells."""
-    if pixels.dtype != np.uint8 or pixels.ndim != 2 or pixels.shape[0] % 2:
-        raise ValueError("preview pixels must be an even-height uint8 raster")
+def _xterm256(pixels: np.ndarray) -> np.ndarray:
+    """Choose the nearest standard xterm color cube or grayscale entry."""
+    rgb = pixels.astype(np.int32)
+    levels = np.array([0, 95, 135, 175, 215, 255], dtype=np.int32)
+    indices = np.square(rgb[..., None] - levels).argmin(axis=-1)
+    cube = 16 + 36 * indices[..., 0] + 6 * indices[..., 1] + indices[..., 2]
+    cube_distance = np.square(rgb - levels[indices]).sum(axis=-1)
+    grays = np.arange(8, 239, 10, dtype=np.int32)
+    gray_distances = np.square(rgb[..., None, :] - grays[:, None]).sum(axis=-1)
+    gray_index = gray_distances.argmin(axis=-1)
+    gray_distance = np.take_along_axis(gray_distances, gray_index[..., None], axis=-1)[..., 0]
+    return np.where(gray_distance < cube_distance, 232 + gray_index, cube).astype(np.uint8)
+
+
+def half_blocks(pixels: np.ndarray, *, mono: bool = False,
+                color_mode: str = "truecolor") -> list[str]:
+    """Encode paired coverage or RGB raster rows with matching foreground/background."""
+    if (not isinstance(pixels, np.ndarray) or pixels.dtype != np.uint8
+            or pixels.ndim not in (2, 3) or pixels.shape[0] % 2
+            or (pixels.ndim == 3 and pixels.shape[2] != 3)):
+        raise ValueError("preview pixels must be an even-height uint8 gray or RGB raster")
+    if color_mode not in ("truecolor", "256"):
+        raise ValueError("preview color_mode must be truecolor or 256")
+    if mono and pixels.ndim == 3:
+        pixels = ((pixels.astype(np.int32) * [299, 587, 114]).sum(axis=2) + 500) // 1000
+    elif not mono:
+        rgb = np.repeat(pixels[..., None], 3, axis=2) if pixels.ndim == 2 else pixels
+        colors = _xterm256(rgb) if color_mode == "256" else rgb
     rows = []
     for y in range(0, pixels.shape[0], 2):
         if mono:
@@ -107,11 +143,16 @@ def half_blocks(pixels: np.ndarray, *, mono: bool = False) -> list[str]:
         else:
             line = []
             previous = None
-            for upper, lower in zip(pixels[y], pixels[y + 1], strict=True):
-                pair = (int(upper), int(lower))
+            for upper, lower in zip(colors[y], colors[y + 1], strict=True):
+                pair = ((int(upper), int(lower)) if color_mode == "256"
+                        else (tuple(map(int, upper)), tuple(map(int, lower))))
                 if pair != previous:
                     a, b = pair
-                    line.append(f"\x1b[38;2;{a};{a};{a}m\x1b[48;2;{b};{b};{b}m")
+                    if color_mode == "256":
+                        line.append(f"\x1b[38;5;{a}m\x1b[48;5;{b}m")
+                    else:
+                        line.append(f"\x1b[38;2;{a[0]};{a[1]};{a[2]}m"
+                                    f"\x1b[48;2;{b[0]};{b[1]};{b[2]}m")
                     previous = pair
                 line.append("▀")
             rows.append("".join(line) + "\x1b[0m")
@@ -150,7 +191,19 @@ def frame_lines(runtime: Any, size: os.terminal_size, *, command: str = "",
     # Display foreground as a light silhouette regardless of export inversion.
     if preview.invert:
         pixels = np.subtract(np.uint8(255), pixels)
-    image = half_blocks(pixels, mono=mono)
+    color_mode = getattr(runtime, "terminal_color_mode", "truecolor")
+    monochrome = mono or color_mode == "mono"
+    chromatic = getattr(runtime, "chromatic", None)
+    if not monochrome and chromatic is not None and chromatic.enabled:
+        # LiveScene delegates inversion to its resolved dataclass base. Color
+        # receives the foreground coverage already un-inverted above.
+        if preview.invert:
+            preview = (replace(preview, base=replace(preview.base, invert=False))
+                       if hasattr(preview, "base") else replace(preview, invert=False))
+        pixels = chromatic.rgb(pixels, runtime.state, preview,
+                               runtime.config["seed"], runtime.state.tick)
+    image = half_blocks(pixels, mono=monochrome,
+                        color_mode="256" if color_mode == "256" else "truecolor")
     padding = " " * ((columns - side) // 2)
     image = [padding + line for line in image]
     image += [""] * (body_rows - len(image))

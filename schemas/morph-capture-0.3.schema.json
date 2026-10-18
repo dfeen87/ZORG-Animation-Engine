@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-morph-capture-0.3"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "label": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+    },
+    "tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 216000
+    },
+    "active_target": {
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+    },
+    "state": {
+      "$ref": "state-row.schema.json"
+    },
+    "channels": {
+      "type": "object",
+      "properties": {
+        "shape": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "end": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "tick": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duration_ticks": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 600
+            }
+          },
+          "required": [
+            "start",
+            "end",
+            "tick",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
+        },
+        "translation": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "end": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "tick": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duration_ticks": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 600
+            }
+          },
+          "required": [
+            "start",
+            "end",
+            "tick",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
+        },
+        "morph": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "end": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "tick": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duration_ticks": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 600
+            }
+          },
+          "required": [
+            "start",
+            "end",
+            "tick",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
+        },
+        "wander_mix": {
+          "type": "object",
+          "properties": {
+            "start": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "end": {
+              "oneOf": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "number"
+                    },
+                    "minItems": 2,
+                    "maxItems": 2
+                  },
+                  "minItems": 1
+                }
+              ]
+            },
+            "tick": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "duration_ticks": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 600
+            }
+          },
+          "required": [
+            "start",
+            "end",
+            "tick",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "shape",
+        "translation",
+        "morph",
+        "wander_mix"
+      ],
+      "additionalProperties": false
+    },
+    "seed": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4294967295
+    },
+    "config_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "source_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "field": {
+      "type": "object",
+      "properties": {
+        "threshold": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "elements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "sigma": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "weight": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              }
+            },
+            "required": [
+              "id",
+              "sigma",
+              "weight"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "threshold",
+        "elements"
+      ],
+      "additionalProperties": false
+    },
+    "validation": {
+      "const": "passed"
+    },
+    "chromatic": {
+      "$ref": "chromatic.schema.json"
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "label",
+    "tick",
+    "active_target",
+    "state",
+    "channels",
+    "seed",
+    "config_sha256",
+    "source_sha256",
+    "field",
+    "validation",
+    "chromatic"
+  ],
+  "additionalProperties": false
+}
