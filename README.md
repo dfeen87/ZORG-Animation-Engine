@@ -10,7 +10,7 @@
   <img alt="Python 3.12" src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&amp;logoColor=white">
   <img alt="Creator Studio Build 0.3" src="https://img.shields.io/badge/Creator%20Studio-Build%200.3-7457C5">
   <img alt="Local first" src="https://img.shields.io/badge/Local--first-no%20cloud%20required-0D9488">
-  <a href="LICENSE"><img alt="MIT licensed software" src="https://img.shields.io/badge/Code%20license-MIT-22A06B"></a>
+  <a href="LICENSE"><img alt="Private source, all rights reserved" src="https://img.shields.io/badge/Source-Private%20%7C%20All%20rights%20reserved-8B5CF6"></a>
 </p>
 
 <p align="center">
@@ -203,7 +203,11 @@ The forthcoming **radial spatial-context / Letter-Depth Encoding** investigation
 
 ## 📜 License & creative ownership
 
-Code in this repository is distributed under the [MIT License](LICENSE), with the original software attribution preserved. **The MIT software license does not automatically grant rights to the original Commander–ZORG characters, scripts, story bible, fictional setting, or third-party creative assets.**
+**ZORG is currently a private, proprietary project.** Current repository materials are subject to the [private-source and creative rights notice](LICENSE), with no general permission to copy, redistribute, sublicense, or commercially exploit them. The original Commander–ZORG characters, scripts, story bible, and creative artwork are likewise **not offered under a public commercial-use license**.
+
+**Historical license note:** Earlier repository revisions contained the MIT License. Rights validly granted to lawful recipients of those earlier copies cannot be retroactively withdrawn simply by updating the current notice. Separately licensed third-party components continue under their own terms. Your other open-source repositories are unaffected.
+
+A future ZORG website could allow free public viewing or interaction **without releasing the private mathematical source**. Website/content permissions can be decided independently when that experience is built.
 
 This is a personal, evolving research and creative project. The code is real; the finished film is still ahead of us.
 
