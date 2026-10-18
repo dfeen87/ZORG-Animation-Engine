@@ -16,16 +16,18 @@ import shutil
 import subprocess
 import sys
 import time
+import tempfile
 import xml.etree.ElementTree as ET
 
-BASELINE_TESTS = 716  # Independently collected on main cc9d563; reductions need review.
+BASELINE_TESTS = 765  # Independently collected on main a0da2378; reductions need review.
 RESULTS = Path(os.environ.get('ZORG_CI_RESULTS', 'ci-results'))
 PHASES = {}
 DESELECTED = []
 COLLECTION_PROBLEMS = []
 HELP_COMMANDS = ('validate', 'live', 'live-demo', 'morph-lab', 'morph-demo',
                  'render-morph-session', 'verify-morph-session')
-COMMON_STAGES = ('locked-dependencies', 'editable-install', 'dependency-check', 'diagnostics')
+COMMON_STAGES = ('locked-dependencies', 'editable-install', 'dependency-check',
+                 'media-install', 'media-readiness', 'diagnostics')
 
 
 def write_json(path, value):
@@ -35,20 +37,45 @@ def write_json(path, value):
 
 
 # Passive hooks: observe the actual collection and setup/call/teardown reports.
+def _record_pytest_progress(value):
+    """Persist progress before a later native hang can prevent sessionfinish."""
+    destination = os.environ.get('ZORG_CI_PYTEST_REPORT')
+    if destination:
+        path = Path(destination).with_name('pytest-progress.jsonl')
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open('a', encoding='utf-8') as stream:
+            stream.write(json.dumps(value, allow_nan=False) + '\n')
+
+
+def pytest_runtest_logstart(nodeid, location):
+    if os.environ.get('ZORG_CI_PYTEST_REPORT'):
+        _record_pytest_progress({'nodeid': nodeid, 'phase': 'start'})
+        print(f'\nCI test starting: {nodeid}', flush=True)
+
+
 def pytest_deselected(items):
     DESELECTED.extend(item.nodeid for item in items)
 
 
 def pytest_collectreport(report):
     if report.failed or report.skipped:
-        COLLECTION_PROBLEMS.append({'nodeid': report.nodeid, 'outcome': report.outcome,
-                                    'detail': str(report.longrepr)})
+        issue = {'nodeid': report.nodeid, 'phase': 'collection',
+                 'outcome': report.outcome, 'detail': str(report.longrepr)}
+        COLLECTION_PROBLEMS.append(issue)
+        _record_pytest_progress(issue)
+        print(f'\nCI collection {report.outcome}: {report.nodeid}\n{report.longrepr}', flush=True)
 
 
 def pytest_runtest_logreport(report):
     PHASES.setdefault(report.nodeid, []).append({
         'phase': report.when, 'outcome': report.outcome,
         'wasxfail': getattr(report, 'wasxfail', None)})
+    if report.failed:
+        issue = {'nodeid': report.nodeid, 'phase': report.when,
+                 'outcome': report.outcome, 'detail': str(report.longrepr),
+                 'sections': list(report.sections)}
+        _record_pytest_progress(issue)
+        print(f'\nCI phase failed: {report.nodeid} [{report.when}]\n{report.longrepr}', flush=True)
 
 
 def pytest_sessionfinish(session, exitstatus):
@@ -133,6 +160,8 @@ def diagnostics():
         'event_sha': os.environ.get('GITHUB_SHA'), 'event': os.environ.get('GITHUB_EVENT_NAME'),
         'dependencies': dict(sorted(versions.items())),
         'optional_ffmpeg': 'available' if shutil.which('ffmpeg') else 'unavailable',
+        'ffprobe': 'available' if shutil.which('ffprobe') else 'unavailable',
+        'ci_media_policy': 'FFmpeg, ffprobe and a working libx264 encoder required for the full suite',
         'deep_media_policy': 'MP4 disabled explicitly; PNG/HTML and mathematical checks remain required'}
     write_json(RESULTS / 'environment.json', data)
     print(json.dumps(data, indent=2))
@@ -140,6 +169,46 @@ def diagnostics():
         raise ValueError('Python 3.12 is required')
     if data['event_sha'] and data['event_sha'] != data['commit_sha']:
         raise ValueError('checkout differs from the event commit')
+
+
+def check_media():
+    """Prove CI's real encoder/probe work; application's local fallback stays optional."""
+    data = {'passed': False, 'ffmpeg': shutil.which('ffmpeg'),
+            'ffprobe': shutil.which('ffprobe')}
+    try:
+        if not data['ffmpeg'] or not data['ffprobe']:
+            raise ValueError('CI requires both ffmpeg and ffprobe; skipped MP4 tests are not acceptance')
+        for name in ('ffmpeg', 'ffprobe'):
+            result = subprocess.run([data[name], '-version'], check=True,
+                                    capture_output=True, text=True, timeout=10)
+            data[name + '_version'] = result.stdout.splitlines()[0]
+        RESULTS.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='media-smoke-', dir=RESULTS) as directory:
+            movie = str(Path(directory) / 'smoke.mp4')
+            command = [data['ffmpeg'], '-nostdin', '-v', 'error', '-n',
+                       '-f', 'lavfi', '-i', 'color=c=black:s=16x16:r=30:d=0.1',
+                       '-frames:v', '3', '-an', '-c:v', 'libx264',
+                       '-pix_fmt', 'yuv420p', '-movflags', '+faststart', movie]
+            encoded = subprocess.run(command, capture_output=True, text=True, timeout=15)
+            if encoded.stderr:
+                print(encoded.stderr, end='', flush=True)
+            encoded.check_returncode()
+            probed = subprocess.run([data['ffprobe'], '-v', 'error', '-select_streams', 'v:0',
+                '-count_frames', '-show_entries',
+                'stream=codec_name,pix_fmt,nb_read_frames,r_frame_rate', '-of', 'json', movie],
+                check=True, capture_output=True, text=True, timeout=10)
+            data['stream'] = json.loads(probed.stdout)['streams'][0]
+            expected = {'codec_name': 'h264', 'pix_fmt': 'yuv420p',
+                        'nb_read_frames': '3', 'r_frame_rate': '30/1'}
+            if data['stream'] != expected:
+                raise ValueError(f'CI libx264 smoke encode/probe mismatch: {data["stream"]!r}')
+        data['passed'] = True
+    except BaseException as error:
+        data['error'] = f'{type(error).__name__}: {error}'
+        raise
+    finally:
+        write_json(RESULTS / 'media-capabilities.json', data)
+        print(json.dumps(data, indent=2), flush=True)
 
 
 def audit_tests(junit):
@@ -193,7 +262,8 @@ def compact_evidence(take):
         if (not path.is_file() or path.is_symlink() or
             any(part in ('source', 'frames', 'captures') for part in relative.parts)):
             continue
-        if path.name not in names and not path.name.endswith('_integrity.json'):
+        if (path.name not in names and not path.name.endswith('_integrity.json')
+            and relative != Path('chromatic/report.json')):
             continue
         total += path.stat().st_size
         if total > 20 * 1024 * 1024:
@@ -211,7 +281,8 @@ def summary(mode):
         required += ['pytest', 'test-audit'] + [f'help-{name}' for name in HELP_COMMANDS]
         required += ['validate-e1', 'validate-control']
     else:
-        required += ['build0', 'test-audit', 'morph-demo', 'morph-check', 'live-demo', 'live-check', 'compact-reports']
+        required += ['build0', 'test-audit', 'morph-demo', 'morph-check',
+                     'live-demo', 'live-check', 'chromatic-demo', 'compact-reports']
     rows = []
     for name in required:
         path = RESULTS / f'{name}.json'
@@ -234,7 +305,7 @@ def summary(mode):
         attention += [f"- Collection `{p['nodeid']}`: {p['outcome']}" for p in data['collection_problems']]
         lines += attention or ['None.']
     lines += ['', 'See JUnit and stage logs for complete tracebacks. Missing stages are not passes.',
-              'Deep MP4 encoding is explicitly disabled; optional FFmpeg availability is diagnostic only.']
+              'Deep demo MP4 encoding is disabled; FFmpeg, ffprobe and libx264 remain required by the complete test suite.']
     RESULTS.mkdir(parents=True, exist_ok=True)
     content = '\n'.join(lines) + '\n'
     (RESULTS / 'summary.md').write_text(content, encoding='utf-8')
@@ -254,6 +325,7 @@ def main():
     run.add_argument('stage')
     run.add_argument('command', nargs=argparse.REMAINDER)
     sub.add_parser('diagnostics')
+    sub.add_parser('check-media')
     audit = sub.add_parser('audit-tests'); audit.add_argument('--junit', type=Path, required=True)
     sub.add_parser('smoke')
     compact = sub.add_parser('compact'); compact.add_argument('take', type=Path)
@@ -264,6 +336,7 @@ def main():
         if not command: parser.error('a child command is required')
         return run_stage(args.stage, command, args.pytest_report)
     if args.action == 'diagnostics': diagnostics(); return 0
+    if args.action == 'check-media': check_media(); return 0
     if args.action == 'audit-tests': return audit_tests(args.junit)
     if args.action == 'smoke': return smoke()
     if args.action == 'compact': compact_evidence(args.take); return 0

@@ -1,0 +1,65 @@
+{
+  "baseline": "a0da2378d705449d54eaeb3e73fbf402e873d385",
+  "runs": [
+    {
+      "id": 39149188435,
+      "event": "pull_request",
+      "head": "6d6726fd31aa88fa7b9bb7e893f1baf56d8748d1",
+      "tested": "31e0c9086cc64e75e8bb9d14402870902b56d08d",
+      "ubuntu_job": 117739155297,
+      "macos_job": 117739155461
+    },
+    {
+      "id": 39149276535,
+      "event": "push",
+      "head": "a0da2378d705449d54eaeb3e73fbf402e873d385",
+      "ubuntu_job": 117739406198,
+      "macos_job": 117739406051
+    },
+    {
+      "id": 39145890905,
+      "event": "push",
+      "head": "23d087a19c5f09cad5ad5f61f69e939b0f103c61",
+      "ubuntu_job": 117729526525,
+      "macos_job": 117729526750,
+      "observation": "Same macOS PTY FE sequence and 15-minute cancellation predate adaptive motion"
+    }
+  ],
+  "ubuntu": {
+    "collected": 765,
+    "selected": 765,
+    "call_executed": 764,
+    "passed": 764,
+    "skipped": 1,
+    "skip_nodeid": "tests/test_live_export.py::test_real_mp4_has_compatible_codec_and_ordered_frame_count",
+    "skip_reason": "optional local FFmpeg unavailable",
+    "audit_failed": true
+  },
+  "macos": {
+    "platform": "macOS-15.7.9-arm64-arm-64bit",
+    "python": "3.12.10",
+    "ffmpeg": "unavailable",
+    "pytest_status": "cancelled",
+    "final_outcome_report": false,
+    "junit": false,
+    "traceback": false,
+    "inferred_failure_nodes": [
+      "tests/test_adaptive_motion.py::test_interactive_auto_feedback_and_recording",
+      "tests/test_live_terminal.py::test_live_foundation_real_pty_left_tick_log_and_exact_replay",
+      "tests/test_live_terminal.py::test_live_pty_clean_exit_modes",
+      "tests/test_live_terminal.py::test_live_pty_invalid_command_continues_and_resize",
+      "tests/test_live_terminal.py::test_live_pty_transition_failure_restores_and_records_failure",
+      "tests/test_live_terminal.py::test_live_pty_recording_write_failure_restores_and_records_failure",
+      "tests/test_live_terminal.py::test_live_pty_interrupt_during_recording_fails_incomplete_take_and_restores",
+      "tests/test_live_terminal.py::test_live_pty_huge_finite_duration_uses_configured_horizon",
+      "tests/test_live_terminal.py::test_live_pty_help_remains_visible_while_animation_continues",
+      "tests/test_live_terminal.py::test_live_pty_interrupt_during_finish_marks_interrupted_after_restore",
+      "tests/test_live_terminal.py::test_terminal_context_restores_on_output_error"
+    ],
+    "inference_note": "Mapped quiet pytest progress to same-SHA Linux inventory; traceback was not emitted before cancellation"
+  },
+  "artifacts": {
+    "macos": 12144598889,
+    "ubuntu": 12144442667
+  }
+}

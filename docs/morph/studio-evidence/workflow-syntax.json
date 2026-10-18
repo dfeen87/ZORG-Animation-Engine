@@ -1,0 +1,16 @@
+[
+  {
+    "workflow": ".github/workflows/ci.yml",
+    "yaml_parsed": true,
+    "bash_syntax_steps": 7,
+    "action_pins_immutable": true,
+    "permissions_read_only": true
+  },
+  {
+    "workflow": ".github/workflows/deep-validation.yml",
+    "yaml_parsed": true,
+    "bash_syntax_steps": 12,
+    "action_pins_immutable": true,
+    "permissions_read_only": true
+  }
+]

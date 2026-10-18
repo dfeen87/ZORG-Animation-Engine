@@ -5,6 +5,7 @@ from pathlib import Path
 import os
 import numpy as np
 import pytest
+from scripts.pty_support import PtyProcess
 from commander_zorg.canonical import read_json, canonical_bytes, atomic_json, sha256
 from commander_zorg.live_motion import LiveRuntime, Blend, LiveNumericalError
 from commander_zorg.morph_commands import parse_command
@@ -229,8 +230,6 @@ def test_auto_never_repairs_invalid_simulation_state(runtime):
 
 def test_interactive_auto_feedback_and_recording(tmp_path):
     import fcntl, select, struct, subprocess, sys, termios, time
-    master,slave=os.openpty();previous=termios.tcgetattr(slave)
-    fcntl.ioctl(slave,termios.TIOCSWINSZ,struct.pack('HHHH',24,100,0,0))
     code='''from pathlib import Path
 from commander_zorg.canonical import read_json
 from commander_zorg.live_motion import LiveRuntime
@@ -241,19 +240,15 @@ c=read_json('scenes/live_lab.json')
 t=load_targets('morph_targets',LiveRuntime(c).scene)
 run_lab(c,t,Path(sys.argv[1])/'take',mono=True,max_seconds=8)
 '''
-    def controlling_terminal():
-        os.setsid();fcntl.ioctl(0,termios.TIOCSCTTY,0)
-    child=subprocess.Popen([sys.executable,'-c',code,str(tmp_path)],cwd=ROOT,
-        stdin=slave,stdout=slave,stderr=subprocess.PIPE,preexec_fn=controlling_terminal)
+    take=PtyProcess(code,(tmp_path,),cwd=ROOT,size=(100,24))
+    master,slave=take.master,take.slave
+    previous=take.previous
+    child=take.process
     output=b''
     def until(text):
         nonlocal output
-        deadline=time.monotonic()+6
-        while time.monotonic()<deadline:
-            if select.select([master],[],[],.05)[0]:output+=os.read(master,65536)
-            if text in output:return
-            if child.poll() is not None:break
-        raise AssertionError(f'missing {text!r}: {output[-1000:]!r}')
+        take.wait_for(lambda data:text in data,timeout=6)
+        output=take.output
     try:
         until(b'COMMAND:')
         for command,feedback in [(b'morph cloud\r',b'MORPH accepted'),
@@ -263,15 +258,15 @@ run_lab(c,t,Path(sys.argv[1])/'take',mono=True,max_seconds=8)
         until(b'APPLIED: 0.0744372057')
         until('SHAPE: CLOUD — PRESERVED'.encode())
         os.write(master,b'quit\r');until(b'\x1b[?25h\x1b[?1049l')
-        child.wait(timeout=6)
-        assert child.returncode==0,child.stderr.read().decode()
+        take.wait(timeout=6)
+        output=take.output
+        assert child.returncode==0,take.stderr.decode()
         assert termios.tcgetattr(slave)==previous
         path=tmp_path/'take/session.json'
         assert verify_session(path)['exact_replay']
         assert read_json(path)['events'][-1]['command']['requested']['strength']==.3
     finally:
-        if child.poll() is None:child.kill();child.wait()
-        child.stderr.close();os.close(master);os.close(slave)
+        take.close()
 
 
 def test_effective_strength_below_historical_grammar_minimum(runtime):

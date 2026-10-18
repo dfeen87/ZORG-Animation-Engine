@@ -18,6 +18,7 @@ import time
 import numpy as np
 import pytest
 
+from scripts.pty_support import PtyProcess
 from commander_zorg.live import run_live, terminal_session
 from commander_zorg.live_commands import HELP
 from commander_zorg.live_motion import LiveRuntime
@@ -32,18 +33,13 @@ def _config():
     return json.loads((ROOT / "scenes/live_lab.json").read_text())
 
 
-class PtyTake:
+class PtyTake(PtyProcess):
     """Keep the slave open so settings can be compared after child exit."""
 
     def __init__(self, directory, *, size=(80, 24), fail=False,
                  recording_fail=False, recording_interrupt=False,
                  finish_interrupt=False, max_seconds=8):
-        self.master, self.slave = os.openpty()
-        fcntl.ioctl(self.slave, termios.TIOCSWINSZ,
-                    struct.pack("HHHH", size[1], size[0], 0, 0))
-        self.previous = termios.tcgetattr(self.slave)
         self.directory = directory
-        self.output = b""
         code = (
             "import json,sys\nfrom pathlib import Path\n"
             "from commander_zorg.live import run_live\n"
@@ -86,52 +82,20 @@ class PtyTake:
             "(Path(sys.argv[1])/'result.json').write_text(json.dumps(result))\n"
         )
 
-        def controlling_terminal():
-            os.setsid()
-            fcntl.ioctl(0, termios.TIOCSCTTY, 0)
-
-        self.process = subprocess.Popen(
-            [sys.executable, "-c", code, str(directory), str(max_seconds)], cwd=ROOT,
-            stdin=self.slave, stdout=self.slave, stderr=subprocess.PIPE,
-            preexec_fn=controlling_terminal,
-        )
-
-    def wait_for(self, predicate, *, timeout=5):
-        deadline = time.monotonic() + timeout
-        while time.monotonic() < deadline:
-            readable, _, _ = select.select([self.master], [], [], 0.05)
-            if readable:
-                self.output += os.read(self.master, 65536)
-            if predicate(self.output):
-                return
-            if self.process.poll() is not None:
-                break
-        raise AssertionError(f"PTY condition missing; child={self.process.poll()}, tail={self.output[-500:]!r}")
+        super().__init__(code, (directory, max_seconds), cwd=ROOT, size=size)
 
     def tick(self, minimum):
         self.wait_for(lambda output: any(int(n) >= minimum for n in re.findall(rb"TICK (\d+)", output)))
 
-    def send(self, value):
-        os.write(self.master, value)
-
     def finish(self, *, expected_code=0):
-        self.process.wait(timeout=5)
-        while select.select([self.master], [], [], 0)[0]:
-            self.output += os.read(self.master, 65536)
-        stderr = self.process.stderr.read().decode()
+        self.wait(timeout=5)
+        stderr = self.stderr.decode()
         assert self.process.returncode == expected_code, stderr
         assert termios.tcgetattr(self.slave) == self.previous
         assert b"\x1b[?25h\x1b[?1049l" in self.output
         assert b"\n" not in self.output  # fixed rows, no scrolling log
         return json.loads((self.directory / "take/session.json").read_text())
 
-    def close(self):
-        if self.process.poll() is None:
-            self.process.kill()
-            self.process.wait(timeout=3)
-        self.process.stderr.close()
-        os.close(self.master)
-        os.close(self.slave)
 
 
 @pytest.fixture
