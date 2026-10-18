@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-gallery-0.3 six-candidate E0 manifest",
+  "description": "Failed candidate entries retain null artifact/metrics fields and an error string. Runtime verification rechecks complete child runs, fixed weights/threshold, labels, images and acceptance claims.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-gallery-0.3"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "failed"
+      ]
+    },
+    "passed": {
+      "type": "boolean"
+    },
+    "candidate_count": {
+      "const": 6
+    },
+    "distinct_decoded_images": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 6
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "scene_id": {
+            "$ref": "common.schema.json#/$defs/identifier"
+          },
+          "manifest": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/fileReference"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "pixel_sha256": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/sha256"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "metrics": {
+            "anyOf": [
+              {
+                "$ref": "common.schema.json#/$defs/metrics"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "usable": {
+            "type": "boolean"
+          },
+          "failed_gates": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "nonfinite_field",
+                "occupancy",
+                "clipping",
+                "render_or_integrity_failure"
+              ]
+            },
+            "minItems": 0,
+            "uniqueItems": true
+          },
+          "error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "scene_id",
+          "manifest",
+          "pixel_sha256",
+          "metrics",
+          "usable",
+          "failed_gates",
+          "error"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "artifacts": {
+      "type": "object",
+      "properties": {
+        "contact_sheet.png": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "run_status.json": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        }
+      },
+      "required": [
+        "contact_sheet.png",
+        "run_status.json"
+      ],
+      "additionalProperties": false
+    },
+    "creator_review": {
+      "$ref": "common.schema.json#/$defs/creatorReview"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "passed",
+    "candidate_count",
+    "distinct_decoded_images",
+    "candidates",
+    "artifacts",
+    "creator_review"
+  ],
+  "additionalProperties": false
+}

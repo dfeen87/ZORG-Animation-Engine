@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-integrity-0.3 successful integrity result",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-integrity-0.3"
+    },
+    "passed": {
+      "const": true
+    },
+    "frames": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 360
+    },
+    "states": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 1441
+    },
+    "decisions": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 1440
+    },
+    "source_digest": {
+      "$ref": "common.schema.json#/$defs/sha256"
+    },
+    "creator_review": {
+      "const": "pending"
+    }
+  },
+  "required": [
+    "schema_version",
+    "passed",
+    "frames",
+    "states",
+    "decisions",
+    "source_digest",
+    "creator_review"
+  ],
+  "additionalProperties": false
+}

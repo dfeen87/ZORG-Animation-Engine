@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "decisions.jsonl record",
+  "description": "Rejected candidates have no committed hash. Nonfinite values occur only as diagnostic strings. A complete run admits only ACCEPT rows and verifies state-hash links.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "attempted_tick": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "status": {
+          "const": "ACCEPT"
+        },
+        "source_state_hash": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "committed_state_hash": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "enum": [
+                  "BAD_TICK",
+                  "BAD_SHAPE",
+                  "BAD_DTYPE",
+                  "BAD_LAYOUT",
+                  "NONFINITE_POSITION",
+                  "NONFINITE_VELOCITY",
+                  "DISPLACEMENT_LIMIT",
+                  "SPEED_LIMIT",
+                  "INVALID_PREVIOUS"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "element_id": {
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/$defs/identifier"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "detail": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "path",
+              "element_id",
+              "detail"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "maxItems": 0
+        }
+      },
+      "required": [
+        "attempted_tick",
+        "status",
+        "source_state_hash",
+        "committed_state_hash",
+        "reasons"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "attempted_tick": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1440
+        },
+        "status": {
+          "const": "REJECT"
+        },
+        "source_state_hash": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "enum": [
+                  "BAD_TICK",
+                  "BAD_SHAPE",
+                  "BAD_DTYPE",
+                  "BAD_LAYOUT",
+                  "NONFINITE_POSITION",
+                  "NONFINITE_VELOCITY",
+                  "DISPLACEMENT_LIMIT",
+                  "SPEED_LIMIT",
+                  "INVALID_PREVIOUS"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "element_id": {
+                "anyOf": [
+                  {
+                    "$ref": "common.schema.json#/$defs/identifier"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "detail": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "code",
+              "path",
+              "element_id",
+              "detail"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "attempted_tick",
+        "status",
+        "source_state_hash",
+        "reasons"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "states.jsonl record",
+  "description": "The containing run identifies this row schema. Array lengths must equal its element order; float lexical representation, finiteness, ordering and state bounds are verified by the runtime.",
+  "type": "object",
+  "properties": {
+    "tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 1440
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/vec2"
+      },
+      "minItems": 1,
+      "maxItems": 12
+    },
+    "velocities": {
+      "type": "array",
+      "items": {
+        "$ref": "common.schema.json#/$defs/vec2"
+      },
+      "minItems": 1,
+      "maxItems": 12
+    }
+  },
+  "required": [
+    "tick",
+    "positions",
+    "velocities"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-experiment-0.3 experiment links",
+  "description": "References resolve relative to the experiment manifest directory and include exact file hashes. Tuning entries are explicit text descriptions of recorded configuration changes; an empty array records no tuning.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-experiment-0.3"
+    },
+    "e0": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "e1": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "control": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "cadence": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "replay": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "tests": {
+      "$ref": "common.schema.json#/$defs/fileReference"
+    },
+    "creator_review": {
+      "$ref": "common.schema.json#/$defs/creatorReview"
+    },
+    "tuning": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "e0",
+    "e1",
+    "control",
+    "cadence",
+    "replay",
+    "tests",
+    "creator_review",
+    "tuning"
+  ],
+  "additionalProperties": false
+}

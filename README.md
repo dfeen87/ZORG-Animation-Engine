@@ -1,1 +1,152 @@
-# Commander-Zorg
+# ZORG
+
+ZORG is a small, local mathematical animation engine. Commander-ZORG is the
+original fictional production that motivates the technology. This repository
+began as **Commander-Zorg**; its existing history and MIT software license,
+including Don Michael Feeney Jr.'s attribution, are preserved.
+
+Build 0 evaluates positive Gaussian influence fields, renders deterministic
+grayscale silhouettes, and animates independent damped springs with a prescribed
+quartic force pulse. It exports inspectable state, decision, frame, source and
+integrity evidence. It has no editor, network service, AI system, memory layer,
+GPU dependency or production character pipeline. Artistic approval is separate
+from numerical acceptance and remains pending unless the creator supplies it.
+
+The internal Python package remains `commander_zorg` and the scene schema remains
+`cz-scene-0.3`. The numerical authority is the verified v0.3 specification;
+[architecture decisions](docs/adr) and [scene decisions](docs/scene-decisions.md)
+record implementation choices. Implementation reports state which complete
+experiments and evidence gates actually passed.
+
+## Install on a MacBook or Linux machine
+
+Python **3.12** is the supported baseline. The implementation environment is
+Linux on x86-64 with Python 3.12; exact interpreter, NumPy, Pillow, pytest and
+zlib versions are recorded in run manifests and `requirements.lock`. Native
+macOS acceptance has not been demonstrated. A MacBook should use the same
+Python minor release, install the locked dependencies, run the tests, and
+regenerate evidence locally. Exact PNG replay is demonstrated only within the
+recorded environment, not promised across operating systems or compiled builds.
+
+Clone the existing private repository using your existing GitHub access:
+
+```sh
+git clone https://github.com/dfeen87/ZORG.git
+cd ZORG
+git checkout feature/build0-foundation
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.lock
+python -m pip install --no-deps -e .
+```
+
+The engine uses Python, NumPy and Pillow; pytest is the test dependency. No
+FFmpeg, SciPy, browser framework or external development service is required.
+The commands below also work as `python -m commander_zorg.cli ...` after
+installation or from the checkout root.
+
+## Test and regenerate experiments
+
+Reproduce the complete experiment, including test reports, E0, full E1 and
+control, numerical cadence comparisons, integrity checks, fresh-process replay
+and the final linked profile report:
+
+```sh
+python scripts/run_build0.py --out outputs/build0_take_01
+```
+
+The runner preserves complete evidence in the new output directory and records
+all measured gates. It refuses an existing destination. To execute the same
+operations individually:
+
+```sh
+python -m pytest -q
+commander-zorg validate scenes/e1.json
+commander-zorg gallery scenes/e0 --out outputs/e0_take_01
+commander-zorg render scenes/e1.json --out outputs/e1_take_01
+commander-zorg render scenes/control.json --out outputs/control_take_01
+commander-zorg cadence scenes/e1.json --out outputs/cadence_take_01.json
+commander-zorg verify outputs/e1_take_01/manifest.json --integrity
+commander-zorg verify outputs/control_take_01/manifest.json --integrity
+commander-zorg verify outputs/e1_take_01/manifest.json --replay --out outputs/replay_take_01
+```
+
+Every destination must be new. Use a new take name for another run; existing
+takes are refused. Rendering success does not imply all Build 0 profile gates
+passed. The complete E1 and control each contain 180 PNG frames at ticks
+`0,2,...,358`, 361 state rows through terminal audit tick 360, and 360 accepted
+transition rows. Frame zero is rendered before stepping. Renderers stream one
+field at a time, and numerical rejection preserves the last committed state
+and terminates the run without clamping or repair.
+
+Each run contains:
+
+```text
+scene.input.json       scene.resolved.json
+frames/                contact_sheet.png
+states.jsonl           decisions.jsonl          frames.jsonl
+run_status.json        manifest.json            source/
+```
+
+The gallery contains six complete child static runs and its labeled contact
+sheet. State and decision traces use canonical JSON. The engine records raw
+input and resolved semantic hashes separately, exact executed source hashes,
+environment versions, decoded-pixel hashes and PNG file hashes. The final
+manifest is published atomically after checking all closed artifacts. Failed
+or interrupted runs are retained and cannot verify as complete.
+
+A release experiment manifest links the E0 gallery, E1, full cue-off control,
+cadence study, fresh-process replay report and executed test report using
+relative paths plus SHA-256 hashes. Its schema is `cz-experiment-0.3` (see
+[schemas](schemas)). Once this manifest and its linked evidence exist:
+
+```sh
+commander-zorg check-profile outputs/experiment_manifest.json --report outputs/profile_report.json
+```
+
+This command verifies linked integrity before checking numerical and image
+acceptance. It recomputes the cadence study with independent scalar and analytic
+references, verifies test-output and JUnit hashes, and checks actual JUnit
+testcase totals rather than trusting report pass flags. Tests and report values must come from actual executions. It checks
+all recovery states at ticks 330–360, every recovery output frame, excitation,
+centroid-aligned morphology, visibility, ten distinct decoded frames, control
+invariance, independent 60/120 Hz comparisons and exact replay. It never
+substitutes creator artistic judgment. Exit codes are 0 success, 2 configuration
+or usage failure, 3 numerical rejection, 4 integrity/export failure, 5 replay
+failure, and 6 experiment/profile failure.
+
+## View the outputs
+
+Open `player.html` from an exported run in your local browser for complete
+30-FPS sequence playback, or open `contact_sheet.png` in your image viewer. The E1 sheet includes frames
+0, 23, 38, 50, 60, 90, 120, 165 and 179, plus the minimum aligned-IoU frame
+when different. Review the complete frame sequence for flicker; sparse stills
+do not establish fluid motion. `frames/frame_000000.png` through
+`frame_000179.png` are ordered at exactly 30 FPS for six seconds.
+
+If FFmpeg is already installed locally, an optional viewing copy can be made:
+
+```sh
+ffmpeg -framerate 30 -i outputs/e1_take_01/frames/frame_%06d.png -c:v libx264 -pix_fmt yuv420p outputs/e1_preview.mp4
+```
+
+The PNG sequence and its recorded timestamps remain the required evidence.
+No optional encoder is needed to inspect each full-resolution output image.
+Ask during creator review whether the form feels fluid, an identifiable accent
+survives, the disturbance reads clearly, and recovery feels intentional.
+
+## Limits and next steps
+
+Build 0 is an experiment in mathematical geometry, motion and verification.
+It does not establish final character recognition, humor, mathematical novelty,
+physical realism or a real-time performance guarantee. The proposed thirty-second
+render target must be judged from measured runs. Generated outputs are ignored
+by Git; preserve complete evidence separately and regenerate it with the same
+scene and environment.
+
+The next engineering experiment should follow the measured failing gate, if
+any. A later creative tuning take must explicitly record scene changes and
+retain its predecessors. Temporal history, predictive motion, colors,
+cinematography, authoring tools and a community platform remain deferred.
+The software's MIT license does not automatically confer rights to original
+character artwork, scripts, fictional settings or third-party assets.

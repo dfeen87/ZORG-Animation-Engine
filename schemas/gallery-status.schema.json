@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "E0 gallery local run_status.json",
+  "description": "This gallery status is distinct from the versioned per-scene run status and is selected by its enclosing gallery context.",
+  "type": "object",
+  "properties": {
+    "state": {
+      "enum": [
+        "running",
+        "failed",
+        "complete"
+      ]
+    }
+  },
+  "required": [
+    "state"
+  ],
+  "additionalProperties": false
+}
