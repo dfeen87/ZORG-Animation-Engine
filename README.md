@@ -24,8 +24,9 @@ See the [implementation report](docs/results/implementation-report.md),
 [numerical results](docs/results/numerical-verification.md),
 [E0 gallery](docs/results/e0-gallery.png) and
 [E1 contact sheet](docs/results/e1-contact-sheet.png).
-Creator review is pending. GitHub metadata/PR delivery remains blocked by API
-network access; the implementation branch and portable delivery are local.
+Creator review is pending. The implementation branch is pushed to
+`dfeen87/ZORG`; GitHub API networking still blocks metadata verification and
+automated PR creation. [Create the PR on GitHub](https://github.com/dfeen87/ZORG/pull/new/feature/build0-foundation).
 
 ## Install on a MacBook or Linux machine
 

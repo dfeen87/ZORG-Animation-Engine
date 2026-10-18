@@ -3,7 +3,8 @@
 The mathematical foundation and all automated evidence gates passed. Repository
 delivery remains incomplete because GitHub API networking prevents required
 canonical-name/privacy verification and pull-request creation. Source is
-committed locally on `feature/build0-foundation`; no merge or public release
+committed and pushed to `dfeen87/ZORG` on `feature/build0-foundation` following
+the user's explicit PR retry request; no merge or public release
 occurred. The implementation source commit is `01984b2` (based on
 `0090e6322ce63621acb25ce05e26ac6a53bb68bb`). Creator review is pending.
 
@@ -94,19 +95,22 @@ not a real-time or 4K claim.
 
 ## Repository delivery limitation and next step
 
-Native Git reads and a branch-push **dry run** succeeded through the platform
-proxy. That dry run changed no remote refs. REST/GraphQL requests to
+Native Git reads and the actual implementation-branch push succeeded through
+the platform proxy. The remote branch was verified against local HEAD.
+REST/GraphQL requests to
 `api.github.com` were refused by the enforced proxy policy before authentication.
 Both unauthenticated repository-name pages returned 404; that is consistent
 with private access but does not establish canonical identity/visibility metadata.
-The required checks therefore remain unverified. The implementation branch has
-not been pushed and no PR exists; this preserves the user's private-destination
-requirement while metadata access is unavailable.
+The metadata checks therefore remain unverified. The implementation branch is
+pushed, but `gh pr create` returned `Forbidden` from GitHub's GraphQL API and
+no PR was created. GitHub supplied this direct creation link:
+https://github.com/dfeen87/ZORG/pull/new/feature/build0-foundation
 
 An additive `api.github.com` allowance plus tested install/start instructions
 were saved in the environment draft. Review/save and publish that environment
 configuration, then verify `full_name`, `private`, `default_branch` and remote HEAD
-before pushing this existing branch and creating the private PR. Do not merge.
+before completing API verification and PR creation. The implementation branch
+is already pushed; do not merge.
 No new token is inferred to be necessary from this network failure.
 
 Build 0 mathematical automated acceptance: **passed**. Overall repository
