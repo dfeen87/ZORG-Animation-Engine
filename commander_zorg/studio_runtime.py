@@ -4,9 +4,10 @@ from itertools import product
 
 import numpy as np
 
-from .canonical import canonical_bytes, strict_json
-from .studio_commands import parse_command, MOTION_PRESETS, SPEED_PRESETS
+from .canonical import canonical_bytes, strict_json, sha256
+from .studio_commands import parse_command
 from .morph_runtime import MorphRuntime
+from .chromatic import ChromaticState
 
 
 ADMISSION = 'future-corners-v1'
@@ -22,6 +23,7 @@ class StudioRuntime(MorphRuntime):
         # Match historical omitted numeric arguments until a creator changes it.
         self.motion_preset = 'bold'
         self.speed_preset = 'normal'
+        self.chromatic = ChromaticState()
 
     def _admit(self, translation=None):
         if not self._future_admission:
@@ -49,7 +51,7 @@ class StudioRuntime(MorphRuntime):
             if (operation['action'] == 'motion' and self.motion_auto
                     and operation['motion']['action'] in DIRECTIONS):
                 operation = self._adaptive_command(operation['motion'])
-            command = (operation if operation['action'] in ('motion_preset', 'speed_preset')
+            command = (operation if operation['action'] in ('motion_preset', 'speed_preset', 'color', 'palette')
                        else {**operation, 'admission': ADMISSION} if operation['action'] == 'adaptive_motion'
                        else {'action': 'creator', 'operation': operation, 'admission': ADMISSION})
             event = {'schema_version': 'cz-morph-event-0.3', 'sequence': len(self.events),
@@ -92,6 +94,19 @@ class StudioRuntime(MorphRuntime):
             setattr(self, 'motion_preset' if action == 'motion_preset' else 'speed_preset', command['name'])
             self.events.append(event)
             return
+        if command.get('action') == 'color':
+            if set(command) != {'action', 'enabled'} or type(command['enabled']) is not bool:
+                raise ValueError('invalid color command')
+            self.chromatic.enabled = command['enabled']
+            self.events.append(event)
+            return
+        if command.get('action') == 'palette':
+            normalized = parse_command('palette '+str(command.get('name')), self.motion_preset, self.speed_preset)
+            if canonical_bytes(command) != canonical_bytes(normalized):
+                raise ValueError('invalid normalized palette command')
+            self.chromatic.set_palette(command['name'], self.active_target, self.state.tick, command['duration_ticks'])
+            self.events.append(event)
+            return
         if command.get('action') == 'adaptive_motion':
             command = {'action': 'creator', 'admission': command.get('admission'),
                        'operation': {k: v for k, v in command.items() if k != 'admission'}}
@@ -100,12 +115,24 @@ class StudioRuntime(MorphRuntime):
                 or type(command['operation']) is not dict):
             raise ValueError('invalid creator operation/admission version')
         operation = command['operation']
+        if type(operation.get('action')) is not str:
+            raise ValueError('invalid creator operation action')
+        timed = (operation if operation['action'] == 'morph'
+                 else operation.get('requested') if operation['action'] == 'adaptive_motion' else None)
+        if timed is not None and (type(timed) is not dict
+                or type(timed.get('duration_ticks')) is not int
+                or not 30 <= timed['duration_ticks'] <= 600):
+            raise ValueError('invalid creator transition duration')
+        if operation['action'] == 'motion' and (type(operation.get('motion')) is not dict
+                or type(operation['motion'].get('action')) is not str):
+            raise ValueError('invalid creator motion action')
         extended = operation.get('action') in ('motion_auto', 'adaptive_motion')
         inner = {**event, 'schema_version': 'cz-morph-event-0.2' if extended else 'cz-morph-event-0.1',
                  'command': operation}
+        motion = operation.get('motion')
         directional = (operation.get('action') == 'adaptive_motion'
                        or (operation.get('action') == 'motion'
-                           and operation.get('motion', {}).get('action') in DIRECTIONS))
+                           and type(motion) is dict and motion.get('action') in DIRECTIONS))
         origin = deepcopy(self.translation)
         count = len(self.events)
         previous = self._future_admission
@@ -116,6 +143,15 @@ class StudioRuntime(MorphRuntime):
                 self.translation = origin
                 del self.events[count:]
                 raise ValueError('MOTION: TARGET ALREADY SET; no additional movement applied. Directions set absolute targets; the current transition may still be running.')
+            if operation.get('action') == 'morph':
+                self.chromatic.on_morph(self.active_target, self.state.tick, operation['duration_ticks'])
+            elif type(motion) is dict and motion.get('action') == 'reset':
+                self.chromatic.on_reset('home', self.state.tick, motion['duration_ticks'])
+            elif operation.get('action') == 'capture':
+                capture = self.captures[-1]
+                capture['schema_version'] = 'cz-morph-capture-0.3'
+                capture['chromatic'] = self.chromatic.mapping()
+                capture['id'] = sha256(canonical_bytes({k:v for k,v in capture.items() if k != 'id'}))
             self.events[-1] = event
         finally:
             self._future_admission = previous
@@ -130,7 +166,12 @@ class StudioRuntime(MorphRuntime):
             return f"SPEED {command['name'].upper()}: transition {command['duration_ticks']/60:g} seconds"
         if command['action'] == 'adaptive_motion':
             return super().command_feedback({'command': command})
+        if command['action'] == 'color':
+            return 'COLOR '+('ON' if command['enabled'] else 'OFF')
+        if command['action'] == 'palette':
+            return f"PALETTE {command['name'].upper()}; blending over {command['duration_ticks']/60:g} seconds"
         return super().command_feedback({'command': command['operation']})
 
     def creator_status(self):
-        return f"AUTO {'ON' if self.motion_auto else 'OFF (STRICT)'} | MOTION {self.motion_preset.upper()} | SPEED {self.speed_preset.upper()}"
+        return (f"AUTO {'ON' if self.motion_auto else 'OFF (STRICT)'} | MOTION {self.motion_preset.upper()} | SPEED {self.speed_preset.upper()}"
+                f" | COLOR {'ON' if self.chromatic.enabled else 'OFF'} {self.chromatic.palette_name.upper()}")

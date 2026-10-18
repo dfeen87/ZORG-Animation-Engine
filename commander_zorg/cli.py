@@ -72,6 +72,11 @@ def parser() -> argparse.ArgumentParser:
         if name == 'render-morph-session':
             morph.add_argument('--out', required=True, type=Path)
             morph.add_argument('--no-mp4', action='store_true')
+            presentation = morph.add_mutually_exclusive_group()
+            presentation.add_argument('--color', dest='color', action='store_true', default=None,
+                                      help='RGB presentation from recorded version 0.3 color settings')
+            presentation.add_argument('--grayscale', dest='color', action='store_false',
+                                      help='independent original grayscale export')
     return result
 
 
@@ -100,7 +105,7 @@ def main(argv: list[str] | None = None) -> int:
             report = verify_session(arguments.path)
         elif arguments.command == 'render-morph-session':
             from .morph_export import render_session
-            report = render_session(arguments.path, arguments.out, mp4=not arguments.no_mp4)
+            report = render_session(arguments.path, arguments.out, mp4=not arguments.no_mp4, color=arguments.color)
         elif arguments.command == 'verify-morph-export':
             from .morph_export import verify_export
             report = verify_export(arguments.path)

@@ -61,3 +61,9 @@ Creator review remains exactly `{"status":"pending","source":null}` in the
 current implementation. No schema field implies an imported artistic opinion.
 Tuning records are explicit strings describing configuration changes; their
 presence does not authorize unrecorded numerical-policy changes.
+
+Creator contract 0.3 uses `morph-event-0.3`, `morph-session-0.3`,
+`morph-capture-0.3`, `chromatic`, and RGB `morph-export-0.3` schemas.
+The original 0.1/0.2 schemas retain historical meanings. Runtime validation and
+exact source/environment replay additionally enforce semantic relationships
+(such as active speed, fixed palette endpoints and admission recomputation).

@@ -70,7 +70,14 @@
         "captures": {
           "type": "array",
           "items": {
-            "$ref": "morph-capture.schema.json"
+            "oneOf": [
+              {
+                "$ref": "morph-capture.schema.json"
+              },
+              {
+                "$ref": "morph-capture-0.3.schema.json"
+              }
+            ]
           }
         },
         "final_tick": {

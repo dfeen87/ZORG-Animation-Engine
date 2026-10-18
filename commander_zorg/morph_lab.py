@@ -18,6 +18,8 @@ def _ui_command(text):
 
 
 def _viewport(runtime,size,**kwargs):
+    if hasattr(runtime, 'terminal_color_mode'):
+        kwargs['mono'] = runtime.terminal_color_mode == 'mono'
     lines=frame_lines(runtime,size,**kwargs)
     settings = ' | '+runtime.creator_status() if hasattr(runtime, 'creator_status') else ''
     lines[0]=f'ZORG MORPH LAB — TARGET: {runtime.active_target.upper()}{settings}'[:size.columns]
@@ -25,7 +27,12 @@ def _viewport(runtime,size,**kwargs):
 
 
 def run_lab(config,targets,record,**kwargs):
-    return run_live(config,record,runtime_factory=lambda c:StudioRuntime(c,targets),
+    def factory(config):
+        from .terminal_view import detect_color_mode
+        runtime = StudioRuntime(config, targets)
+        runtime.terminal_color_mode = detect_color_mode(kwargs.get('mono', False))
+        return runtime
+    return run_live(config,record,runtime_factory=factory,
         recorder_factory=MorphRecorder,command_parser=_ui_command,help_text=HELP,viewport=_viewport,**kwargs)
 
 

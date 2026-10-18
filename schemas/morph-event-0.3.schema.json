@@ -474,6 +474,53 @@
             "admission"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "color"
+            },
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "action",
+            "enabled"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "palette"
+            },
+            "name": {
+              "enum": [
+                "auto",
+                "neutral",
+                "circle",
+                "oval",
+                "cloud",
+                "hill"
+              ]
+            },
+            "duration_ticks": {
+              "enum": [
+                60,
+                120,
+                240
+              ]
+            }
+          },
+          "required": [
+            "action",
+            "name",
+            "duration_ticks"
+          ],
+          "additionalProperties": false
         }
       ]
     }
