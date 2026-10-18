@@ -174,3 +174,91 @@ remain separate.
 commander-zorg live --scene scenes/live_lab.json --record outputs/live_take_01
 commander-zorg live-demo --out outputs/live_demo_01
 ```
+
+The live viewport displays a Gaussian-field silhouette that wanders and changes
+shape continuously. Type commands and press Return while it animates. Physics
+runs at a fixed 60 Hz; the terminal preview targets 15 FPS. Accepted motion
+commands are recorded with their effective simulation ticks for exact replay
+with the same source and supported environment.
+
+### Start an interactive take
+
+From the repository root, using the Python 3.12 environment installed above:
+
+```sh
+source .venv/bin/activate
+commander-zorg live --scene scenes/live_lab.json --seed 172026 --record outputs/my_live_take
+```
+
+Use a new recording directory for every take. The viewport needs an interactive
+ANSI-compatible terminal; `--mono` forces monochrome rendering. Native macOS
+terminal acceptance still needs the local checks in the guide.
+
+### Commands to type inside the viewport
+
+| Command | What it does |
+| --- | --- |
+| `left`, `right`, `up`, `down` | Smoothly move toward a directional offset from the home pose. |
+| `squash` | Compress the shape vertically and widen its control layout. |
+| `stretch` | Elongate the shape vertically and narrow its control layout. |
+| `reset` | Smoothly return toward home and turn wander off. |
+| `wander on`, `wander off` | Fade autonomous motion in or out. |
+| `help` | Show the available commands while animation continues. |
+| `save` | Finish the recording and export its animation. |
+| `quit` | Exit cleanly and keep the recording for later export. |
+
+Directional and shape commands accept **strength, then transition seconds**:
+
+```text
+right 0.3 2.0
+stretch 0.5 1.5
+left
+squash
+reset
+save
+```
+
+Direction strength defaults to `0.3` world units and accepts `0.05`–`0.30`.
+Shape strength defaults to `0.5` and accepts `0.05`–`0.60`. Transition duration
+defaults to two seconds and accepts `0.5`–`10` seconds. Targets persist until
+replaced: directions share one translation channel, squash/stretch share one
+shape channel, and both can coexist with wander. Invalid commands are rejected
+without stopping the animation. Ctrl+C restores the terminal and retains the
+captured recording as interrupted.
+
+### Replay, export and watch
+
+Typing `save` exports into the recording's `export/` directory. Alternatively,
+verify and export a saved recording explicitly:
+
+```sh
+commander-zorg verify-session outputs/my_live_take/session.json
+commander-zorg render-session outputs/my_live_take/session.json --out outputs/my_live_video
+commander-zorg verify-live-export outputs/my_live_video/manifest.json
+```
+
+The supplied scene exports a complete 384×384 PNG sequence at 30 FPS, a local
+HTML player, session/event records and a manifest with source and artifact
+hashes. When FFmpeg with H.264 support is available, it also creates
+`animation.mp4`; otherwise the HTML player remains available. On a MacBook:
+
+```sh
+open outputs/my_live_video/player.html
+# When MP4 encoding succeeded:
+open outputs/my_live_video/animation.mp4
+```
+
+For a complete noninteractive demonstration using the same runtime:
+
+```sh
+commander-zorg live-demo --seed 172026 --out outputs/my_live_demo
+open outputs/my_live_demo/video/player.html
+```
+
+The 15-second demo shows autonomous motion, rightward movement, stretch,
+leftward movement, squash and recovery. See the
+[saved demo video](docs/live/results/live-demo.mp4) and
+[execution evidence](docs/live/results/README.md): 642 tests passed, including
+all 456 unchanged Build 0 regressions, and the complete Build 0 experiment gates
+passed again. Exact replay across different operating systems or library builds
+is not claimed; record and verify a new take on the destination machine.
