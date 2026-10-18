@@ -1,0 +1,15 @@
+{
+  "baseline_minimum": 716,
+  "collected": 765,
+  "selected": 765,
+  "call_executed": 765,
+  "outcomes": {
+    "passed": 765
+  },
+  "junit_rows": 765,
+  "junit_outcomes": {
+    "passed": 765
+  },
+  "problems": [],
+  "passed": true
+}

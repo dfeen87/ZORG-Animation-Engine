@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "cz-morph-event-0.2"
+    },
+    "sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "effective_tick": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 215999
+    },
+    "command": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "motion_auto"
+            },
+            "enabled": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "action",
+            "enabled"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "action": {
+              "const": "adaptive_motion"
+            },
+            "requested": {
+              "type": "object",
+              "properties": {
+                "action": {
+                  "enum": [
+                    "left",
+                    "right",
+                    "up",
+                    "down"
+                  ]
+                },
+                "strength": {
+                  "type": "number",
+                  "minimum": 0.05,
+                  "maximum": 0.3
+                },
+                "duration_ticks": {
+                  "type": "integer",
+                  "minimum": 30,
+                  "maximum": 600
+                },
+                "scope": {
+                  "const": "all"
+                },
+                "envelope": {
+                  "const": "quintic-target-v1"
+                }
+              },
+              "required": [
+                "action",
+                "strength",
+                "duration_ticks",
+                "scope",
+                "envelope"
+              ],
+              "additionalProperties": false
+            },
+            "effective_translation": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 2,
+              "maxItems": 2
+            },
+            "fraction": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "algorithm": {
+              "const": "translation-bisection-v1"
+            }
+          },
+          "required": [
+            "action",
+            "requested",
+            "effective_translation",
+            "fraction",
+            "algorithm"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "sequence",
+    "effective_tick",
+    "command"
+  ],
+  "additionalProperties": false,
+  "description": "Opt-in adaptive translation. Runtime recomputes the deterministic admission decision and requires exact canonical agreement before committing effective_translation. Fraction is progress from previous admitted translation endpoint toward requested directional endpoint, not a speed multiplier."
+}

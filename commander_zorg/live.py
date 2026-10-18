@@ -112,7 +112,8 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
                                 break
                             else:
                                 accepted = runtime.accept(event.text)
-                                status_text = f"{action.upper()} accepted at tick {runtime.state.tick}"
+                                status_text = (runtime.command_feedback(accepted) if hasattr(runtime, "command_feedback")
+                                               else f"{action.upper()} accepted at tick {runtime.state.tick}")
                         except ValueError as exc:
                             status_text = str(exc)
                             continue

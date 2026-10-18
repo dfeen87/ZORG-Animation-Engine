@@ -1,0 +1,181 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Self-contained config, recipes, events and captures. Runtime additionally verifies canonical digest, chronology, original guards, current source/environment and exact full-tick replay. No schema validation alone proves replay. Interrupted records are valid prefixes; failed/running records cannot replay.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "cz-morph-session-0.2"
+        },
+        "status": {
+          "const": "running"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "cz-morph-session-0.2"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "interrupted",
+            "failed"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config": {
+          "$ref": "live-config.schema.json"
+        },
+        "targets": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9_]{0,63}$"
+          },
+          "additionalProperties": {
+            "$ref": "morph-target.schema.json"
+          }
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "morph-event.schema.json"
+              },
+              {
+                "$ref": "morph-event-0.2.schema.json"
+              }
+            ]
+          }
+        },
+        "captures": {
+          "type": "array",
+          "items": {
+            "$ref": "morph-capture.schema.json"
+          }
+        },
+        "final_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 216000
+        },
+        "trajectory_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "final_state_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^(commander_zorg/[A-Za-z_][A-Za-z0-9_]*\\.py|requirements\\.lock|pyproject\\.toml)$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "python": {
+              "type": "string"
+            },
+            "implementation": {
+              "type": "string"
+            },
+            "numpy": {
+              "type": "string"
+            },
+            "pillow": {
+              "type": "string"
+            },
+            "zlib": {
+              "type": "string"
+            },
+            "zlib_runtime": {
+              "type": "string"
+            },
+            "pillow_zlib": {
+              "type": "string"
+            },
+            "system": {
+              "type": "string"
+            },
+            "release": {
+              "type": "string"
+            },
+            "machine": {
+              "type": "string"
+            },
+            "byteorder": {
+              "type": "string"
+            },
+            "numpy_build": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "python",
+            "implementation",
+            "numpy",
+            "pillow",
+            "zlib",
+            "zlib_runtime",
+            "pillow_zlib",
+            "system",
+            "release",
+            "machine",
+            "byteorder",
+            "numpy_build"
+          ],
+          "additionalProperties": false
+        },
+        "metrics": {
+          "type": "object"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "reason",
+        "config",
+        "targets",
+        "events",
+        "captures",
+        "final_tick",
+        "trajectory_sha256",
+        "final_state_sha256",
+        "source",
+        "environment",
+        "metrics",
+        "session_sha256"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

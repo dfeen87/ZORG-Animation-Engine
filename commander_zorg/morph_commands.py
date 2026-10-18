@@ -3,13 +3,17 @@ import math
 from .live_commands import parse_command as parse_live
 from .morph_targets import label
 
-HELP = 'morph NAME [0.5–10 seconds] | capture LABEL | left/right/up/down | squash/stretch | wander on/off | reset | save | quit'
+HELP = 'morph NAME [0.5–10 seconds] | capture LABEL | motion auto on/off | left/right/up/down | squash/stretch | wander on/off | reset | save | quit'
 
 
 def parse_command(text):
     if type(text) is not str:
         raise ValueError('command must be text')
     words = text.split()
+    if words and words[0] == 'motion':
+        if words not in (['motion','auto','on'], ['motion','auto','off']):
+            raise ValueError('usage: motion auto on/off')
+        return {'action':'motion_auto','enabled':words[2]=='on'}
     if words and words[0] == 'morph':
         if len(words) not in (2,3):
             raise ValueError('usage: morph NAME [seconds]')
