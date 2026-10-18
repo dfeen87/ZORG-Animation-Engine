@@ -1,8 +1,8 @@
 # CI and platform evidence
 
-Development Linux: the complete suite executed **932 tests, 932 passed, zero
+Development Linux: the complete suite executed **933 tests, 933 passed, zero
 failed/skipped/deselected**. Passive per-phase outcomes independently match all
-932 JUnit cases; the strict inventory audit passes with a preserved minimum of
+933 JUnit cases; the strict inventory audit passes with a preserved minimum of
 765. Two pre-existing `record_property`/xunit2 warnings remain. Locked dependency
 check passes. The real libx264 smoke encode/ffprobe reports H.264, yuv420p, 30 FPS,
 three ordered frames. Relevant evidence is in `studio-evidence/`.
@@ -35,6 +35,9 @@ later fixture. The deep workflow additionally requires the exact chromatic demo.
 Both YAML files and all 19 shell blocks parse; action SHAs and read-only job
 permissions remain pinned. Full actionlint was unavailable.
 
+Full Build 0 preservation also passes: all 21 crosslinked gates, exact original
+state/decision/pixel/PNG replay and all V01–V12 test families. Original live
+(450 frames) and morph (600 frames) demonstrations pass all 27 semantic gates.
 Hosted Ubuntu/macOS results for this feature are recorded separately when run.
 Native MacBook Terminal.app/iTerm2 visual and cleanup acceptance remains pending
 until the creator executes the supplied guide. Linux PTY emulation, a source
