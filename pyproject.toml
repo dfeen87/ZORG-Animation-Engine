@@ -7,7 +7,7 @@ name = "commander-zorg"
 version = "0.1.0"
 description = "ZORG Build 0: deterministic mathematical silhouette animation"
 requires-python = ">=3.12,<3.13"
-license = "MIT"
+license = "LicenseRef-Proprietary"
 authors = [{name = "Don Michael Feeney Jr."}]
 dependencies = ["numpy==2.3.5", "Pillow==12.3.0"]
 
