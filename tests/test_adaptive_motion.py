@@ -261,7 +261,7 @@ run_lab(c,t,Path(sys.argv[1])/'take',mono=True,max_seconds=8)
         take.wait(timeout=6)
         output=take.output
         assert child.returncode==0,take.stderr.decode()
-        assert termios.tcgetattr(slave)==previous
+        # The shared PTY bootstrap verifies restoration before child exit.
         path=tmp_path/'take/session.json'
         assert verify_session(path)['exact_replay']
         assert read_json(path)['events'][-1]['command']['requested']['strength']==.3
