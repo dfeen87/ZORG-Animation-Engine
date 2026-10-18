@@ -30,12 +30,12 @@
         "group": "body",
         "home_xy": [
           0.0,
-          -0.1482
+          -0.14079
         ],
-        "sigma": 0.2295,
+        "sigma": 0.218025,
         "weight": 1.0,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
@@ -45,10 +45,10 @@
           0.0,
           0.0
         ],
-        "sigma": 0.221,
+        "sigma": 0.20995,
         "weight": 1.0,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
@@ -56,77 +56,77 @@
         "group": "head",
         "home_xy": [
           0.0,
-          0.1794
+          0.17043
         ],
-        "sigma": 0.187,
+        "sigma": 0.17765,
         "weight": 1.0,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
         "id": "head_01",
         "group": "head",
         "home_xy": [
-          0.0468,
-          0.2964
+          0.04446,
+          0.28158
         ],
-        "sigma": 0.0935,
+        "sigma": 0.088825,
         "weight": 0.8,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
         "id": "accent_left",
         "group": "accent",
         "home_xy": [
-          -0.1794,
-          0.23399999999999999
+          -0.17043,
+          0.2223
         ],
-        "sigma": 0.0765,
+        "sigma": 0.072675,
         "weight": 0.9,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
         "id": "accent_right",
         "group": "accent",
         "home_xy": [
-          0.1794,
-          0.23399999999999999
+          0.17043,
+          0.2223
         ],
-        "sigma": 0.0765,
+        "sigma": 0.072675,
         "weight": 0.9,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
         "id": "base_left",
         "group": "body",
         "home_xy": [
-          -0.1014,
-          -0.2886
+          -0.09633,
+          -0.27417
         ],
-        "sigma": 0.0935,
+        "sigma": 0.088825,
         "weight": 0.9,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       },
       {
         "id": "base_right",
         "group": "body",
         "home_xy": [
-          0.1014,
-          -0.2886
+          0.09633,
+          -0.27417
         ],
-        "sigma": 0.0935,
+        "sigma": 0.088825,
         "weight": 0.9,
         "mass": 1.0,
-        "spring_k": 14.0,
+        "spring_k": 10.0,
         "damping_c": 5.0
       }
     ],

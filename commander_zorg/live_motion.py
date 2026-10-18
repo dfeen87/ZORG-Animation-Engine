@@ -92,6 +92,7 @@ class LiveRuntime:
         self.events = []
         self.wander = self.config["wander"]
         self.translation = Blend([0., 0.])
+        self.morph = Blend(0.)
         self.wander_mix = Blend(float(self.wander))
         self._phases = []
         for element in base.elements:
@@ -123,10 +124,26 @@ class LiveRuntime:
         if (type(event["duration_ticks"]) is not int or not 30 <= event["duration_ticks"] <= 600
                 or type(event["strength"]) not in (int,float)):
             raise ValueError("event: invalid parameter types")
-        normalized = parse_command(f"{event['action']} {event['strength']} {event['duration_ticks']/60}")
+        action = event['action']
+        text = (action.replace('_',' ') if action in ('wander_on','wander_off','reset')
+                else f"{action} {event['strength']} {event['duration_ticks']/60}")
+        normalized = parse_command(text)
         if any(event[k] != v for k,v in normalized.items()):
             raise ValueError("event: invalid normalized parameters")
-        self.translation.set([-event["strength"], 0.], self.state.tick, event["duration_ticks"])
+        tick,duration,strength = self.state.tick,event['duration_ticks'],event['strength']
+        directions = {'left':[-strength,0.], 'right':[strength,0.], 'up':[0.,strength], 'down':[0.,-strength]}
+        if action in directions:
+            self.translation.set(directions[action],tick,duration)
+        elif action in ('squash','stretch'):
+            self.morph.set(strength if action=='stretch' else -strength,tick,duration)
+        elif action == 'reset':
+            self.translation.set([0.,0.],tick,duration)
+            self.morph.set(0.,tick,duration)
+            self.wander_mix.set(0.,tick,duration)
+            self.wander = False
+        else:
+            self.wander = action == 'wander_on'
+            self.wander_mix.set(float(self.wander),tick,duration)
         self.events.append(strict_json(canonical_bytes(event)))
 
     def target_offsets(self, tick):
@@ -136,7 +153,9 @@ class LiveRuntime:
         phase = self._phases
         organic = np.column_stack((.025*np.sin(.71*t+phase[:,0]), .035*np.sin(.57*t+phase[:,1])))
         organic += [.055*math.sin(.43*t), .045*math.sin(.37*t)]
-        return self.translation.at(tick) + ramp*self.wander_mix.at(tick)*organic
+        relative = self.scene.home_xy-self.scene.home_xy.mean(axis=0)
+        morphology = self.morph.at(tick)*relative*np.array([-.5,1.])
+        return self.translation.at(tick) + morphology + ramp*self.wander_mix.at(tick)*organic
 
     def step(self):
         previous = self.state

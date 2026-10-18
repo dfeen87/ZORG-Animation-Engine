@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "cz-live-session-0.1 recording summary",
+  "description": "Running marker or closed recording summary. Failed records are diagnostic and cannot be replayed as successful recordings. The runtime binds the config/events artifacts, canonical metadata digest, source/environment provenance and exact trajectory. Schema validation alone cannot establish those relationships.",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "cz-live-session-0.1"
+        },
+        "status": {
+          "const": "running"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "cz-live-session-0.1"
+        },
+        "status": {
+          "enum": [
+            "complete",
+            "interrupted",
+            "failed"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "config": {
+          "$ref": "live-config.schema.json"
+        },
+        "config_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "events": {
+          "const": "events.jsonl"
+        },
+        "events_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "event_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "final_tick": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 216000
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3600
+        },
+        "trajectory_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "final_state_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "environment": {
+          "type": "object",
+          "properties": {
+            "python": {
+              "type": "string"
+            },
+            "implementation": {
+              "type": "string"
+            },
+            "numpy": {
+              "type": "string"
+            },
+            "pillow": {
+              "type": "string"
+            },
+            "zlib": {
+              "type": "string"
+            },
+            "zlib_runtime": {
+              "type": "string"
+            },
+            "pillow_zlib": {
+              "type": "string"
+            },
+            "system": {
+              "type": "string"
+            },
+            "release": {
+              "type": "string"
+            },
+            "machine": {
+              "type": "string"
+            },
+            "byteorder": {
+              "type": "string"
+            },
+            "numpy_build": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "python",
+            "implementation",
+            "numpy",
+            "pillow",
+            "zlib",
+            "zlib_runtime",
+            "pillow_zlib",
+            "system",
+            "release",
+            "machine",
+            "byteorder",
+            "numpy_build"
+          ],
+          "additionalProperties": false
+        },
+        "source": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "type": "string",
+            "pattern": "^(commander_zorg/[A-Za-z_][A-Za-z0-9_]*\\.py|requirements\\.lock|pyproject\\.toml)$"
+          },
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "metrics": {
+          "type": "object"
+        },
+        "session_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "required": [
+        "schema_version",
+        "status",
+        "reason",
+        "config",
+        "config_sha256",
+        "events",
+        "events_sha256",
+        "event_count",
+        "final_tick",
+        "duration_seconds",
+        "trajectory_sha256",
+        "final_state_sha256",
+        "environment",
+        "source",
+        "metrics",
+        "session_sha256"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, replace
 import os
 import shutil
+import textwrap
 from typing import Any
 
 import numpy as np
@@ -18,6 +19,19 @@ from .raster import rasterize
 
 
 MAX_INPUT = 160
+
+
+def use_monochrome(force: bool = False, environment: Any = None) -> bool:
+    """Use portable blocks unless the terminal explicitly advertises truecolor.
+
+    Apple's Terminal commonly advertises xterm-256color without 24-bit color.
+    Its default must still show geometry rather than an unsupported-color box.
+    """
+    environment = os.environ if environment is None else environment
+    term = environment.get("TERM", "").lower()
+    color = environment.get("COLORTERM", "").lower()
+    advertised = color in ("truecolor", "24bit") or "direct" in term
+    return force or term in ("dumb", "unknown") or not advertised
 
 
 @dataclass(frozen=True)
@@ -109,16 +123,26 @@ def frame_lines(runtime: Any, size: os.terminal_size, *, command: str = "",
                 mono: bool = False) -> list[str]:
     """Fit the viewport and command area into the current terminal dimensions."""
     columns, rows = max(1, size.columns), max(1, size.lines)
-    footer = [
+    paragraphs = status.splitlines() or [""]
+    metadata = [
         f"{'WANDER' if runtime.wander else 'DIRECTED'}  SEED {runtime.config['seed']}  "
         f"TICK {runtime.state.tick}  PREVIEW {fps:.1f} FPS",
         f"COMMAND: {command}",
-        f"STATUS: {status}",
     ]
     if rows < 6 or columns < 12:
         # A tiny terminal remains usable; no hidden raster is computed.
-        return (["ZORG LIVE"] + footer)[-rows:]
-    body_rows = rows - 4
+        return (["ZORG LIVE"] + metadata + [f"STATUS: {paragraphs[0]}"])[-rows:]
+    wrapped = [line for paragraph in paragraphs for line in
+               (textwrap.wrap(paragraph, width=max(1, columns - 8)) or [""])] or [""]
+    # Keep input visible and at least one animation row even when help wraps.
+    status_limit = max(1, rows - 4)
+    if len(wrapped) > status_limit:
+        wrapped = wrapped[:status_limit]
+        wrapped[-1] = "resize for full status/help"
+    status_lines = [("STATUS: " if index == 0 else "        ") + line
+                    for index, line in enumerate(wrapped)]
+    footer = metadata + status_lines
+    body_rows = rows - 1 - len(footer)
     side = min(columns, body_rows * 2, 96)
     side -= side % 2
     preview = replace(runtime.scene, width=side, height=side, samples_per_axis=1)

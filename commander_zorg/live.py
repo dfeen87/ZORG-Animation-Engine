@@ -16,7 +16,7 @@ from typing import Any
 from .live_commands import HELP, parse_command
 from .live_motion import LiveRuntime
 from .session import Recorder
-from .terminal_view import CommandInput, draw_frame, frame_lines, terminal_size
+from .terminal_view import CommandInput, draw_frame, frame_lines, terminal_size, use_monochrome
 
 
 @contextmanager
@@ -63,10 +63,12 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
     runtime = LiveRuntime(config)
     recorder = Recorder(Path(record), runtime.config)
     editor = CommandInput()
+    monochrome = use_monochrome(mono)
     sim_hz = runtime.scene.sim_hz
     tick_limit = runtime.scene.terminal_tick
     if max_seconds is not None:
-        tick_limit = min(tick_limit, math.ceil(max_seconds * sim_hz))
+        bounded_seconds = min(max_seconds, tick_limit / sim_hz)
+        tick_limit = min(tick_limit, math.ceil(bounded_seconds * sim_hz))
     status_text = "Moving autonomously; type help"
     recording_status, reason = "complete", "quit"
     save_requested = False
@@ -141,7 +143,7 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
                     size = terminal_size(output_stream)
                     lines = frame_lines(runtime, size, command=editor.text,
                                         status=status_text, fps=frame_count / elapsed,
-                                        mono=mono or os.environ.get("TERM") in ("dumb", "unknown"))
+                                        mono=monochrome)
                     draw_frame(output_stream, lines, size)
                     render_seconds += time.monotonic() - render_started
                     frame_count += 1
@@ -160,7 +162,22 @@ def run_live(config: dict, record: Path, *, mono: bool = False,
         "elapsed_seconds": elapsed,
         "final_tick": runtime.state.tick,
     }
-    session = recorder.finish(runtime, status=recording_status, reason=reason, metrics=metrics)
+    try:
+        session = recorder.finish(runtime, status=recording_status, reason=reason, metrics=metrics)
+    except KeyboardInterrupt:
+        # Input settings have already been restored before recording is closed.
+        # One interrupted close gets a single retry with a truthful status.
+        if recording_status != "failed":
+            recording_status, reason = "interrupted", "ctrl_c_during_finish"
+        save_requested = False
+        session = recorder.finish(runtime, status=recording_status, reason=reason, metrics=metrics)
+    except (OSError, ValueError) as exc:
+        # An interrupt or failed write may leave a partially recorded event.
+        # Such a take is diagnostic evidence, never a replayable success.
+        recording_status, reason = 'failed', f'finalization: {type(exc).__name__}: {exc}'
+        save_requested = False
+        failure = failure or exc
+        session = recorder.finish(runtime,status='failed',reason=reason,metrics=metrics)
     if failure is not None:
         raise RuntimeError(f"Live recording failed; diagnostic session saved at {session}: {reason}") from failure
     return {"session": str(session), "status": recording_status, "reason": reason,

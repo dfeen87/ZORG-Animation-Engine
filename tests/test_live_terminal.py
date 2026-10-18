@@ -19,9 +19,10 @@ import numpy as np
 import pytest
 
 from commander_zorg.live import run_live, terminal_session
+from commander_zorg.live_commands import HELP
 from commander_zorg.live_motion import LiveRuntime
 from commander_zorg.session import verify_session
-from commander_zorg.terminal_view import CommandInput, draw_frame, frame_lines, half_blocks
+from commander_zorg.terminal_view import CommandInput, draw_frame, frame_lines, half_blocks, use_monochrome
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,7 +35,9 @@ def _config():
 class PtyTake:
     """Keep the slave open so settings can be compared after child exit."""
 
-    def __init__(self, directory, *, size=(80, 24), fail=False):
+    def __init__(self, directory, *, size=(80, 24), fail=False,
+                 recording_fail=False, recording_interrupt=False,
+                 finish_interrupt=False, max_seconds=8):
         self.master, self.slave = os.openpty()
         fcntl.ioctl(self.slave, termios.TIOCSWINSZ,
                     struct.pack("HHHH", size[1], size[0], 0, 0))
@@ -45,6 +48,7 @@ class PtyTake:
             "import json,sys\nfrom pathlib import Path\n"
             "from commander_zorg.live import run_live\n"
             "from commander_zorg.live_motion import LiveRuntime\n"
+            "from commander_zorg.session import Recorder\n"
             "config=json.loads(Path('scenes/live_lab.json').read_text())\n"
         )
         if fail:
@@ -55,8 +59,30 @@ class PtyTake:
                 " return original(self)\n"
                 "LiveRuntime.step=step\n"
             )
+        if recording_fail:
+            code += (
+                "def record_event(self,event):\n"
+                " raise OSError('injected recording write failure')\n"
+                "Recorder.record_event=record_event\n"
+            )
+        if recording_interrupt:
+            code += (
+                "def record_event(self,event):\n"
+                " raise KeyboardInterrupt\n"
+                "Recorder.record_event=record_event\n"
+            )
+        if finish_interrupt:
+            code += (
+                "original_finish=Recorder.finish\n"
+                "def finish(self,*args,**kwargs):\n"
+                " if not getattr(self,'interrupted_once',False):\n"
+                "  self.interrupted_once=True\n"
+                "  raise KeyboardInterrupt\n"
+                " return original_finish(self,*args,**kwargs)\n"
+                "Recorder.finish=finish\n"
+            )
         code += (
-            "result=run_live(config,Path(sys.argv[1])/'take',mono=True,max_seconds=8)\n"
+            "result=run_live(config,Path(sys.argv[1])/'take',mono=True,max_seconds=float(sys.argv[2]))\n"
             "(Path(sys.argv[1])/'result.json').write_text(json.dumps(result))\n"
         )
 
@@ -65,7 +91,7 @@ class PtyTake:
             fcntl.ioctl(0, termios.TIOCSCTTY, 0)
 
         self.process = subprocess.Popen(
-            [sys.executable, "-c", code, str(directory)], cwd=ROOT,
+            [sys.executable, "-c", code, str(directory), str(max_seconds)], cwd=ROOT,
             stdin=self.slave, stdout=self.slave, stderr=subprocess.PIPE,
             preexec_fn=controlling_terminal,
         )
@@ -126,7 +152,7 @@ def pty_take(tmp_path):
 
 def test_live_foundation_real_pty_left_tick_log_and_exact_replay(pty_take):
     take = pty_take()
-    take.tick(30)
+    take.tick(90)
     take.send(b"l")
     take.wait_for(lambda data: b"COMMAND: l" in data)
     take.send(b"eft\r")
@@ -137,11 +163,29 @@ def test_live_foundation_real_pty_left_tick_log_and_exact_replay(pty_take):
     doc = take.finish()
     events = [json.loads(line) for line in (take.directory / "take/events.jsonl").read_text().splitlines()]
     assert events[0]["action"] == "left"
-    assert events[0]["effective_tick"] == accepted >= 30
+    assert events[0]["effective_tick"] == accepted >= 90
     assert doc["metrics"]["preview_frames"] > 15
     assert doc["metrics"]["achieved_preview_fps"] > 8
     assert "█".encode() in take.output or "▀".encode() in take.output
     assert verify_session(take.directory / "take/session.json")["passed"]
+
+    # Inspect actual PTY-rendered field rasters, rather than a generated still.
+    snapshots = []
+    for frame in take.output.split(b"\x1b[1;1H\x1b[2K")[1:]:
+        tick = re.search(rb"TICK (\d+)", frame)
+        if tick is None:
+            continue
+        raster = tuple(line.decode() for row, line in re.findall(
+            rb"\x1b\[(\d+);1H\x1b\[2K([^\x1b]*)", frame) if 2 <= int(row) <= 21)
+        snapshots.append((int(tick[1]), raster))
+    assert len({raster for tick, raster in snapshots if tick <= accepted}) > 1
+
+    def screen_x(raster):
+        occupied = [x for row in raster for x, value in enumerate(row) if value in "▀▄█"]
+        return float(np.mean(occupied))
+
+    before_frame = next(raster for tick, raster in reversed(snapshots) if tick <= accepted)
+    assert screen_x(snapshots[-1][1]) < screen_x(before_frame) - 2
 
     # Compare against the exact same tick-driven autonomous trajectory.
     autonomous, directed = LiveRuntime(doc["config"]), LiveRuntime(doc["config"])
@@ -173,7 +217,7 @@ def test_live_pty_invalid_command_continues_and_resize(pty_take):
     take = pty_take(size=(30, 9))
     take.wait_for(lambda data: b"COMMAND:" in data)
     take.send(b"left nan\r")
-    take.wait_for(lambda data: b"STATUS: direction strength" in data)
+    take.wait_for(lambda data: re.search(rb"STATUS: [^\x1b]*strength", data) is not None)
     fcntl.ioctl(take.slave, termios.TIOCSWINSZ, struct.pack("HHHH", 3, 8, 0, 0))
     # A resized tiny terminal keeps its command row and can still exit.
     take.wait_for(lambda data: b"\x1b[3;1H\x1b[2KSTATUS:" in data)
@@ -190,6 +234,58 @@ def test_live_pty_transition_failure_restores_and_records_failure(pty_take):
     assert doc["status"] == "failed"
     assert doc["final_tick"] == 3
     assert "injected transition failure" in doc["reason"]
+
+
+def test_live_pty_recording_write_failure_restores_and_records_failure(pty_take):
+    take = pty_take(recording_fail=True)
+    take.wait_for(lambda data: b"COMMAND:" in data)
+    take.send(b"left\r")
+    doc = take.finish(expected_code=1)
+    assert doc["status"] == "failed"
+    assert "injected recording write failure" in doc["reason"]
+    assert "recording incomplete" in doc["reason"]
+    assert not (take.directory / "take/events.jsonl").read_bytes()
+    assert b"LEFT accepted" not in take.output
+
+
+def test_live_pty_interrupt_during_recording_fails_incomplete_take_and_restores(pty_take):
+    take = pty_take(recording_interrupt=True)
+    take.wait_for(lambda data: b"COMMAND:" in data)
+    take.send(b"left\r")
+    doc = take.finish(expected_code=1)
+    assert doc["status"] == "failed"
+    assert "recording incomplete" in doc["reason"]
+    assert not (take.directory / "take/events.jsonl").read_bytes()
+    assert b"LEFT accepted" not in take.output
+
+
+def test_live_pty_huge_finite_duration_uses_configured_horizon(pty_take):
+    take = pty_take(max_seconds=1e308)
+    take.wait_for(lambda data: b"COMMAND:" in data)
+    take.send(b"quit\r")
+    assert take.finish()["status"] == "complete"
+
+
+def test_live_pty_help_remains_visible_while_animation_continues(pty_take):
+    take = pty_take()
+    take.tick(5)
+    take.send(b"help\r")
+    take.wait_for(lambda data: b"wander on | wander off | help | save | quit" in data)
+    take.tick(20)
+    take.send(b"quit\r")
+    assert take.finish()["final_tick"] >= 20
+
+
+def test_live_pty_interrupt_during_finish_marks_interrupted_after_restore(pty_take):
+    take = pty_take(finish_interrupt=True)
+    take.wait_for(lambda data: b"COMMAND:" in data)
+    take.send(b"save\r")
+    doc = take.finish()
+    assert doc["status"] == "interrupted"
+    assert doc["reason"] == "ctrl_c_during_finish"
+    result = json.loads((take.directory / "result.json").read_text())
+    assert not result["save_requested"]
+    assert verify_session(take.directory / "take/session.json")["passed"]
 
 
 def test_noninteractive_live_rejected_before_record_creation(tmp_path):
@@ -226,6 +322,19 @@ def test_input_editor_rejects_overflow_escapes_and_preserves_partial_line():
     assert editor.feed(b"\x03")[0].kind == "interrupt"
 
 
+@pytest.mark.parametrize("environment,monochrome", [
+    ({}, True),
+    ({"TERM": "xterm-256color"}, True),
+    ({"TERM": "xterm", "COLORTERM": "truecolor"}, False),
+    ({"COLORTERM": "24bit"}, False),
+    ({"TERM": "xterm-direct"}, False),
+    ({"TERM": "dumb", "COLORTERM": "truecolor"}, True),
+])
+def test_conservative_color_detection_and_explicit_mono(environment, monochrome):
+    assert use_monochrome(environment=environment) == monochrome
+    assert use_monochrome(True, environment=environment)
+
+
 def test_preview_uses_field_and_fits_without_newlines():
     runtime = LiveRuntime(_config())
     pixels = np.array([[0, 255, 0, 255], [0, 0, 255, 255]], dtype=np.uint8)
@@ -241,3 +350,15 @@ def test_preview_uses_field_and_fits_without_newlines():
         draw_frame(output, lines, size)
         assert "\n" not in output.getvalue()
         assert f"\x1b[{rows};1H" in output.getvalue()
+
+
+def test_help_at_normal_terminal_size_shows_every_supported_command():
+    runtime = LiveRuntime(_config())
+    lines = frame_lines(runtime, os.terminal_size((80, 24)), status=HELP, mono=True)
+    assert len(lines) == 24
+    assert all(len(line) <= 80 for line in lines)
+    visible = " ".join(lines)
+    for command in ("left", "right", "up", "down", "squash", "stretch", "reset",
+                    "wander on", "wander off", "help", "save", "quit"):
+        assert command in visible
+    assert any("█" in line or "▀" in line or "▄" in line for line in lines)
