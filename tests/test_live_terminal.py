@@ -18,7 +18,7 @@ import time
 import numpy as np
 import pytest
 
-from scripts.pty_support import PtyProcess
+from scripts.pty_support import PtyProcess, terminal_settings_equal
 from commander_zorg.live import run_live, terminal_session
 from commander_zorg.live_commands import HELP
 from commander_zorg.live_motion import LiveRuntime
@@ -91,7 +91,8 @@ class PtyTake(PtyProcess):
         self.wait(timeout=5)
         stderr = self.stderr.decode()
         assert self.process.returncode == expected_code, stderr
-        assert termios.tcgetattr(self.slave) == self.previous
+        # The PTY bootstrap asserts exact child-side restoration before exit.
+        # Reading the slave after its controlling process exits is not portable.
         assert b"\x1b[?25h\x1b[?1049l" in self.output
         assert b"\n" not in self.output  # fixed rows, no scrolling log
         return json.loads((self.directory / "take/session.json").read_text())
@@ -270,7 +271,7 @@ def test_terminal_context_restores_on_output_error():
         with os.fdopen(os.dup(slave), "r") as stream:
             with pytest.raises(BrokenPipeError), terminal_session(stream, BrokenOutput()):
                 pass
-        assert termios.tcgetattr(slave) == before
+        assert terminal_settings_equal(before, termios.tcgetattr(slave))
     finally:
         os.close(master)
         os.close(slave)

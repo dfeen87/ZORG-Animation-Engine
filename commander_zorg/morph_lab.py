@@ -17,12 +17,29 @@ def _ui_command(text):
     return command['motion'] if command['action']=='motion' else command
 
 
+def _studio_header(runtime, columns):
+    """Prioritize visible shape/color state at ordinary and narrow widths."""
+    target = runtime.active_target.upper()
+    if not hasattr(runtime, 'chromatic'):
+        return f'ZORG MORPH LAB — TARGET: {target}'[:max(1, columns)]
+    color = f"COLOR {'ON' if runtime.chromatic.enabled else 'OFF'} {runtime.chromatic.palette_name.upper()}"
+    auto = f"AUTO {'ON' if runtime.motion_auto else 'OFF'}"
+    full = ' | '.join((f'ZORG {target}', color, auto,
+                     f'MOTION {runtime.motion_preset.upper()}', f'SPEED {runtime.speed_preset.upper()}'))
+    if len(full) <= columns:
+        return full
+    compact = ' | '.join((f'Z {target}', color, auto,
+                        f'M {runtime.motion_preset.upper()}', f'S {runtime.speed_preset.upper()}'))
+    if len(compact) <= columns:
+        return compact
+    return (color + ' | ' + target)[:max(1, columns)]
+
+
 def _viewport(runtime,size,**kwargs):
     if hasattr(runtime, 'terminal_color_mode'):
         kwargs['mono'] = runtime.terminal_color_mode == 'mono'
     lines=frame_lines(runtime,size,**kwargs)
-    settings = ' | '+runtime.creator_status() if hasattr(runtime, 'creator_status') else ''
-    lines[0]=f'ZORG MORPH LAB — TARGET: {runtime.active_target.upper()}{settings}'[:size.columns]
+    lines[0] = _studio_header(runtime, max(1, size.columns))
     return lines
 
 

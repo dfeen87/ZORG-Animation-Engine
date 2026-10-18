@@ -14,6 +14,23 @@ import termios
 import time
 
 
+def terminal_settings_equal(expected, actual):
+    """Compare real tty settings, ignoring Darwin's transient PENDIN flag.
+
+    PENDIN requests a pending-input retype after canonical-mode restoration.
+    macOS may set it during tcsetattr; it is not a persistent user setting.
+    Every other input/output/control/local flag, speed and control byte must match.
+    """
+    if len(expected) != 7 or len(actual) != 7:
+        return False
+    before, after = list(expected), list(actual)
+    if sys.platform == 'darwin':
+        pending = getattr(termios, 'PENDIN', 0x20000000)
+        before[3] &= ~pending
+        after[3] &= ~pending
+    return before == after
+
+
 class PtyProcess:
     """Keep the slave for restoration assertions and drain both child streams."""
 
@@ -146,7 +163,15 @@ def _child():
     code = sys.argv[2]
     sys.argv = ['-c', *sys.argv[3:]]
     fcntl.ioctl(0, termios.TIOCSCTTY, 0)
-    exec(compile(code, '<pty-child>', 'exec'), {'__name__': '__main__'})
+    # Validate before the child exits. Darwin may revoke a PTY slave when its
+    # controlling process exits; inspecting the slave afterward can raise ENOTTY.
+    baseline = termios.tcgetattr(0)
+    try:
+        exec(compile(code, '<pty-child>', 'exec'), {'__name__': '__main__'})
+    finally:
+        restored = termios.tcgetattr(0)
+        if not terminal_settings_equal(baseline, restored):
+            raise AssertionError('PTY child did not restore its own terminal settings')
 
 
 if __name__ == '__main__':

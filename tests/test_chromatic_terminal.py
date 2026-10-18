@@ -19,6 +19,7 @@ import numpy as np
 import pytest
 
 from commander_zorg.canonical import canonical_bytes, read_json
+from scripts.pty_support import terminal_settings_equal
 from commander_zorg.chromatic import ChromaticState
 from commander_zorg.live_motion import LiveRuntime
 from commander_zorg.morph_targets import load_targets
@@ -138,7 +139,9 @@ def test_creator_real_pty_color_modes_resize_and_restore(tmp_path, mode):
     fcntl.ioctl(slave, termios.TIOCSWINSZ, struct.pack("HHHH", 24, 80, 0, 0))
     previous = termios.tcgetattr(slave)
     code = (
-        "import json,sys\nfrom pathlib import Path\n"
+        "import json,sys,termios\nfrom pathlib import Path\n"
+        "from scripts.pty_support import terminal_settings_equal\n"
+        "tty_before=termios.tcgetattr(0)\n"
         "from commander_zorg.canonical import read_json\n"
         "from commander_zorg.live_motion import LiveRuntime\n"
         "from commander_zorg.morph_targets import load_targets\n"
@@ -147,6 +150,7 @@ def test_creator_real_pty_color_modes_resize_and_restore(tmp_path, mode):
         "targets=load_targets(Path('morph_targets'),LiveRuntime(config).scene)\n"
         "result=run_lab(config,targets,Path(sys.argv[1])/'take',"
         "mono=(sys.argv[2]=='mono'),max_seconds=1.2)\n"
+        "assert terminal_settings_equal(tty_before,termios.tcgetattr(0)), 'child tty not restored'\n"
         "(Path(sys.argv[1])/'result.json').write_text(json.dumps(result))\n"
     )
     environment = dict(os.environ, TERM="xterm-256color", COLORTERM="")
@@ -187,7 +191,7 @@ def test_creator_real_pty_color_modes_resize_and_restore(tmp_path, mode):
         assert process.returncode == 0, process.stderr.read().decode()
         assert sent and resized
         assert b"\x1b[3;1H\x1b[2KSTATUS:" in output
-        assert termios.tcgetattr(slave) == previous
+        # The child checks the complete tty state before its PTY is hung up.
         assert b"\x1b[?25h\x1b[?1049l" in output
         assert b"\n" not in output
         result = json.loads((tmp_path / "result.json").read_text())
@@ -212,3 +216,22 @@ def test_creator_real_pty_color_modes_resize_and_restore(tmp_path, mode):
         process.stderr.close()
         os.close(master)
         os.close(slave)
+
+
+def test_studio_header_exposes_color_and_palette_at_standard_width(runtime):
+    from commander_zorg.morph_lab import _viewport
+    runtime.terminal_color_mode = '256'
+    runtime.chromatic.enabled = True
+    runtime.chromatic.set_palette('cloud', runtime.active_target, runtime.state.tick, 120)
+    for columns in (80, 100):
+        lines = _viewport(runtime, os.terminal_size((columns, 24)))
+        assert len(lines[0]) <= columns
+        assert 'COLOR ON CLOUD' in lines[0]
+        assert 'AUTO' in lines[0]
+        assert 'MOTION' in lines[0]
+        assert 'SPEED' in lines[0]
+    for columns in (8, 24, 40, 60):
+        lines = _viewport(runtime, os.terminal_size((columns, 24)))
+        assert len(lines[0]) <= columns
+        if columns >= len('COLOR ON CLOUD'):
+            assert 'COLOR ON CLOUD' in lines[0]
