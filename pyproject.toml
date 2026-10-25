@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "commander-zorg"
 version = "0.1.0"
-description = "ZORG Build 0: deterministic mathematical silhouette animation"
+description = "Deterministic mathematical animation engine for procedural geometry, bounded motion, and reproducible research"
 requires-python = ">=3.12,<3.13"
-license = "LicenseRef-Proprietary"
+license = "MIT"
 authors = [{name = "Don Michael Feeney Jr."}]
 dependencies = ["numpy==2.3.5", "Pillow==12.3.0"]
 
